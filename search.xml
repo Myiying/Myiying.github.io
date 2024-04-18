@@ -63,6 +63,165 @@
       </tags>
   </entry>
   <entry>
+    <title>塞曼效应实验报告</title>
+    <url>/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/</url>
+    <content><![CDATA[<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><ol>
+<li><p>观察塞曼效应仪，理解理论学习内容</p>
+</li>
+<li><p>掌握测量波长差的原理</p>
+</li>
+<li><p>测量质荷比</p>
+</li>
+</ol>
+<h1 id="实验仪器及方法"><a href="#实验仪器及方法" class="headerlink" title="实验仪器及方法"></a>实验仪器及方法</h1><p>&emsp;&emsp;本实验为模拟仿真实验</p>
+<h1 id="原理简述"><a href="#原理简述" class="headerlink" title="原理简述"></a>原理简述</h1><h2 id="观察塞曼分裂的方法"><a href="#观察塞曼分裂的方法" class="headerlink" title="观察塞曼分裂的方法"></a>观察塞曼分裂的方法</h2><p>&emsp;&emsp;塞曼分裂的波长差很小，以Hg 5461 Å谱线为例，当处于B=1T的磁场中：</p>
+<script type="math/tex; mode=display">
+\Delta \widetilde{v}=\frac{L}{2}=\frac{1}{2}\times46.7\times1=23.35m^{-1}</script><script type="math/tex; mode=display">
+\Delta\lambda=\lambda^2\Delta\widetilde{v}=10^{-11}m=0.1</script><p>&emsp;&emsp;要观察如此小的波长差，用一般的棱镜摄谱仪是不可能的，需要用高分辨率的仪器，如法布里—珀罗标准器（F—P标准具）。F—P标准具由平行放置的两块平面玻璃或石英板组成的，在两板相对的平面上镀薄银膜和其他有较高反射系数的薄膜。两平行的镀银平面的间隔是由某些热膨胀系数很小的材料做成的环固定起来。玻璃板上带有三个螺丝，可以精确调节两玻璃板内表面之间的平行度。标准具的光路图如下所示。从扩展光源S上发出的单色光。设到标准具板的平行平面上，经M1和M2表面的多次反射和透射，分别形成一系列相互平行的反射光束1,2,3,4…..和透射光束1’,2’,3’,4’……在透射的光束中，相邻的光程差是：</p>
+<script type="math/tex; mode=display">
+\delta=2ndcos\theta</script><p>&emsp;&emsp;这一系列平行光在无穷远处或透镜的焦平面上发生干涉，干涉的极大值为：</p>
+<script type="math/tex; mode=display">
+2dcos\theta=K\lambda</script><p>&emsp;&emsp;K为整数，称为干涉级次。</p>
+<p><a href="https://imgse.com/i/pFzo2PP"><img src="https://s21.ax1x.com/2024/04/18/pFzo2PP.jpg" alt="pFzo2PP.jpg"></a></p>
+<p>&emsp;&emsp;标准具有两个特征参量自由光谱范围和分辨本领,分别说明如下：</p>
+<p>&emsp;&emsp;对于F—P标准具：</p>
+<script type="math/tex; mode=display">
+\frac{\lambda}{\Delta\lambda}=KN</script><p>&emsp;&emsp;N为精细度，两相邻干涉级间能够分辨的最大条纹数</p>
+<script type="math/tex; mode=display">
+N=\frac{\pi\sqrt{R}}{1-R}</script><p>&emsp;&emsp;R为反射率，R一般在90%。使用标准具时光近似正入射，sin<em>q</em> ≈0,从标准具干涉的极大值公式可得</p>
+<script type="math/tex; mode=display">
+K=\frac{2d}{\lambda}</script><h2 id="测量塞曼分裂谱线波长差的方法"><a href="#测量塞曼分裂谱线波长差的方法" class="headerlink" title="测量塞曼分裂谱线波长差的方法"></a>测量塞曼分裂谱线波长差的方法</h2><p>&emsp;&emsp;应用F-P标准具测量各分裂谱线的波长或者波长差是通过测量干涉环的直径来实现的。如标准具光路图所示，用透镜把F-P标准具的干涉圆环成像在焦平面上。出射角为$\theta$的圆环其直径$D$与透镜焦距$f$间的关系为：</p>
+<script type="math/tex; mode=display">
+tan\theta=\frac{D}{2f}</script><p>&emsp;&emsp;对于近中心处的圆环，$\theta$很小，可以认为:</p>
+<script type="math/tex; mode=display">
+\theta\approx sin\theta\approx tan\theta</script><p>&emsp;&emsp;而</p>
+<script type="math/tex; mode=display">
+cos\theta=1-2sin^2\frac{\theta^2}{2}=1-\frac{\theta^2}{2}=1-\frac{D^2}{8f^2}</script><p>&emsp;&emsp;由于</p>
+<script type="math/tex; mode=display">
+2dcos\theta=K\lambda</script><p>&emsp;&emsp;所以有：</p>
+<script type="math/tex; mode=display">
+2dcos\theta=2d(1-\frac{D^2}{8f^2})=K\lambda</script><p>&emsp;&emsp;从上式可推得同一波长$\lambda$相邻两级$K$和$K-1$级圆环直径的平方差：</p>
+<script type="math/tex; mode=display">
+\Delta D^2=D_{K-1}^2-D_K^2=\frac{4f^2\lambda}{d}</script><p>&emsp;&emsp;可见$\Delta D^2$是与干涉级无关的常数。设波长$\lambda_a$和$\lambda_b$的第$K$级干涉圆环直径分别为$D_a$和$D_b$，可得</p>
+<script type="math/tex; mode=display">
+\lambda_a-\lambda_b=\frac{d}{4f^2K}(D_b^2-D_a^2)=(\frac{D_b^2-D_a^2}{D_{K-1}^2-D_K^2})\frac{\lambda}{K}</script><p>&emsp;&emsp;将K代入，得波长差</p>
+<script type="math/tex; mode=display">
+\Delta\lambda=\frac{\lambda^2}{2d}(\frac{D_b^2-D_a^2}{D_{K-1}^2-D_K^2})</script><p>&emsp;&emsp;波数差</p>
+<script type="math/tex; mode=display">
+\Delta\sigma=\frac{1}{2d}(\frac{D_b^2-D_a^2}{D_{K-1}^2-D_K^2})</script><h1 id="实验相关问题列举"><a href="#实验相关问题列举" class="headerlink" title="实验相关问题列举"></a>实验相关问题列举</h1><ol>
+<li><p>塞曼效应相关基础知识</p>
+</li>
+<li><p>谱线在磁场中的能级分裂</p>
+</li>
+<li><p>塞曼分裂谱线与原谱线关系</p>
+</li>
+<li><p>塞曼跃迁 </p>
+</li>
+</ol>
+<h1 id="原始数据及操作"><a href="#原始数据及操作" class="headerlink" title="原始数据及操作"></a>原始数据及操作</h1><h2 id="实验操作"><a href="#实验操作" class="headerlink" title="实验操作"></a>实验操作</h2><ol>
+<li><p>调节光路共轴及F-P标准具平行</p>
+</li>
+<li><p>在垂直于磁场方向观察Hg 546.1nm谱线在磁场中的分裂，用偏振片区分谱线中π和σ成分。</p>
+</li>
+<li><p>平行于磁场方向观察Hg 546.1nm谱线在磁场中的分裂，用偏振片和1/4波晶片区分谱线中σ+和σ-成分。此时磁场方向指向观察者。</p>
+</li>
+<li><p>垂直于磁场方向观察，用塞曼分裂计算电子荷质比e/m。</p>
+</li>
+<li><p>验证塞曼分裂与磁感应强度的关系</p>
+</li>
+</ol>
+<h1 id="原始数据"><a href="#原始数据" class="headerlink" title="原始数据"></a>原始数据</h1><h2 id="实验截图"><a href="#实验截图" class="headerlink" title="实验截图"></a>实验截图</h2><p><a href="https://imgse.com/i/pFzT1Rf"><img src="https://s21.ax1x.com/2024/04/18/pFzT1Rf.png" alt="pFzT1Rf.png"></a></p>
+<p><a href="https://imgse.com/i/pFzTsQU"><img src="https://s21.ax1x.com/2024/04/18/pFzTsQU.png" alt="pFzTsQU.png"></a></p>
+<h2 id="实验数据"><a href="#实验数据" class="headerlink" title="实验数据"></a>实验数据</h2><p>&emsp;&emsp;用1/4和偏振片区分σ+成分和σ-成分：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>偏振片透振方向</th>
+<th>0</th>
+<th>45</th>
+<th>90</th>
+<th>135</th>
+<th>180</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>干涉图像的现象</td>
+<td>内外各3根</td>
+<td>外6根</td>
+<td>内外各3根</td>
+<td>外6根</td>
+<td>内外各3根</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&emsp;&emsp;测量电子荷质比：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>第K级</th>
+<th>第K-1级</th>
+<th>第K-2级</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D3</td>
+<td>D2</td>
+<td>D1</td>
+<td>D3</td>
+<td>D2</td>
+<td>D1</td>
+<td>D3</td>
+<td>D2</td>
+<td>D1</td>
+</tr>
+<tr>
+<td>188</td>
+<td>202</td>
+<td>216</td>
+<td>292</td>
+<td>302</td>
+<td>312</td>
+<td>366</td>
+<td>376</td>
+<td>384</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&emsp;&emsp;测量得到磁场大小为：B=350mT</p>
+<p>&emsp;&emsp;标准具常数d=5mm</p>
+<h1 id="测量内容与数据处理"><a href="#测量内容与数据处理" class="headerlink" title="测量内容与数据处理"></a>测量内容与数据处理</h1><p>&emsp;&emsp;计算得荷质比$\frac{e}{m}=1.884\times10^11C/kg$</p>
+<p>&emsp;&emsp;理论值：$1.758\times10^11$</p>
+<p>&emsp;&emsp;相对误差：$7.06%$</p>
+<h1 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h1><ol>
+<li><p>调节定轴等高时存在误差</p>
+</li>
+<li><p>计算直径时存在误差</p>
+</li>
+<li><p>计算时的认为误差</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>文章报告</category>
+        <category>实验报告</category>
+      </categories>
+      <tags>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>斜面滑块摆锤问题的求解——大物实验报告</title>
     <url>/2024/04/18/%E6%96%9C%E9%9D%A2%E6%BB%91%E5%9D%97%E6%91%86%E9%94%A4%E9%97%AE%E9%A2%98%E7%9A%84%E6%B1%82%E8%A7%A3%E2%80%94%E2%80%94%E5%A4%A7%E7%89%A9%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<h1 id="实验分析"><a href="#实验分析" class="headerlink" title="实验分析"></a>实验分析</h1><p>&emsp;&emsp;研究对象为一个在摩擦系数为$\mu$的斜面上运动的滑动摆；滑块A的质量为$m_1$，一个单摆悬挂在滑块上，单摆长度为$l$,摆锤质量为$m_2$，整个系统可以在同一竖直平面内运动。研究整个系统的运动（滑块运动和摆锤的运动轨迹）。</p>

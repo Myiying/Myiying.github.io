@@ -63,6 +63,105 @@
       </tags>
   </entry>
   <entry>
+    <title>电感测量仪设计与实现</title>
+    <url>/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h1><ol>
+<li><p>了解电感的测试原理及方法。</p>
+</li>
+<li><p>掌握555集成定时器的工作原理、电路分析与应用。</p>
+</li>
+<li><p>掌握中规模集成电路74LS90（二－五－十进制计数器）在分频电路中的具体应用。</p>
+</li>
+<li><p>学习Multisim软件的使用，学会用软件仿真分析实验电路。</p>
+</li>
+<li><p>调试较复杂数字电路的方法，实现系统设计的功能。</p>
+</li>
+<li><p>学习Arduino的基本使用方法，学会使用单片机进行频率的测量与串口调试。</p>
+</li>
+</ol>
+<h1 id="2-实验原理"><a href="#2-实验原理" class="headerlink" title="2. 实验原理"></a>2. 实验原理</h1><p>&emsp;&emsp;整个振荡器上电之后，电感$L_1$的电流并未发生大的变化，随着电流的不断增大，电阻$R_1$的压降也不断增大，引脚2（TR）和（TH）的输入电压在减小，当2、6引脚上的电压小于VCC/3时电路翻转；3（OUT）引脚输出高电平，引脚7为高阻态（与地断开）。$R_1$和$L_1$组成的回路断开，电感处于放电过程，$R_1$的压降随电流减小而减小，而引脚2（TR）和6（TH）的输入电压不断增大，当电压大于VCC/3时电路再次翻转；3（OUT）引脚输出低电平，引脚7为地阻态（对地导通），$L_1$则再次充电；如此$L_1$重复充电放电过程实现自振荡，根据电路输出波形的高低电平时间可得到其输出频率，公式如下：</p>
+<p>&emsp;&emsp;输出波形高电平时间：</p>
+<script type="math/tex; mode=display">
+t_1=\tau ln\frac{\frac{2}{3}V_{cc}}{\frac{1}{3}V_{cc}}=\tau ln2</script><p>&emsp;&emsp;输出波形低电平时间：</p>
+<script type="math/tex; mode=display">
+t_2=\tau ln\frac{V_{cc}-\frac{1}{3}V_{cc}}{V_{cc}-\frac{2}{3}V_{cc}}=\tau ln2</script><p>&emsp;&emsp;输出频率：</p>
+<script type="math/tex; mode=display">
+f=\frac{1}{t_1+t_2}=\frac{1}{2\tau ln2}=\frac{R_1}{2ln2L_1}</script><p>&emsp;&emsp;由上式可得：</p>
+<script type="math/tex; mode=display">
+L_X=L_1=\frac{R_1}{2ln2f}</script><p>其中$\tau =\frac{L_1}{R_1}$<br>&emsp;&emsp;因此将待测电感作为$L_1$接入到电路中即可测量出待测电感$L_X$的值，电感测量电路中消噪电容$C_1= 0.1uF$，$R_1=100Ω$。电感测量电路构成的多谐振荡器输出引脚3（OUT）的频率较高，因此需要先将输出频率经过74LS90组成的分频电路进行分频，分频之后的频率再通过Arduino采集。74LS90是一个中规模集成的TTL电平计数器，由一个二进制计数器和一个五进制计数器构成，通过引脚间的连接即可实现二分频、五分频以及十分频等功能。</p>
+<p>&emsp;&emsp;电感测量电路：</p>
+<p><img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片1.png" alt="图2-1 电感测量电路"></p>
+<p>&emsp;&emsp;分频电路：</p>
+<p><img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片2.png" alt="图2-2 分频电路"></p>
+<p>&emsp;&emsp;基于Arduino的频率测量硬件连接电路：</p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片3.png" alt="图2-3 基于Arduino的频率测量硬件连接电路"></p>
+<p>&emsp;&emsp;总电路：</p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片4.png" alt="图2-4 总电路"></p>
+<h1 id="4-软件编程"><a href="#4-软件编程" class="headerlink" title="4. 软件编程"></a>4. 软件编程</h1><h2 id="4-1-流程图"><a href="#4-1-流程图" class="headerlink" title="4.1 流程图"></a>4.1 流程图</h2><p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片5.png" alt="图3-1 软件编程流程图"></p>
+<h2 id="4-2-公式原理"><a href="#4-2-公式原理" class="headerlink" title="4.2 公式原理"></a>4.2 公式原理</h2><p>frequency = 1.E6/(Pulse_h+Pulse_l)：Pulse函数分别采集输入信号的高位时间与低位时间，二者之和为一个周期，单位为微秒，处理成秒*1.E6</p>
+<p>frequency *= Delay : 计算出分频前的频率</p>
+<p>inductance = (R<em> 1000)/(2</em>frequency*log(2)) : 由频率与电感之前的关系导出</p>
+<h2 id="4-3-最终程序"><a href="#4-3-最终程序" class="headerlink" title="4.3 最终程序"></a>4.3 最终程序</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//申明引脚、宏、常量</span></span><br><span class="line">\<span class="meta">#<span class="keyword">define</span> freqIn 2  <span class="comment">//频率引脚</span></span></span><br><span class="line">\<span class="meta">#<span class="keyword">define</span> Delay 10   <span class="comment">//频率分频值（根据分频电路确定）</span></span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> R = <span class="number">100.0</span> ;</span><br><span class="line"><span class="comment">//申明频率和电感变量</span></span><br><span class="line"><span class="type">double</span> frequency, inductance;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> Serial.<span class="built_in">begin</span>(<span class="number">9600</span>);</span><br><span class="line"> <span class="built_in">pinMode</span>(freqIn, INPUT);  <span class="comment">//初始化引脚为输入模式</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="comment">//使用pulseIn函数读取脉冲高位/低位时间，计时范围为0.01s，输出单位为微妙</span></span><br><span class="line"> <span class="type">double</span> Pulse_h = <span class="built_in">pulseIn</span>(freqIn, HIGH, <span class="number">10000</span>); </span><br><span class="line"> <span class="type">double</span> Pulse_l = <span class="built_in">pulseIn</span>(freqIn, LOW, <span class="number">10000</span>); </span><br><span class="line"> frequency = <span class="number">1.E6</span> / (Pulse_h+Pulse_l); </span><br><span class="line"> <span class="built_in">delay</span>(<span class="number">20</span>);</span><br><span class="line"> frequency *= Delay;  <span class="comment">//分频之前的频率</span></span><br><span class="line"> inductance = (R*<span class="number">1000</span>)/(<span class="number">2</span>*frequency*(<span class="built_in">log</span>(<span class="number">2</span>)));  <span class="comment">//电感与频率之间的关系式</span></span><br><span class="line"> Serial.<span class="built_in">print</span>(<span class="string">&quot;frequency:&quot;</span>);  <span class="comment">//串口显示</span></span><br><span class="line"> Serial.<span class="built_in">print</span>(frequency);</span><br><span class="line"> Serial.<span class="built_in">println</span>(<span class="string">&quot;Hz   &quot;</span>);</span><br><span class="line"> Serial.<span class="built_in">print</span>(<span class="string">&quot;inductance:&quot;</span>);</span><br><span class="line"> Serial.<span class="built_in">print</span>(inductance);</span><br><span class="line"> Serial.<span class="built_in">println</span>(<span class="string">&quot;mH   &quot;</span>); </span><br><span class="line"> <span class="built_in">delay</span>(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="5-实验调试"><a href="#5-实验调试" class="headerlink" title="5. 实验调试"></a>5. 实验调试</h1><ol>
+<li><p>搭建完555集成电路之后，使用示波器观察输出频率的值是否在合适的范围之内（30kHZ左右），如果频率太大，找出减小频率的方法（将电阻值降低）；如果将电阻值降低之后555集成不振荡，判断可能是否需要更换电容元件。</p>
+<p><img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片6.png" alt="图5-1 示波器显示1"></p>
+</li>
+</ol>
+<p>&emsp;&emsp;图中频率为82KHZ是由于采用1K欧姆电阻的结果，这个结果的电路电容接上100欧姆电阻不发生振荡，最后我们小组更换一个电容之后解决了这个问题。</p>
+<ol>
+<li><p>搭建分频电路之后，再次使用示波器观察输出波形的频率是否为分频之后的频率，如果不是，改进分频电路。</p>
+<p><img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片7.png" alt="图5-2 示波器显示2"></p>
+<p>&emsp;&emsp;图中：示波器显示二号通道（蓝色）是分频之前的信号，一号通道（黄色）是采用10分频之后的信号。</p>
+</li>
+<li><p>连接Ardunio之后，观察串口监视器显示结果，电容值显示不合理，猜想是代码编译问题，改进代码之后电容值显示合理。</p>
+</li>
+</ol>
+<p>&emsp;&emsp;最终结果图：</p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片9.jpg" alt="图5-3 最终结果图1"></p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片10.png" alt="图5-4 最终结果图2"></p>
+<p>&emsp;&emsp;图中：串口显示器也就是图中右半部分，清楚的显示了频率（frequency）与电容(inductance)的值。由于Arduino是在不断地读取输入信号，所以显示结果是不同时刻输入信号对应的结果。</p>
+<p>&emsp;&emsp;总结：本次测量的电感值大概为2.2mH, 对应的频率为33KHZ</p>
+<h1 id="6-实验总结"><a href="#6-实验总结" class="headerlink" title="6. 实验总结"></a>6. 实验总结</h1><p>&emsp;&emsp;本次电感测量仪设计与实现项目过程中：</p>
+<h2 id="6-1-设计步骤"><a href="#6-1-设计步骤" class="headerlink" title="6.1 设计步骤"></a>6.1 设计步骤</h2><ol>
+<li><p>按图接线，取$U_{cc}=5V,R_1=100\Omega,C_1=0.1\mu F$，$L_1$选用配发的电感（222）。观察输出信号的波形、频率。</p>
+</li>
+<li><p>根据输出信号频率利用74LS90设计相应的分频电路用于Arduino信号采集。</p>
+</li>
+<li><p>将匹配的输出信号接入Arduino的输入引脚，利用Arduino的高低电平采集函数pulseIn()或外部中断函数进行软件编程，实现信号频率的测量。</p>
+</li>
+<li><p>依据测量原理中所得出的电感与频率之间的函数关系转换为电感测量，Arduino的串口监视器实时观测电感大小的值。</p>
+</li>
+</ol>
+<h2 id="6-2-过程中遇到的问题"><a href="#6-2-过程中遇到的问题" class="headerlink" title="6.2 过程中遇到的问题"></a>6.2 过程中遇到的问题</h2><ol>
+<li><p>使用100欧姆电阻配合所选电感（103）无法输出信号，不振荡，电路连接没问题。</p>
+</li>
+<li><p>不清楚如何使用74LS90实现10分频的原理。</p>
+</li>
+<li><p>Aruino如何完整的采集输入信号的一个周期。</p>
+</li>
+<li><p>串口监视器电感显示结果为0.00。</p>
+</li>
+</ol>
+<h2 id="6-3-解决方法"><a href="#6-3-解决方法" class="headerlink" title="6.3 解决方法"></a>6.3 解决方法</h2><ol>
+<li><p>更换一个电感（222），可以使用100欧姆电阻完成信号的输出，频率值为33K。</p>
+</li>
+<li><p>徒手画出10个脉冲对应的74LS90的Q3端输出波形，发现其周期比输入信号大10倍，也即十分频。</p>
+</li>
+<li><p>探究Pulse函数的原理，可以采集一个周期HIGH或LOW状态的时间，将两个状态对应的时间加起来即为一个周期的时间。</p>
+</li>
+<li><p>将代码中关于电感的表达式再乘以1000，使得千分位小数在个位数上显示，解决了显示数据溢出的问题。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>文章报告</category>
+        <category>实验报告</category>
+      </categories>
+      <tags>
+        <tag>电子</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>两种情况下通道壁面的温度分布与冷量损失</title>
     <url>/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<h1 id="1-物理问题"><a href="#1-物理问题" class="headerlink" title="1. 物理问题"></a>1. 物理问题</h1><p>&emsp;&emsp;一个长方体截面的冷空气通道的尺寸如图所示。假设再垂直于纸面的方向上冷空气及通道墙壁的温度变化很小，可以忽略。试用数值方法计算下列两种情况下通道壁面中的温度分布及每米长度上通过壁面的冷量损失：（已知$\lambda_{wall}=0.53 W/(m·K)$）</p>
@@ -583,7 +682,7 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
 ]]></content>
       <categories>
         <category>文章报告</category>
-        <category>课程作业</category>
+        <category>实验报告</category>
       </categories>
       <tags>
         <tag>传热学</tag>
@@ -658,8 +757,8 @@ cos\theta=1-2sin^2\frac{\theta^2}{2}=1-\frac{\theta^2}{2}=1-\frac{D^2}{8f^2}</sc
 <li><p>验证塞曼分裂与磁感应强度的关系</p>
 </li>
 </ol>
-<h2 id="2-原始数据"><a href="#2-原始数据" class="headerlink" title="2. 原始数据"></a>2. 原始数据</h2><h3 id="2-1-实验截图"><a href="#2-1-实验截图" class="headerlink" title="2.1 实验截图"></a>2.1 实验截图</h3><p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片2.png" alt="图片5-1 实验台示意"></p>
-<p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片3.png" alt="图片5-2 实验结果图"></p>
+<h2 id="2-原始数据"><a href="#2-原始数据" class="headerlink" title="2. 原始数据"></a>2. 原始数据</h2><h3 id="2-1-实验截图"><a href="#2-1-实验截图" class="headerlink" title="2.1 实验截图"></a>2.1 实验截图</h3><p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片2.png" alt="图5-1 实验台示意"></p>
+<p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片3.png" alt="图5-2 实验结果图"></p>
 <h3 id="2-2-实验数据"><a href="#2-2-实验数据" class="headerlink" title="2.2 实验数据"></a>2.2 实验数据</h3><p>&emsp;&emsp;用1/4和偏振片区分σ+成分和σ-成分：</p>
 <div class="table-container">
 <table>

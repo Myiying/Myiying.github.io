@@ -65,20 +65,12 @@
   <entry>
     <title>电感测量仪设计与实现</title>
     <url>/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h1><ol>
-<li><p>了解电感的测试原理及方法。</p>
-</li>
-<li><p>掌握555集成定时器的工作原理、电路分析与应用。</p>
-</li>
-<li><p>掌握中规模集成电路74LS90（二－五－十进制计数器）在分频电路中的具体应用。</p>
-</li>
-<li><p>学习Multisim软件的使用，学会用软件仿真分析实验电路。</p>
-</li>
-<li><p>调试较复杂数字电路的方法，实现系统设计的功能。</p>
-</li>
-<li><p>学习Arduino的基本使用方法，学会使用单片机进行频率的测量与串口调试。</p>
-</li>
-</ol>
+    <content><![CDATA[<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h1><p>（1）了解电感的测试原理及方法。</p>
+<p>（2）掌握555集成定时器的工作原理、电路分析与应用。</p>
+<p>（3）掌握中规模集成电路74LS90（二－五－十进制计数器）在分频电路中的具体应用。</p>
+<p>（4）学习Multisim软件的使用，学会用软件仿真分析实验电路。</p>
+<p>（5）调试较复杂数字电路的方法，实现系统设计的功能。</p>
+<p>（6）学习Arduino的基本使用方法，学会使用单片机进行频率的测量与串口调试。</p>
 <h1 id="2-实验原理"><a href="#2-实验原理" class="headerlink" title="2. 实验原理"></a>2. 实验原理</h1><p>&emsp;&emsp;整个振荡器上电之后，电感$L_1$的电流并未发生大的变化，随着电流的不断增大，电阻$R_1$的压降也不断增大，引脚2（TR）和（TH）的输入电压在减小，当2、6引脚上的电压小于VCC/3时电路翻转；3（OUT）引脚输出高电平，引脚7为高阻态（与地断开）。$R_1$和$L_1$组成的回路断开，电感处于放电过程，$R_1$的压降随电流减小而减小，而引脚2（TR）和6（TH）的输入电压不断增大，当电压大于VCC/3时电路再次翻转；3（OUT）引脚输出低电平，引脚7为地阻态（对地导通），$L_1$则再次充电；如此$L_1$重复充电放电过程实现自振荡，根据电路输出波形的高低电平时间可得到其输出频率，公式如下：</p>
 <p>&emsp;&emsp;输出波形高电平时间：</p>
 <script type="math/tex; mode=display">
@@ -97,61 +89,36 @@ L_X=L_1=\frac{R_1}{2ln2f}</script><p>其中$\tau =\frac{L_1}{R_1}$<br>&emsp;&ems
 <p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片3.png" alt="图2-3 基于Arduino的频率测量硬件连接电路"></p>
 <p>&emsp;&emsp;总电路：</p>
 <p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片4.png" alt="图2-4 总电路"></p>
-<h1 id="4-软件编程"><a href="#4-软件编程" class="headerlink" title="4. 软件编程"></a>4. 软件编程</h1><h2 id="4-1-流程图"><a href="#4-1-流程图" class="headerlink" title="4.1 流程图"></a>4.1 流程图</h2><p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片5.png" alt="图3-1 软件编程流程图"></p>
-<h2 id="4-2-公式原理"><a href="#4-2-公式原理" class="headerlink" title="4.2 公式原理"></a>4.2 公式原理</h2><p>frequency = 1.E6/(Pulse_h+Pulse_l)：Pulse函数分别采集输入信号的高位时间与低位时间，二者之和为一个周期，单位为微秒，处理成秒*1.E6</p>
+<h1 id="3-软件编程"><a href="#3-软件编程" class="headerlink" title="3. 软件编程"></a>3. 软件编程</h1><h2 id="3-1-流程图"><a href="#3-1-流程图" class="headerlink" title="3.1 流程图"></a>3.1 流程图</h2><p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片5.png" alt="图3-1 软件编程流程图"></p>
+<h2 id="3-2-公式原理"><a href="#3-2-公式原理" class="headerlink" title="3.2 公式原理"></a>3.2 公式原理</h2><p>frequency = 1.E6/(Pulse_h+Pulse_l)：Pulse函数分别采集输入信号的高位时间与低位时间，二者之和为一个周期，单位为微秒，处理成秒*1.E6</p>
 <p>frequency *= Delay : 计算出分频前的频率</p>
 <p>inductance = (R<em> 1000)/(2</em>frequency*log(2)) : 由频率与电感之前的关系导出</p>
-<h2 id="4-3-最终程序"><a href="#4-3-最终程序" class="headerlink" title="4.3 最终程序"></a>4.3 最终程序</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//申明引脚、宏、常量</span></span><br><span class="line">\<span class="meta">#<span class="keyword">define</span> freqIn 2  <span class="comment">//频率引脚</span></span></span><br><span class="line">\<span class="meta">#<span class="keyword">define</span> Delay 10   <span class="comment">//频率分频值（根据分频电路确定）</span></span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> R = <span class="number">100.0</span> ;</span><br><span class="line"><span class="comment">//申明频率和电感变量</span></span><br><span class="line"><span class="type">double</span> frequency, inductance;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> Serial.<span class="built_in">begin</span>(<span class="number">9600</span>);</span><br><span class="line"> <span class="built_in">pinMode</span>(freqIn, INPUT);  <span class="comment">//初始化引脚为输入模式</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="comment">//使用pulseIn函数读取脉冲高位/低位时间，计时范围为0.01s，输出单位为微妙</span></span><br><span class="line"> <span class="type">double</span> Pulse_h = <span class="built_in">pulseIn</span>(freqIn, HIGH, <span class="number">10000</span>); </span><br><span class="line"> <span class="type">double</span> Pulse_l = <span class="built_in">pulseIn</span>(freqIn, LOW, <span class="number">10000</span>); </span><br><span class="line"> frequency = <span class="number">1.E6</span> / (Pulse_h+Pulse_l); </span><br><span class="line"> <span class="built_in">delay</span>(<span class="number">20</span>);</span><br><span class="line"> frequency *= Delay;  <span class="comment">//分频之前的频率</span></span><br><span class="line"> inductance = (R*<span class="number">1000</span>)/(<span class="number">2</span>*frequency*(<span class="built_in">log</span>(<span class="number">2</span>)));  <span class="comment">//电感与频率之间的关系式</span></span><br><span class="line"> Serial.<span class="built_in">print</span>(<span class="string">&quot;frequency:&quot;</span>);  <span class="comment">//串口显示</span></span><br><span class="line"> Serial.<span class="built_in">print</span>(frequency);</span><br><span class="line"> Serial.<span class="built_in">println</span>(<span class="string">&quot;Hz   &quot;</span>);</span><br><span class="line"> Serial.<span class="built_in">print</span>(<span class="string">&quot;inductance:&quot;</span>);</span><br><span class="line"> Serial.<span class="built_in">print</span>(inductance);</span><br><span class="line"> Serial.<span class="built_in">println</span>(<span class="string">&quot;mH   &quot;</span>); </span><br><span class="line"> <span class="built_in">delay</span>(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="5-实验调试"><a href="#5-实验调试" class="headerlink" title="5. 实验调试"></a>5. 实验调试</h1><ol>
-<li><p>搭建完555集成电路之后，使用示波器观察输出频率的值是否在合适的范围之内（30kHZ左右），如果频率太大，找出减小频率的方法（将电阻值降低）；如果将电阻值降低之后555集成不振荡，判断可能是否需要更换电容元件。</p>
-<p><img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片6.png" alt="图5-1 示波器显示1"></p>
-</li>
-</ol>
+<h2 id="3-3-最终程序"><a href="#3-3-最终程序" class="headerlink" title="3.3 最终程序"></a>3.3 最终程序</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//申明引脚、宏、常量</span></span><br><span class="line">\<span class="meta">#<span class="keyword">define</span> freqIn 2  <span class="comment">//频率引脚</span></span></span><br><span class="line">\<span class="meta">#<span class="keyword">define</span> Delay 10   <span class="comment">//频率分频值（根据分频电路确定）</span></span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> R = <span class="number">100.0</span> ;</span><br><span class="line"><span class="comment">//申明频率和电感变量</span></span><br><span class="line"><span class="type">double</span> frequency, inductance;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> Serial.<span class="built_in">begin</span>(<span class="number">9600</span>);</span><br><span class="line"> <span class="built_in">pinMode</span>(freqIn, INPUT);  <span class="comment">//初始化引脚为输入模式</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="comment">//使用pulseIn函数读取脉冲高位/低位时间，计时范围为0.01s，输出单位为微妙</span></span><br><span class="line"> <span class="type">double</span> Pulse_h = <span class="built_in">pulseIn</span>(freqIn, HIGH, <span class="number">10000</span>); </span><br><span class="line"> <span class="type">double</span> Pulse_l = <span class="built_in">pulseIn</span>(freqIn, LOW, <span class="number">10000</span>); </span><br><span class="line"> frequency = <span class="number">1.E6</span> / (Pulse_h+Pulse_l); </span><br><span class="line"> <span class="built_in">delay</span>(<span class="number">20</span>);</span><br><span class="line"> frequency *= Delay;  <span class="comment">//分频之前的频率</span></span><br><span class="line"> inductance = (R*<span class="number">1000</span>)/(<span class="number">2</span>*frequency*(<span class="built_in">log</span>(<span class="number">2</span>)));  <span class="comment">//电感与频率之间的关系式</span></span><br><span class="line"> Serial.<span class="built_in">print</span>(<span class="string">&quot;frequency:&quot;</span>);  <span class="comment">//串口显示</span></span><br><span class="line"> Serial.<span class="built_in">print</span>(frequency);</span><br><span class="line"> Serial.<span class="built_in">println</span>(<span class="string">&quot;Hz   &quot;</span>);</span><br><span class="line"> Serial.<span class="built_in">print</span>(<span class="string">&quot;inductance:&quot;</span>);</span><br><span class="line"> Serial.<span class="built_in">print</span>(inductance);</span><br><span class="line"> Serial.<span class="built_in">println</span>(<span class="string">&quot;mH   &quot;</span>); </span><br><span class="line"> <span class="built_in">delay</span>(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-实验调试"><a href="#4-实验调试" class="headerlink" title="4. 实验调试"></a>4. 实验调试</h1><p>（1）搭建完555集成电路之后，使用示波器观察输出频率的值是否在合适的范围之内（30kHZ左右），如果频率太大，找出减小频率的方法（将电阻值降低）；如果将电阻值降低之后555集成不振荡，判断可能是否需要更换电容元件。</p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片6.png" alt="图4-1 示波器显示1"></p>
 <p>&emsp;&emsp;图中频率为82KHZ是由于采用1K欧姆电阻的结果，这个结果的电路电容接上100欧姆电阻不发生振荡，最后我们小组更换一个电容之后解决了这个问题。</p>
-<ol>
-<li><p>搭建分频电路之后，再次使用示波器观察输出波形的频率是否为分频之后的频率，如果不是，改进分频电路。</p>
-<p><img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片7.png" alt="图5-2 示波器显示2"></p>
-<p>&emsp;&emsp;图中：示波器显示二号通道（蓝色）是分频之前的信号，一号通道（黄色）是采用10分频之后的信号。</p>
-</li>
-<li><p>连接Ardunio之后，观察串口监视器显示结果，电容值显示不合理，猜想是代码编译问题，改进代码之后电容值显示合理。</p>
-</li>
-</ol>
+<p>（2）搭建分频电路之后，再次使用示波器观察输出波形的频率是否为分频之后的频率，如果不是，改进分频电路。</p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片7.png" alt="图4-2 示波器显示2"></p>
+<p> &emsp;&emsp;图中：示波器显示二号通道（蓝色）是分频之前的信号，一号通道（黄色）是采用10分频之后的信号。</p>
+<p>（3）连接Ardunio之后，观察串口监视器显示结果，电容值显示不合理，猜想是代码编译问题，改进代码之后电容值显示合理。</p>
 <p>&emsp;&emsp;最终结果图：</p>
-<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片9.jpg" alt="图5-3 最终结果图1"></p>
-<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片10.png" alt="图5-4 最终结果图2"></p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片9.jpg" alt="图4-3 最终结果图1"></p>
+<p> <img src="/2024/04/19/%E7%94%B5%E6%84%9F%E6%B5%8B%E9%87%8F%E4%BB%AA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/图片10.png" alt="图4-4 最终结果图2"></p>
 <p>&emsp;&emsp;图中：串口显示器也就是图中右半部分，清楚的显示了频率（frequency）与电容(inductance)的值。由于Arduino是在不断地读取输入信号，所以显示结果是不同时刻输入信号对应的结果。</p>
 <p>&emsp;&emsp;总结：本次测量的电感值大概为2.2mH, 对应的频率为33KHZ</p>
-<h1 id="6-实验总结"><a href="#6-实验总结" class="headerlink" title="6. 实验总结"></a>6. 实验总结</h1><p>&emsp;&emsp;本次电感测量仪设计与实现项目过程中：</p>
-<h2 id="6-1-设计步骤"><a href="#6-1-设计步骤" class="headerlink" title="6.1 设计步骤"></a>6.1 设计步骤</h2><ol>
-<li><p>按图接线，取$U_{cc}=5V,R_1=100\Omega,C_1=0.1\mu F$，$L_1$选用配发的电感（222）。观察输出信号的波形、频率。</p>
-</li>
-<li><p>根据输出信号频率利用74LS90设计相应的分频电路用于Arduino信号采集。</p>
-</li>
-<li><p>将匹配的输出信号接入Arduino的输入引脚，利用Arduino的高低电平采集函数pulseIn()或外部中断函数进行软件编程，实现信号频率的测量。</p>
-</li>
-<li><p>依据测量原理中所得出的电感与频率之间的函数关系转换为电感测量，Arduino的串口监视器实时观测电感大小的值。</p>
-</li>
-</ol>
-<h2 id="6-2-过程中遇到的问题"><a href="#6-2-过程中遇到的问题" class="headerlink" title="6.2 过程中遇到的问题"></a>6.2 过程中遇到的问题</h2><ol>
-<li><p>使用100欧姆电阻配合所选电感（103）无法输出信号，不振荡，电路连接没问题。</p>
-</li>
-<li><p>不清楚如何使用74LS90实现10分频的原理。</p>
-</li>
-<li><p>Aruino如何完整的采集输入信号的一个周期。</p>
-</li>
-<li><p>串口监视器电感显示结果为0.00。</p>
-</li>
-</ol>
-<h2 id="6-3-解决方法"><a href="#6-3-解决方法" class="headerlink" title="6.3 解决方法"></a>6.3 解决方法</h2><ol>
-<li><p>更换一个电感（222），可以使用100欧姆电阻完成信号的输出，频率值为33K。</p>
-</li>
-<li><p>徒手画出10个脉冲对应的74LS90的Q3端输出波形，发现其周期比输入信号大10倍，也即十分频。</p>
-</li>
-<li><p>探究Pulse函数的原理，可以采集一个周期HIGH或LOW状态的时间，将两个状态对应的时间加起来即为一个周期的时间。</p>
-</li>
-<li><p>将代码中关于电感的表达式再乘以1000，使得千分位小数在个位数上显示，解决了显示数据溢出的问题。</p>
-</li>
-</ol>
+<h1 id="5-实验总结"><a href="#5-实验总结" class="headerlink" title="5. 实验总结"></a>5. 实验总结</h1><p>&emsp;&emsp;本次电感测量仪设计与实现项目过程中：</p>
+<h2 id="5-1-设计步骤"><a href="#5-1-设计步骤" class="headerlink" title="5.1 设计步骤"></a>5.1 设计步骤</h2><p>（1）按图接线，取$U_{cc}=5V,R_1=100\Omega,C_1=0.1\mu F$，$L_1$选用配发的电感（222）。观察输出信号的波形、频率。</p>
+<p>（2）根据输出信号频率利用74LS90设计相应的分频电路用于Arduino信号采集。</p>
+<p>（3）将匹配的输出信号接入Arduino的输入引脚，利用Arduino的高低电平采集函数pulseIn()或外部中断函数进行软件编程，实现信号频率的测量。</p>
+<p>（4）依据测量原理中所得出的电感与频率之间的函数关系转换为电感测量，Arduino的串口监视器实时观测电感大小的值。</p>
+<h2 id="5-2-过程中遇到的问题"><a href="#5-2-过程中遇到的问题" class="headerlink" title="5.2 过程中遇到的问题"></a>5.2 过程中遇到的问题</h2><p>（1）使用100欧姆电阻配合所选电感（103）无法输出信号，不振荡，电路连接没问题。</p>
+<p>（2）不清楚如何使用74LS90实现10分频的原理。</p>
+<p>（3）Aruino如何完整的采集输入信号的一个周期。</p>
+<p>（4）串口监视器电感显示结果为0.00。</p>
+<h2 id="5-3-解决方法"><a href="#5-3-解决方法" class="headerlink" title="5.3 解决方法"></a>5.3 解决方法</h2><p>（1）更换一个电感（222），可以使用100欧姆电阻完成信号的输出，频率值为33K。</p>
+<p>（2）徒手画出10个脉冲对应的74LS90的Q3端输出波形，发现其周期比输入信号大10倍，也即十分频。</p>
+<p>（3）探究Pulse函数的原理，可以采集一个周期HIGH或LOW状态的时间，将两个状态对应的时间加起来即为一个周期的时间。</p>
+<p>（4）将代码中关于电感的表达式再乘以1000，使得千分位小数在个位数上显示，解决了显示数据溢出的问题。</p>
 ]]></content>
       <categories>
         <category>文章报告</category>
@@ -186,19 +153,19 @@ t|_{y=0.5,0.5\le x\le 1.5}=30</script><script type="math/tex; mode=display">
 -\lambda\frac{\partial t}{\partial y}|_{y=0.5,0.5\le x\le1.5}=h_1(t_{f_1}-t|_{y=0.5,0.5\le x\le 1.5})</script><script type="math/tex; mode=display">
 \frac{\partial t}{\partial x}|_{x=1.5,0\le y\le 0.5}=0</script><script type="math/tex; mode=display">
 \frac{\partial t}{\partial y}|_{y=1.1,0\le x\le 0.5}=0</script><h1 id="4-建立离散模型方程"><a href="#4-建立离散模型方程" class="headerlink" title="4. 建立离散模型方程"></a>4. 建立离散模型方程</h1><p>&emsp;&emsp;将所建模型进行离散处理，并作出如图所示网格，模型中任意一节点表示为$(i,j)$，任意节点温度表示为$t_{i,j}$（横向节点用i表示，纵向节点用j表示），两个方向上步长均为0.1m，即$\Delta x=\Delta y=0.1 m$<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片3.png" alt="图4-1 网格划分"></p>
-<h2 id="4-1-等温条件"><a href="#4-1-等温条件" class="headerlink" title="4.1 等温条件"></a>4.1 等温条件</h2><p>4.1.1 若$(i,j)$为内节点：</p>
+<h2 id="4-1-等温条件"><a href="#4-1-等温条件" class="headerlink" title="4.1 等温条件"></a>4.1 等温条件</h2><p>（1）若$(i,j)$为内节点：</p>
 <p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片4.png" alt="图4-2 等温条件内节点"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
-\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y=0</script><p>4.1.2 若$(i,j)$为等温边界点及拐角点：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片5.png" alt="图4-3 等温条件边界点及拐角点"><br>&emsp;&emsp;对应离散方程：</p>
+\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y=0</script><p>（2）若$(i,j)$为等温边界点及拐角点：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片5.png" alt="图4-3 等温条件边界点及拐角点"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
-t_{i,j}=t_{w}</script><p>4.1.3 若$(i,j)$为绝热边界点：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片5.png" alt="图4-4 绝热条件内节点"><br>&emsp;&emsp;对应离散方程：</p>
+t_{i,j}=t_{w}</script><p>（3）若$(i,j)$为绝热边界点：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片5.png" alt="图4-4 绝热条件内节点"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
 \frac{t_{i,j-1}-t{i,j}}{\Delta y}=0\ \ \ \ \ 1\le i\le 4, j=11</script><script type="math/tex; mode=display">
-\frac{t_{i-1,j}-t{i,j}}{\Delta X}=0\ \ \ \ \ \ 1\le i=j\le 4, i=15</script><h2 id="4-2-对流传热条件"><a href="#4-2-对流传热条件" class="headerlink" title="4.2 对流传热条件"></a>4.2 对流传热条件</h2><p>4.2.1 内节点离散方程与等温条件相同；</p>
-<p>4.2.2 外部对流传热边界点（不包括拐角点）：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片7.png" alt="图4-5 外部对流条件边界点（不包括拐角点）"><br>&emsp;&emsp;对应离散方程：</p>
+\frac{t_{i-1,j}-t{i,j}}{\Delta X}=0\ \ \ \ \ \ 1\le i=j\le 4, i=15</script><h2 id="4-2-对流传热条件"><a href="#4-2-对流传热条件" class="headerlink" title="4.2 对流传热条件"></a>4.2 对流传热条件</h2><p>（1）内节点离散方程与等温条件相同；</p>
+<p>（2）外部对流传热边界点（不包括拐角点）：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片7.png" alt="图4-5 外部对流条件边界点（不包括拐角点）"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
 \lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+h_2\cdot\Delta y\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ i=0,1\le j\le 10</script><script type="math/tex; mode=display">
-\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot{\Delta x}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\Delta x\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ j=0,1\le i\le 14</script><p>4.2.3 内部对流传热边界点（不包括拐角点）：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片8.png" alt="图4-6 内部对流条件边界点（不包括拐角点）"><br>&emsp;&emsp;对应离散方程：</p>
+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot{\Delta x}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\Delta x\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ j=0,1\le i\le 14</script><p>（3）内部对流传热边界点（不包括拐角点）：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片8.png" alt="图4-6 内部对流条件边界点（不包括拐角点）"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
 \lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2}+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot{\Delta y}+h_1\cdot\Delta y\cdot(t_{f_1}-t_{i,j})=0\ \ \ \ \ i=5,6\le j\le 10</script><script type="math/tex; mode=display">
 \lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\frac{\Delta x}{2}\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ i=15,j=0</script><script type="math/tex; mode=display">
@@ -211,7 +178,7 @@ t_{f_1}=10℃</script><script type="math/tex; mode=display">
 h_1=20W/(m^2·K)</script><script type="math/tex; mode=display">
 t_{f_2}=30℃</script><script type="math/tex; mode=display">
 h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
-\Delta x=\Delta y=0.1m</script><h1 id="6-求解仿真"><a href="#6-求解仿真" class="headerlink" title="6.求解仿真"></a>6.求解仿真</h1><h2 id="6-1-等温边界"><a href="#6-1-等温边界" class="headerlink" title="6.1 等温边界"></a>6.1 等温边界</h2><p>6.1.1 温度分布</p>
+\Delta x=\Delta y=0.1m</script><h1 id="6-求解仿真"><a href="#6-求解仿真" class="headerlink" title="6.求解仿真"></a>6.求解仿真</h1><h2 id="6-1-等温边界"><a href="#6-1-等温边界" class="headerlink" title="6.1 等温边界"></a>6.1 等温边界</h2><p>（1）温度分布</p>
 <p>&emsp;&emsp;代码：</p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc,clear</span><br><span class="line"><span class="comment">%温度差初始化</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">14</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%等温边界</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">6</span>:<span class="number">16</span> <span class="comment">%BC 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="number">6</span>)=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">6</span>:<span class="number">12</span> <span class="comment">%CD 边</span></span><br><span class="line">t(<span class="number">6</span>,<span class="built_in">j</span>)=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span> <span class="comment">%AF 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="number">1</span>)=<span class="number">30</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span> <span class="comment">%EF 边</span></span><br><span class="line">t(<span class="number">1</span>,<span class="built_in">j</span>)=<span class="number">30</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">n=<span class="number">0</span>; <span class="comment">%迭代次数</span></span><br><span class="line">e=<span class="built_in">inf</span>; <span class="comment">%初始化相对偏差</span></span><br><span class="line"><span class="comment">%高斯迭代</span></span><br><span class="line"><span class="keyword">while</span> e&gt;<span class="number">1e-6</span> <span class="comment">%收敛判断</span></span><br><span class="line">tq=t; <span class="comment">%记录迭代前的温度</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span> <span class="comment">%内部结点</span></span><br><span class="line"><span class="keyword">if</span> ((<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">5</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">12</span>)||(<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">6</span>))</span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%DE 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>))/<span class="number">4</span>;<span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">i</span>==<span class="number">16</span>) <span class="comment">%AB 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">e=<span class="built_in">max</span>(<span class="built_in">max</span>(<span class="built_in">abs</span>(t-tq)./(tq+<span class="built_in">eps</span>))); <span class="comment">%最大相对偏差</span></span><br><span class="line">n=n+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">&#x27;迭代次数:&#x27;</span>)</span><br><span class="line"><span class="built_in">disp</span>(n)</span><br><span class="line"><span class="comment">%非墙区域温度清零</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(t&#x27;) <span class="comment">%温度分布</span></span><br><span class="line">pcolor(t&#x27;);shading interp</span><br><span class="line"><span class="built_in">figure</span>, contour(t&#x27;,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;结果：</p>
@@ -439,13 +406,13 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
 </tbody>
 </table>
 </div>
-<p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片9.png" alt="图6-1 等温边界结果图1"><br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片10.png" alt="图6-2 等温边界结果图2"><br>6.1.2 导热量：</p>
+<p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片9.png" alt="图6-1 等温边界结果图1"><br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片10.png" alt="图6-2 等温边界结果图2"><br>（2）导热量：</p>
 <p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">qw=<span class="number">0</span>; <span class="comment">%外壁面导热量</span></span><br><span class="line">qn=<span class="number">0</span>; <span class="comment">%内壁面导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">2</span>:<span class="number">15</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>*(t(<span class="built_in">i</span>,<span class="number">1</span>)-t(<span class="built_in">i</span>,<span class="number">2</span>)); <span class="comment">%AF 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:<span class="number">11</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>*(t(<span class="number">1</span>,<span class="built_in">j</span>)-t(<span class="number">2</span>,<span class="built_in">j</span>)); <span class="comment">%AE 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">1</span>)-t(<span class="number">16</span>,<span class="number">2</span>))+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">1</span>,<span class="number">12</span>)-t(<span class="number">2</span>,<span class="number">12</span>)); <span class="comment">%A、 E、 F 点导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">15</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="built_in">i</span>,<span class="number">5</span>)-t(<span class="built_in">i</span>,<span class="number">6</span>)); <span class="comment">%BC 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">11</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="number">5</span>,<span class="built_in">j</span>)+t(<span class="number">6</span>,<span class="built_in">j</span>)); <span class="comment">%CD 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="number">6</span>,<span class="number">5</span>)+t(<span class="number">5</span>,<span class="number">6</span>)<span class="number">-2</span>*t(<span class="number">6</span>,<span class="number">6</span>))+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">5</span>)+t(<span class="number">5</span>,<span class="number">12</span>)-t(<span class="number">16</span>,<span class="number">6</span>)-t(<span class="number">6</span>,<span class="number">12</span>));</span><br><span class="line"><span class="comment">%B、 C、 D 边导热量</span></span><br><span class="line">qw=qw*<span class="number">4</span>; <span class="comment">%外壁面总导热量</span></span><br><span class="line">qn=qn*<span class="number">4</span>; <span class="comment">%内壁面总导热量</span></span><br><span class="line">qz=(qw+qn)/<span class="number">2</span> <span class="comment">%垂直于纸面方向每米长度上通过砖墙的导热量</span></span><br><span class="line">delta=<span class="built_in">abs</span>(qw-qn)/((qn+qw)/<span class="number">2</span>) <span class="comment">%热平衡偏差</span></span><br></pre></td></tr></table></figure><br>&emsp;&emsp;结果：<br><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">qz =<span class="number">241.7152</span></span><br><span class="line">delta =<span class="number">6.1122e-06</span></span><br></pre></td></tr></table></figure><br>即：</p>
 <p>外壁导热量 Φ=241.7159 W， </p>
 <p>内壁导热量 Φ= 241.7145 W</p>
 <p>垂直于纸面方向的每米长度上通过砖墙的导热量 Φ=241.7152W</p>
 <p>热平衡偏差=0.00061% 。</p>
-<h2 id="6-2-对流边界"><a href="#6-2-对流边界" class="headerlink" title="6.2 对流边界"></a>6.2 对流边界</h2><p>6.2.1 温度分布：</p>
+<h2 id="6-2-对流边界"><a href="#6-2-对流边界" class="headerlink" title="6.2 对流边界"></a>6.2 对流边界</h2><p>（1） 温度分布：</p>
 <p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc,clear</span><br><span class="line"><span class="comment">%温度差初始化</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">21</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">n=<span class="number">0</span>; <span class="comment">%迭代次数</span></span><br><span class="line">e=<span class="built_in">inf</span>; <span class="comment">%初始化相对偏差</span></span><br><span class="line"><span class="comment">%高斯迭代</span></span><br><span class="line"><span class="keyword">while</span> e&gt;<span class="number">1e-6</span> <span class="comment">%收敛判断</span></span><br><span class="line">tq=t; <span class="comment">%记录迭代前的温度</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line"><span class="keyword">if</span> ((<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">5</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">12</span>)||(<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">6</span>)) <span class="comment">%内部结点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;<span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%DE 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">i</span>==<span class="number">16</span>) <span class="comment">%AB 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">1</span>) <span class="comment">%AF 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">6</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">6</span>) <span class="comment">%BC 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">12</span>) <span class="comment">%CD 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">12</span>) <span class="comment">%EF 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">1</span>) <span class="comment">%A 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">2</span>+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">6</span>) <span class="comment">%B 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">2</span>+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">6</span>) <span class="comment">%C 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+<span class="number">3.975</span>*<span class="number">0.2</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">6</span>+<span class="number">3.975</span>*<span class="number">0.2</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%D 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">2</span>+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%E 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">2</span>+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">1</span>) <span class="comment">%F 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+<span class="number">10.6</span>*<span class="number">0.2</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">2</span>+<span class="number">10.6</span>*<span class="number">0.2</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">e=<span class="built_in">max</span>(<span class="built_in">max</span>(<span class="built_in">abs</span>(t-tq)./(tq+<span class="built_in">eps</span>))); <span class="comment">%最大相对偏差</span></span><br><span class="line">n=n+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">&#x27;迭代次数:&#x27;</span>)</span><br><span class="line"><span class="built_in">disp</span>(n)</span><br><span class="line"><span class="comment">%非墙区域温度清零</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(t&#x27;) <span class="comment">%温度分布</span></span><br><span class="line">pcolor(t&#x27;);shading interp</span><br><span class="line"><span class="built_in">figure</span>, contour(t&#x27;,<span class="number">10</span>);</span><br></pre></td></tr></table></figure><br>&emsp;&emsp; 结果：</p>
 <div class="table-container">
 <table>
@@ -672,7 +639,7 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
 </table>
 </div>
 <p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片11.png" alt="图6-3 对流边界结果图1"><br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片12.png" alt="图6-4 对流边界结果图2"></p>
-<p>6.2.2 导热量：</p>
+<p>（2）导热量：</p>
 <p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">qw=<span class="number">0</span>; <span class="comment">%外壁面导热量</span></span><br><span class="line">qn=<span class="number">0</span>; <span class="comment">%内壁面导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">2</span>:<span class="number">15</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="built_in">i</span>,<span class="number">1</span>)); <span class="comment">%AF 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:<span class="number">11</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="number">1</span>,<span class="built_in">j</span>)); <span class="comment">%AE 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">2</span>*(<span class="number">2</span>*<span class="number">30</span>-t(<span class="number">16</span>,<span class="number">1</span>)-t(<span class="number">1</span>,<span class="number">12</span>))+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="number">1</span>,<span class="number">1</span>)); <span class="comment">%A、 E、 F 点导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">15</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="built_in">i</span>,<span class="number">6</span>)<span class="number">-10</span>); <span class="comment">%BC 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">11</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="number">6</span>,<span class="built_in">j</span>)<span class="number">-10</span>); <span class="comment">%CD 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">6</span>)+t(<span class="number">6</span>,<span class="number">12</span>)<span class="number">-2</span>*<span class="number">10</span>)+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="number">6</span>,<span class="number">6</span>)<span class="number">-10</span>); <span class="comment">%B、 C、 D 边导热量</span></span><br><span class="line">qw=qw*<span class="number">4</span>; <span class="comment">%外壁面总导热量</span></span><br><span class="line">qn=qn*<span class="number">4</span>; <span class="comment">%内壁面总导热量</span></span><br><span class="line">qz=(qw+qn)/<span class="number">2</span> <span class="comment">%垂直于纸面方向每米长度上通过砖墙的导热量</span></span><br><span class="line">delta=<span class="built_in">abs</span>(qw-qn)/((qn+qw)/<span class="number">2</span>) <span class="comment">%热平衡偏差</span></span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;结果：</p>
 <p>外壁导热量Φ=113.4404 W</p>
@@ -692,16 +659,11 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
   <entry>
     <title>塞曼效应实验报告</title>
     <url>/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/</url>
-    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><ol>
-<li><p>观察塞曼效应仪，理解理论学习内容</p>
-</li>
-<li><p>掌握测量波长差的原理</p>
-</li>
-<li><p>测量质荷比</p>
-</li>
-</ol>
-<h1 id="二、实验仪器及方法"><a href="#二、实验仪器及方法" class="headerlink" title="二、实验仪器及方法"></a>二、实验仪器及方法</h1><p>&emsp;&emsp;本实验为模拟仿真实验</p>
-<h1 id="三、原理简述"><a href="#三、原理简述" class="headerlink" title="三、原理简述"></a>三、原理简述</h1><h2 id="1-观察塞曼分裂的方法"><a href="#1-观察塞曼分裂的方法" class="headerlink" title="1. 观察塞曼分裂的方法"></a>1. 观察塞曼分裂的方法</h2><p>&emsp;&emsp;塞曼分裂的波长差很小，以Hg 5461 Å谱线为例，当处于B=1T的磁场中：</p>
+    <content><![CDATA[<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h1><p>（1）观察塞曼效应仪，理解理论学习内容</p>
+<p>（2）掌握测量波长差的原理</p>
+<p>（3）测量质荷比</p>
+<h1 id="2-实验仪器及方法"><a href="#2-实验仪器及方法" class="headerlink" title="2. 实验仪器及方法"></a>2. 实验仪器及方法</h1><p>&emsp;&emsp;本实验为模拟仿真实验</p>
+<h1 id="3-原理简述"><a href="#3-原理简述" class="headerlink" title="3. 原理简述"></a>3. 原理简述</h1><h2 id="3-1-观察塞曼分裂的方法"><a href="#3-1-观察塞曼分裂的方法" class="headerlink" title="3.1 观察塞曼分裂的方法"></a>3.1 观察塞曼分裂的方法</h2><p>&emsp;&emsp;塞曼分裂的波长差很小，以Hg 5461 Å谱线为例，当处于B=1T的磁场中：</p>
 <script type="math/tex; mode=display">
 \Delta \widetilde{v}=\frac{L}{2}=\frac{1}{2}\times46.7\times1=23.35m^{-1}</script><script type="math/tex; mode=display">
 \Delta\lambda=\lambda^2\Delta\widetilde{v}=10^{-11}m=0.1</script><p>&emsp;&emsp;要观察如此小的波长差，用一般的棱镜摄谱仪是不可能的，需要用高分辨率的仪器，如法布里—珀罗标准器（F—P标准具）。F—P标准具由平行放置的两块平面玻璃或石英板组成的，在两板相对的平面上镀薄银膜和其他有较高反射系数的薄膜。两平行的镀银平面的间隔是由某些热膨胀系数很小的材料做成的环固定起来。玻璃板上带有三个螺丝，可以精确调节两玻璃板内表面之间的平行度。标准具的光路图如下所示。从扩展光源S上发出的单色光。设到标准具板的平行平面上，经M1和M2表面的多次反射和透射，分别形成一系列相互平行的反射光束1,2,3,4…..和透射光束1’,2’,3’,4’……在透射的光束中，相邻的光程差是：</p>
@@ -717,7 +679,7 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
 <script type="math/tex; mode=display">
 N=\frac{\pi\sqrt{R}}{1-R}</script><p>&emsp;&emsp;R为反射率，R一般在90%。使用标准具时光近似正入射，sin<em>q</em> ≈0,从标准具干涉的极大值公式可得</p>
 <script type="math/tex; mode=display">
-K=\frac{2d}{\lambda}</script><h2 id="2-测量塞曼分裂谱线波长差的方法"><a href="#2-测量塞曼分裂谱线波长差的方法" class="headerlink" title="2. 测量塞曼分裂谱线波长差的方法"></a>2. 测量塞曼分裂谱线波长差的方法</h2><p>&emsp;&emsp;应用F-P标准具测量各分裂谱线的波长或者波长差是通过测量干涉环的直径来实现的。如标准具光路图所示，用透镜把F-P标准具的干涉圆环成像在焦平面上。出射角为$\theta$的圆环其直径$D$与透镜焦距$f$间的关系为：</p>
+K=\frac{2d}{\lambda}</script><h2 id="3-2-测量塞曼分裂谱线波长差的方法"><a href="#3-2-测量塞曼分裂谱线波长差的方法" class="headerlink" title="3.2 测量塞曼分裂谱线波长差的方法"></a>3.2 测量塞曼分裂谱线波长差的方法</h2><p>&emsp;&emsp;应用F-P标准具测量各分裂谱线的波长或者波长差是通过测量干涉环的直径来实现的。如标准具光路图所示，用透镜把F-P标准具的干涉圆环成像在焦平面上。出射角为$\theta$的圆环其直径$D$与透镜焦距$f$间的关系为：</p>
 <script type="math/tex; mode=display">
 tan\theta=\frac{D}{2f}</script><p>&emsp;&emsp;对于近中心处的圆环，$\theta$很小，可以认为:</p>
 <script type="math/tex; mode=display">
@@ -735,31 +697,18 @@ cos\theta=1-2sin^2\frac{\theta^2}{2}=1-\frac{\theta^2}{2}=1-\frac{D^2}{8f^2}</sc
 <script type="math/tex; mode=display">
 \Delta\lambda=\frac{\lambda^2}{2d}(\frac{D_b^2-D_a^2}{D_{K-1}^2-D_K^2})</script><p>&emsp;&emsp;波数差</p>
 <script type="math/tex; mode=display">
-\Delta\sigma=\frac{1}{2d}(\frac{D_b^2-D_a^2}{D_{K-1}^2-D_K^2})</script><h1 id="四、实验相关问题列举"><a href="#四、实验相关问题列举" class="headerlink" title="四、实验相关问题列举"></a>四、实验相关问题列举</h1><ol>
-<li><p>塞曼效应相关基础知识</p>
-</li>
-<li><p>谱线在磁场中的能级分裂</p>
-</li>
-<li><p>塞曼分裂谱线与原谱线关系</p>
-</li>
-<li><p>塞曼跃迁 </p>
-</li>
-</ol>
-<h1 id="五、原始数据及操作"><a href="#五、原始数据及操作" class="headerlink" title="五、原始数据及操作"></a>五、原始数据及操作</h1><h2 id="1-实验操作"><a href="#1-实验操作" class="headerlink" title="1. 实验操作"></a>1. 实验操作</h2><ol>
-<li><p>调节光路共轴及F-P标准具平行</p>
-</li>
-<li><p>在垂直于磁场方向观察Hg 546.1nm谱线在磁场中的分裂，用偏振片区分谱线中π和σ成分。</p>
-</li>
-<li><p>平行于磁场方向观察Hg 546.1nm谱线在磁场中的分裂，用偏振片和1/4波晶片区分谱线中σ+和σ-成分。此时磁场方向指向观察者。</p>
-</li>
-<li><p>垂直于磁场方向观察，用塞曼分裂计算电子荷质比e/m。</p>
-</li>
-<li><p>验证塞曼分裂与磁感应强度的关系</p>
-</li>
-</ol>
-<h2 id="2-原始数据"><a href="#2-原始数据" class="headerlink" title="2. 原始数据"></a>2. 原始数据</h2><h3 id="2-1-实验截图"><a href="#2-1-实验截图" class="headerlink" title="2.1 实验截图"></a>2.1 实验截图</h3><p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片2.png" alt="图5-1 实验台示意"></p>
+\Delta\sigma=\frac{1}{2d}(\frac{D_b^2-D_a^2}{D_{K-1}^2-D_K^2})</script><h1 id="4-实验相关问题列举"><a href="#4-实验相关问题列举" class="headerlink" title="4. 实验相关问题列举"></a>4. 实验相关问题列举</h1><p>（1）塞曼效应相关基础知识</p>
+<p>（2）谱线在磁场中的能级分裂</p>
+<p>（3）塞曼分裂谱线与原谱线关系</p>
+<p>（4）塞曼跃迁 </p>
+<h1 id="5-原始数据及操作"><a href="#5-原始数据及操作" class="headerlink" title="5. 原始数据及操作"></a>5. 原始数据及操作</h1><h2 id="5-1-实验操作"><a href="#5-1-实验操作" class="headerlink" title="5.1 实验操作"></a>5.1 实验操作</h2><p>（1）调节光路共轴及F-P标准具平行</p>
+<p>（2）在垂直于磁场方向观察Hg 546.1nm谱线在磁场中的分裂，用偏振片区分谱线中π和σ成分。</p>
+<p>（3）平行于磁场方向观察Hg 546.1nm谱线在磁场中的分裂，用偏振片和1/4波晶片区分谱线中σ+和σ-成分。此时磁场方向指向观察者。</p>
+<p>（4）垂直于磁场方向观察，用塞曼分裂计算电子荷质比e/m。</p>
+<p>（5）验证塞曼分裂与磁感应强度的关系</p>
+<h2 id="5-2-原始数据"><a href="#5-2-原始数据" class="headerlink" title="5.2 原始数据"></a>5.2 原始数据</h2><h3 id="5-2-1-实验截图"><a href="#5-2-1-实验截图" class="headerlink" title="5.2.1 实验截图"></a>5.2.1 实验截图</h3><p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片2.png" alt="图5-1 实验台示意"></p>
 <p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片3.png" alt="图5-2 实验结果图"></p>
-<h3 id="2-2-实验数据"><a href="#2-2-实验数据" class="headerlink" title="2.2 实验数据"></a>2.2 实验数据</h3><p>&emsp;&emsp;用1/4和偏振片区分σ+成分和σ-成分：</p>
+<h3 id="5-2-2-实验数据"><a href="#5-2-2-实验数据" class="headerlink" title="5.2.2 实验数据"></a>5.2.2 实验数据</h3><p>&emsp;&emsp;用1/4和偏振片区分σ+成分和σ-成分：</p>
 <div class="table-container">
 <table>
 <thead>
@@ -828,17 +777,12 @@ cos\theta=1-2sin^2\frac{\theta^2}{2}=1-\frac{\theta^2}{2}=1-\frac{D^2}{8f^2}</sc
 </div>
 <p>&emsp;&emsp;测量得到磁场大小为：B=350mT</p>
 <p>&emsp;&emsp;标准具常数d=5mm</p>
-<h1 id="六、测量内容与数据处理"><a href="#六、测量内容与数据处理" class="headerlink" title="六、测量内容与数据处理"></a>六、测量内容与数据处理</h1><p>&emsp;&emsp;计算得荷质比$\frac{e}{m}=1.884\times10^{11}C/kg$</p>
+<h1 id="6-测量内容与数据处理"><a href="#6-测量内容与数据处理" class="headerlink" title="6. 测量内容与数据处理"></a>6. 测量内容与数据处理</h1><p>&emsp;&emsp;计算得荷质比$\frac{e}{m}=1.884\times10^{11}C/kg$</p>
 <p>&emsp;&emsp;理论值：$1.758\times10^{11}$</p>
 <p>&emsp;&emsp;相对误差：$7.06\%$</p>
-<h1 id="七、误差分析"><a href="#七、误差分析" class="headerlink" title="七、误差分析"></a>七、误差分析</h1><ol>
-<li><p>调节定轴等高时存在误差</p>
-</li>
-<li><p>计算直径时存在误差</p>
-</li>
-<li><p>计算时的认为误差</p>
-</li>
-</ol>
+<h1 id="7-误差分析"><a href="#7-误差分析" class="headerlink" title="7. 误差分析"></a>7. 误差分析</h1><p>（1）调节定轴等高时存在误差</p>
+<p>（2）计算直径时存在误差</p>
+<p>（3）计算时的人为误差</p>
 ]]></content>
       <categories>
         <category>文章报告</category>
@@ -873,14 +817,9 @@ F_{12y}-m_2g=m_2\ddot{y}_2</script><script type="math/tex; mode=display">
 <p>&emsp;&emsp;运行结果：</p>
 <p><img src="/2024/04/18/%E6%96%9C%E9%9D%A2%E6%BB%91%E5%9D%97%E6%91%86%E9%94%A4%E9%97%AE%E9%A2%98%E7%9A%84%E6%B1%82%E8%A7%A3/图片2.png" alt="图3-2 运行结果图"></p>
 <h1 id="4-实验结果的分析和讨论"><a href="#4-实验结果的分析和讨论" class="headerlink" title="4. 实验结果的分析和讨论"></a>4. 实验结果的分析和讨论</h1><p>&emsp;&emsp;滑块的位移符合实际情况，轨迹为一条沿斜面的直线。摆锤的运动为平面运动，轨迹为复杂的曲线。斜面对滑块的作用力发生正弦变化，这正是由于摆锤对滑块的作用力变化导致的结果。</p>
-<h1 id="5-实验心得体会"><a href="#5-实验心得体会" class="headerlink" title="5. 实验心得体会"></a>5. 实验心得体会</h1><ol>
-<li><p>simulink的仿真功能对于工科的学习有很大帮助，之后可以应用到关于机械设计的许多领域。比方说在用solidworks画图之后，我们可以先用仿真系统测试它的性能，如果有问题及时调整，而不是只能在制作出实体以后才发现问题，这大大减少了对于材料和时间的消耗。</p>
-</li>
-<li><p>采用MATLAB附带的图形仿真工具Simulink实现了对于滑块和摆锤运动轨迹分析，对matlab有了进一步的了解。</p>
-</li>
-<li><p>会利用了simulink模拟力学中一些物体运动，更好的解决问题。</p>
-</li>
-</ol>
+<h1 id="5-实验心得体会"><a href="#5-实验心得体会" class="headerlink" title="5. 实验心得体会"></a>5. 实验心得体会</h1><p>（1）simulink的仿真功能对于工科的学习有很大帮助，之后可以应用到关于机械设计的许多领域。比方说在用solidworks画图之后，我们可以先用仿真系统测试它的性能，如果有问题及时调整，而不是只能在制作出实体以后才发现问题，这大大减少了对于材料和时间的消耗。</p>
+<p>（2）采用MATLAB附带的图形仿真工具Simulink实现了对于滑块和摆锤运动轨迹分析，对matlab有了进一步的了解。</p>
+<p>（3）会利用了simulink模拟力学中一些物体运动，更好的解决问题。</p>
 ]]></content>
       <categories>
         <category>文章报告</category>
@@ -938,33 +877,18 @@ F_{12y}-m_2g=m_2\ddot{y}_2</script><script type="math/tex; mode=display">
   <entry>
     <title>牛奶酸度和钙含量的测定</title>
     <url>/2024/04/17/%E7%89%9B%E5%A5%B6%E9%85%B8%E5%BA%A6%E5%92%8C%E9%92%99%E5%90%AB%E9%87%8F%E7%9A%84%E6%B5%8B%E5%AE%9A/</url>
-    <content><![CDATA[<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h1><ol>
-<li><p>了解牛奶酸度的测定，掌握乳浊液滴定终点的观察方法</p>
-</li>
-<li><p>了解实际样品分析方法</p>
-</li>
-<li><p>了解牛奶钙含量的测定</p>
-</li>
-<li><p>了解实际样品分析方法</p>
-</li>
-<li><p>学会小组合作，共同完成实验</p>
-</li>
-</ol>
-<h1 id="2-实验原理"><a href="#2-实验原理" class="headerlink" title="2. 实验原理"></a>2. 实验原理</h1><ol>
-<li><p>牛乳的酸度以中和100 mL乳液0.1 mol/L NaOH表示，以酚酞作为指示剂，对中和反应进行滴定。通过换算得到牛乳的酸度。</p>
-</li>
-<li><p>配位滴定法，以钙试剂为指示剂，计量点前钙与钙试剂形成粉红配合物，当用EDTA溶液滴定至计量点时，游离出指示剂，溶液呈现蓝色。</p>
-</li>
-</ol>
+    <content><![CDATA[<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h1><p>（1）了解牛奶酸度的测定，掌握乳浊液滴定终点的观察方法</p>
+<p>（2）了解实际样品分析方法</p>
+<p>（3）了解牛奶钙含量的测定</p>
+<p>（4）了解实际样品分析方法</p>
+<p>（5）学会小组合作，共同完成实验</p>
+<h1 id="2-实验原理"><a href="#2-实验原理" class="headerlink" title="2. 实验原理"></a>2. 实验原理</h1><p>（1）牛乳的酸度以中和100 mL乳液0.1 mol/L NaOH表示，以酚酞作为指示剂，对中和反应进行滴定。通过换算得到牛乳的酸度。</p>
+<p>（2）配位滴定法，以钙试剂为指示剂，计量点前钙与钙试剂形成粉红配合物，当用EDTA溶液滴定至计量点时，游离出指示剂，溶液呈现蓝色。</p>
 <h1 id="3-仪器与试剂"><a href="#3-仪器与试剂" class="headerlink" title="3. 仪器与试剂"></a>3. 仪器与试剂</h1><h2 id="3-1-仪器"><a href="#3-1-仪器" class="headerlink" title="3.1 仪器"></a>3.1 仪器</h2><p>&emsp;&emsp;量筒（25 mL）、锥形瓶（250 mL）、滴定管（酸式，碱式）、烧杯、吸量管、天平、细口试剂瓶、移液管（25 mL）、玻璃棒、容量瓶（250 mL）、酸度计。</p>
 <h2 id="3-2-试剂"><a href="#3-2-试剂" class="headerlink" title="3.2 试剂"></a>3.2 试剂</h2><p>&emsp;&emsp;乙二胺四乙酸二钠、碳酸钙、镁溶液、6 mol/L HCI溶液、去离子水、牛奶、0.1%酚酞指示剂，0.1801 mol/L NaOH溶液、钙指示剂。</p>
 <h1 id="4-实验步骤"><a href="#4-实验步骤" class="headerlink" title="4. 实验步骤"></a>4. 实验步骤</h1><h2 id="4-1-EDTA溶液的配制与标定"><a href="#4-1-EDTA溶液的配制与标定" class="headerlink" title="4.1 EDTA溶液的配制与标定"></a>4.1 EDTA溶液的配制与标定</h2><h3 id="4-1-1-0-03mol-L-EDTA溶液的配制"><a href="#4-1-1-0-03mol-L-EDTA溶液的配制" class="headerlink" title="4.1.1 0.03mol/L EDTA溶液的配制"></a>4.1.1 0.03mol/L EDTA溶液的配制</h3><p>&emsp;&emsp;在电子天平上称取乙二胺四乙酸二钠2.52g，加入250mL去离子水溶解至试剂瓶。</p>
-<h3 id="4-1-2-以-CaCO-3-为基准物标定EDTA溶液"><a href="#4-1-2-以-CaCO-3-为基准物标定EDTA溶液" class="headerlink" title="4.1.2 以$CaCO_3$为基准物标定EDTA溶液"></a>4.1.2 以$CaCO_3$为基准物标定EDTA溶液</h3><ol>
-<li><p>钙标准溶液的配制：准确称取0.7 ~ 0.75g $CaCO_3$（差减法称量）于100mL烧杯中，加水润湿，逐滴加入数毫升6 mol/L HCI溶液，使之全部溶解，微沸几分钟以除去$CO_2$，待冷却后转移至250 mL容量瓶中，稀释至刻度。</p>
-</li>
-<li><p>用钙标准溶液标定EDTA溶液：用移液管移取25.00mL标准钙溶液于250mL锥形瓶中，加入25 mL去离子水、10滴镁溶液、15mL 0.1801 mol/L NaOH 溶液及适量（绿豆大小）钙指示剂，摇匀后，用EDTA溶液滴定至溶液从红色变为蓝色，即为终点。</p>
-</li>
-</ol>
+<h3 id="4-1-2-以-CaCO-3-为基准物标定EDTA溶液"><a href="#4-1-2-以-CaCO-3-为基准物标定EDTA溶液" class="headerlink" title="4.1.2 以$CaCO_3$为基准物标定EDTA溶液"></a>4.1.2 以$CaCO_3$为基准物标定EDTA溶液</h3><p>（1）钙标准溶液的配制：准确称取0.7 ~ 0.75g $CaCO_3$（差减法称量）于100mL烧杯中，加水润湿，逐滴加入数毫升6 mol/L HCI溶液，使之全部溶解，微沸几分钟以除去$CO_2$，待冷却后转移至250 mL容量瓶中，稀释至刻度。</p>
+<p>（2）用钙标准溶液标定EDTA溶液：用移液管移取25.00mL标准钙溶液于250mL锥形瓶中，加入25 mL去离子水、10滴镁溶液、15mL 0.1801 mol/L NaOH 溶液及适量（绿豆大小）钙指示剂，摇匀后，用EDTA溶液滴定至溶液从红色变为蓝色，即为终点。</p>
 <h2 id="4-2-酸度的测定"><a href="#4-2-酸度的测定" class="headerlink" title="4.2 酸度的测定"></a>4.2 酸度的测定</h2><h3 id="4-2-1-滴定法"><a href="#4-2-1-滴定法" class="headerlink" title="4.2.1 滴定法"></a>4.2.1 滴定法</h3><p>&emsp;&emsp;0.01801mol/L NaOH标准溶液：稀释0.1801mol/L NaOH溶液于250mL容量瓶中。</p>
 <p>&emsp;&emsp;移取25.00 mL鲜乳，注入250 mL锥形瓶中，加入25 mL去离子水，0.1 % 酚酞指示剂10滴，混匀。用0.01801 mol/L NaOH标准溶液滴定，不断摇动，直至微红色在1min内不消失为止。</p>
 <h3 id="4-2-2-酸度计法"><a href="#4-2-2-酸度计法" class="headerlink" title="4.2.2 酸度计法"></a>4.2.2 酸度计法</h3><p>&emsp;&emsp;取适量鲜乳放入100 mL烧杯中，在酸度计上测定pH值。</p>
@@ -1083,10 +1007,14 @@ c_{EDTA}=0.024 mpl/L</script><h2 id="5-2-酸度的测定"><a href="#5-2-酸度�
 <script type="math/tex; mode=display">
 \overline{V}_{EDTA}=31.30mL</script><p>&emsp;&emsp;计算得钙含量：120.19 mg/100 mL</p>
 <h1 id="6-实验讨论及思考题"><a href="#6-实验讨论及思考题" class="headerlink" title="6. 实验讨论及思考题"></a>6. 实验讨论及思考题</h1><h2 id="6-1-讨论"><a href="#6-1-讨论" class="headerlink" title="6.1 讨论"></a>6.1 讨论</h2><p>&emsp;&emsp;本实验属于自主设计实验，在预习过程中遇到了很多问题，最后都一一解决。在设计实验的过程中，充分锻炼了自己的实验设计能力，以及大局的规划能力。在做实验过程中锻炼了自己的小组合作能力和动手实践操作能力。</p>
-<h2 id="6-2-思考题"><a href="#6-2-思考题" class="headerlink" title="6.2 思考题"></a>6.2 思考题</h2><h3 id="6-2-1-牛奶酸度和钙含量是如何表示的？"><a href="#6-2-1-牛奶酸度和钙含量是如何表示的？" class="headerlink" title="6.2.1 牛奶酸度和钙含量是如何表示的？"></a>6.2.1 牛奶酸度和钙含量是如何表示的？</h3><p>答：牛乳的酸度以中和100 mL乳液0.1 mol/L NaOH表示；钙含量以每100 mL牛奶含钙的毫克数表示。</p>
-<h3 id="6-2-2-锌标准溶液怎样配制？"><a href="#6-2-2-锌标准溶液怎样配制？" class="headerlink" title="6.2.2 锌标准溶液怎样配制？"></a>6.2.2 锌标准溶液怎样配制？</h3><p>答：本实验未配置锌标准溶液，本实验采用的是配制钙标准溶液的方法：准确称取0.7 ~ 0.75g $CaCO_3$(差减法称量)于100mL烧杯中，加水润湿，逐滴加入数毫升6 mol/L HCI溶液，使之全部溶解，微沸几分钟以除去$CO_2$，待冷却后转移至250 mL容量瓶中，稀释至刻度。</p>
-<h3 id="6-2-3-EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？"><a href="#6-2-3-EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？" class="headerlink" title="6.2.3 EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？"></a>6.2.3 EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？</h3><p>答：配位滴定法，以钙试剂为指示剂，计量点前钙与钙试剂形成粉红配合物，当用EDTA溶液滴定至计量点时，游离出指示剂，溶液呈现蓝色。可以采用三乙醇胺掩蔽的方法。</p>
-<h3 id="6-2-4-怎样确定酸奶的称量范围？"><a href="#6-2-4-怎样确定酸奶的称量范围？" class="headerlink" title="6.2.4 怎样确定酸奶的称量范围？"></a>6.2.4 怎样确定酸奶的称量范围？</h3><p>答：酸奶的称量范围以适量为准，不要太多也不要太少。可以先进行一次预测量，以确定大致的称量范围。</p>
+<h2 id="6-2-思考题"><a href="#6-2-思考题" class="headerlink" title="6.2 思考题"></a>6.2 思考题</h2><p>（1）牛奶酸度和钙含量是如何表示的？</p>
+<p>答：牛乳的酸度以中和100 mL乳液0.1 mol/L NaOH表示；钙含量以每100 mL牛奶含钙的毫克数表示。</p>
+<p>（2）6.2.2 锌标准溶液怎样配制？</p>
+<p>答：本实验未配置锌标准溶液，本实验采用的是配制钙标准溶液的方法：准确称取0.7 ~ 0.75g $CaCO_3$(差减法称量)于100mL烧杯中，加水润湿，逐滴加入数毫升6 mol/L HCI溶液，使之全部溶解，微沸几分钟以除去$CO_2$，待冷却后转移至250 mL容量瓶中，稀释至刻度。</p>
+<p>（3）6.2.3 EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？</p>
+<p>答：配位滴定法，以钙试剂为指示剂，计量点前钙与钙试剂形成粉红配合物，当用EDTA溶液滴定至计量点时，游离出指示剂，溶液呈现蓝色。可以采用三乙醇胺掩蔽的方法。</p>
+<p>（4）6.2.4 怎样确定酸奶的称量范围？</p>
+<p>答：酸奶的称量范围以适量为准，不要太多也不要太少。可以先进行一次预测量，以确定大致的称量范围。</p>
 ]]></content>
       <categories>
         <category>文章报告</category>

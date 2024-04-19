@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/m.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/m%20.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/m.png">
+  <link rel="mask-icon" href="/images/m.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="传热学结课报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="两种情况下通道壁面的温度分布与冷量损失">
+<meta property="og:url" content="http://example.com/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A%E2%80%9C/index.html">
+<meta property="og:site_name" content="鸷鹗啄孤凤">
+<meta property="og:description" content="传热学结课报告">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSZvlV.png">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSmQDU.png">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSmlbF.png">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSm5Vg.png">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSmHGn.png">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSnCGR.png">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSn7wD.png">
+<meta property="og:image" content="https://s21.ax1x.com/2024/04/19/pkSunmT.png">
+<meta property="og:image" content="f:/MyWorld/picture/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="f:/MyWorld/picture/%E5%9B%BE%E7%89%8710.png">
+<meta property="og:image" content="f:/MyWorld/picture/%E5%9B%BE%E7%89%8711.png">
+<meta property="article:published_time" content="2024-04-19T08:03:37.000Z">
+<meta property="article:modified_time" content="2024-04-19T09:49:06.503Z">
+<meta property="article:author" content="Ma Yiying">
+<meta property="article:tag" content="传热学">
+<meta property="article:tag" content="数值模拟">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s21.ax1x.com/2024/04/19/pkSZvlV.png">
+
+<link rel="canonical" href="http://example.com/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A%E2%80%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>两种情况下通道壁面的温度分布与冷量损失 | 鸷鹗啄孤凤</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">鸷鹗啄孤凤</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到新世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-book fa-fw"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A%E2%80%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/1.jpg">
+      <meta itemprop="name" content="Ma Yiying">
+      <meta itemprop="description" content="鸷鹗啄孤凤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鸷鹗啄孤凤">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          两种情况下通道壁面的温度分布与冷量损失
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-19 16:03:37 / 修改时间：17:49:06" itemprop="dateCreated datePublished" datetime="2024-04-19T16:03:37+08:00">2024-04-19</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A%E2%80%9C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A%E2%80%9C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text"></span>
+              <span>9.4k</span>
+            </span>
+            <div class="post-description">传热学结课报告</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-物理问题"><a href="#1-物理问题" class="headerlink" title="1. 物理问题"></a>1. 物理问题</h1><p>&emsp;&emsp;一个长方体截面的冷空气通道的尺寸如图所示。假设再垂直于纸面的方向上冷空气及通道墙壁的温度变化很小，可以忽略。试用数值方法计算下列两种情况下通道壁面中的温度分布及每米长度上通过壁面的冷量损失：（已知$\lambda_{wall}=0.53 W/(m·K)$）</p>
+<p>（1）内、外壁分别维持在10℃及30℃；</p>
+<p>（2）内、外壁与流体发生对流传热，且有$t_{f_1}=10 ℃, h_1=20 W/(m^2·K), t_{f_2}=30 ℃, h_2=4 W/(m^2·K)$</p>
+<h1 id="2-模型建立"><a href="#2-模型建立" class="headerlink" title="2. 模型建立"></a>2. 模型建立</h1><p>&emsp;&emsp;由对称性，选取1/4通道作为研究对象并建立笛卡尔坐标系：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSZvlV"><img src="https://s21.ax1x.com/2024/04/19/pkSZvlV.png" alt="pkSZvlV.png"></a></p>
+<h1 id="3-数学描述"><a href="#3-数学描述" class="headerlink" title="3. 数学描述"></a>3. 数学描述</h1><p>&emsp;&emsp;针对两种情况，可得到两组对应的微分控制方程及边界条件：</p>
+<h2 id="3-1-等温——内、外壁恒温"><a href="#3-1-等温——内、外壁恒温" class="headerlink" title="3.1 等温——内、外壁恒温"></a>3.1 等温——内、外壁恒温</h2><script type="math/tex; mode=display">
+\frac{\partial^2 t}{\partial x^2}+\frac{\partial^2 t}{\partial y^2}=0</script><script type="math/tex; mode=display">
+t|_{x=0,0\le y\le 1.1}=30</script><script type="math/tex; mode=display">
+t|_{y=0,0\le x\le 1.5}=30</script><script type="math/tex; mode=display">
+t|_{x=0.5,0.5\le y\le 1.1}=0</script><script type="math/tex; mode=display">
+t|_{y=0.5,0.5\le x\le 1.5}=30</script><script type="math/tex; mode=display">
+\frac{\partial t}{\partial x}|_{x=1.5,0\le y\le 0.5}=0</script><script type="math/tex; mode=display">
+\frac{\partial t}{\partial y}|_{y=1.1,0\le x\le 0.5}=0</script><h2 id="3-2-对流——内外壁与流体发生对流传热"><a href="#3-2-对流——内外壁与流体发生对流传热" class="headerlink" title="3.2 对流——内外壁与流体发生对流传热"></a>3.2 对流——内外壁与流体发生对流传热</h2><script type="math/tex; mode=display">
+\frac{\partial^2 t}{\partial x^2}+\frac{\partial^2 t}{\partial y^2}=0</script><script type="math/tex; mode=display">
+-\lambda\frac{\partial t}{\partial x}|_{x=0,0\le y\le1.1}=h_2(t_{f_2}-t|_{x=0,0\le y\le 1.1})</script><script type="math/tex; mode=display">
+-\lambda\frac{\partial t}{\partial y}|_{y=0,0\le x\le1.5}=h_2(t_{f_2}-t|_{y=0,0\le x\le 1.5})</script><script type="math/tex; mode=display">
+-\lambda\frac{\partial t}{\partial x}|_{x=0.5,0.5\le y\le1.1}=h_1(t_{f_1}-t|_{x=0.5,0.5\le y\le 1.1})</script><script type="math/tex; mode=display">
+-\lambda\frac{\partial t}{\partial y}|_{y=0.5,0.5\le x\le1.5}=h_1(t_{f_1}-t|_{y=0.5,0.5\le x\le 1.5})</script><script type="math/tex; mode=display">
+\frac{\partial t}{\partial x}|_{x=1.5,0\le y\le 0.5}=0</script><script type="math/tex; mode=display">
+\frac{\partial t}{\partial y}|_{y=1.1,0\le x\le 0.5}=0</script><h1 id="4-建立离散模型方程"><a href="#4-建立离散模型方程" class="headerlink" title="4. 建立离散模型方程"></a>4. 建立离散模型方程</h1><p>&emsp;&emsp;将所建模型进行离散处理，并作出如图所示网格，模型中任意一节点表示为$(i,j)$，任意节点温度表示为$t_{i,j}$（横向节点用i表示，纵向节点用j表示），两个方向上步长均为0.1m，即$\Delta x=\Delta y=0.1 m$<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSmQDU"><img src="https://s21.ax1x.com/2024/04/19/pkSmQDU.png" alt="pkSmQDU.png"></a></p>
+<h2 id="4-1-等温条件"><a href="#4-1-等温条件" class="headerlink" title="4.1 等温条件"></a>4.1 等温条件</h2><p>4.1.1 若$(i,j)$为内节点：<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSmlbF"><img src="https://s21.ax1x.com/2024/04/19/pkSmlbF.png" alt="pkSmlbF.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+<script type="math/tex; mode=display">
+\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y=0</script><p>4.1.2 若$(i,j)$为等温边界点及拐角点：<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSm5Vg"><img src="https://s21.ax1x.com/2024/04/19/pkSm5Vg.png" alt="pkSm5Vg.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+<script type="math/tex; mode=display">
+t_{i,j}=t_{w}</script><p>4.1.3 若$(i,j)$为绝热边界点：<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSmHGn"><img src="https://s21.ax1x.com/2024/04/19/pkSmHGn.png" alt="pkSmHGn.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+<script type="math/tex; mode=display">
+\frac{t_{i,j-1}-t{i,j}}{\Delta y}=0\ \ \ \ \ 1\le i\le 4, j=11</script><script type="math/tex; mode=display">
+\frac{t_{i-1,j}-t{i,j}}{\Delta X}=0\ \ \ \ \ \ 1\le i=j\le 4, i=15</script><h2 id="4-2-对流传热条件"><a href="#4-2-对流传热条件" class="headerlink" title="4.2 对流传热条件"></a>4.2 对流传热条件</h2><p>4.2.1 内节点离散方程与等温条件相同；</p>
+<p>4.2.2 外部对流传热边界点（不包括拐角点）：<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSnCGR"><img src="https://s21.ax1x.com/2024/04/19/pkSnCGR.png" alt="pkSnCGR.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+<script type="math/tex; mode=display">
+\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+h_2\cdot\Delta y\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ i=0,1\le j\le 10</script><script type="math/tex; mode=display">
+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot{\Delta x}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\Delta x\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ j=0,1\le i\le 14</script><p>4.2.3 内部对流传热边界点（不包括拐角点）：<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSn7wD"><img src="https://s21.ax1x.com/2024/04/19/pkSn7wD.png" alt="pkSn7wD.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+<script type="math/tex; mode=display">
+\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2}+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot{\Delta y}+h_1\cdot\Delta y\cdot(t_{f_1}-t_{i,j})=0\ \ \ \ \ i=5,6\le j\le 10</script><script type="math/tex; mode=display">
+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\frac{\Delta x}{2}\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ i=15,j=0</script><script type="math/tex; mode=display">
+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot(\frac{\Delta x}{2}+\frac{\Delta y}{2})\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ i=0,j=0</script><script type="math/tex; mode=display">
+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot{\Delta y} +\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_1\cdot(\frac{\Delta x}{2}+\frac{\Delta y}{2})\cdot(t_{f_1}-t_{i,j})=0\ \ \ \ \ i=5,j=5</script><h1 id="5-已知参数"><a href="#5-已知参数" class="headerlink" title="5. 已知参数"></a>5. 已知参数</h1><script type="math/tex; mode=display">
+\lambda=0.53W/(m·K)</script><script type="math/tex; mode=display">
+t_{w_1}=10℃</script><script type="math/tex; mode=display">
+t_{w_2}=30℃</script><script type="math/tex; mode=display">
+t_{f_1}=10℃</script><script type="math/tex; mode=display">
+h_1=20W/(m^2·K)</script><script type="math/tex; mode=display">
+t_{f_2}=30℃</script><script type="math/tex; mode=display">
+h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
+\Delta x=\Delta y=0.1m</script><h1 id="6-求解仿真"><a href="#6-求解仿真" class="headerlink" title="6.求解仿真"></a>6.求解仿真</h1><h2 id="6-1-等温边界"><a href="#6-1-等温边界" class="headerlink" title="6.1 等温边界"></a>6.1 等温边界</h2><p>6.1.1 温度分布</p>
+<p>&emsp;&emsp;代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">clc,clear</span><br><span class="line"><span class="comment">%温度差初始化</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">14</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%等温边界</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">6</span>:<span class="number">16</span> <span class="comment">%BC 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="number">6</span>)=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">6</span>:<span class="number">12</span> <span class="comment">%CD 边</span></span><br><span class="line">t(<span class="number">6</span>,<span class="built_in">j</span>)=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span> <span class="comment">%AF 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="number">1</span>)=<span class="number">30</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span> <span class="comment">%EF 边</span></span><br><span class="line">t(<span class="number">1</span>,<span class="built_in">j</span>)=<span class="number">30</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">n=<span class="number">0</span>; <span class="comment">%迭代次数</span></span><br><span class="line">e=<span class="built_in">inf</span>; <span class="comment">%初始化相对偏差</span></span><br><span class="line"><span class="comment">%高斯迭代</span></span><br><span class="line"><span class="keyword">while</span> e&gt;<span class="number">1e-6</span> <span class="comment">%收敛判断</span></span><br><span class="line">tq=t; <span class="comment">%记录迭代前的温度</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span> <span class="comment">%内部结点</span></span><br><span class="line"><span class="keyword">if</span> ((<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">5</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">12</span>)||(<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">6</span>))</span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%DE 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>))/<span class="number">4</span>;<span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">i</span>==<span class="number">16</span>) <span class="comment">%AB 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">e=<span class="built_in">max</span>(<span class="built_in">max</span>(<span class="built_in">abs</span>(t-tq)./(tq+<span class="built_in">eps</span>))); <span class="comment">%最大相对偏差</span></span><br><span class="line">n=n+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">&#x27;迭代次数:&#x27;</span>)</span><br><span class="line"><span class="built_in">disp</span>(n)</span><br><span class="line"><span class="comment">%非墙区域温度清零</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(t&#x27;) <span class="comment">%温度分布</span></span><br><span class="line">pcolor(t&#x27;);shading interp</span><br><span class="line"><span class="built_in">figure</span>, contour(t&#x27;,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;结果：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>30</th>
+<th>24.1026</th>
+<th>18.1678</th>
+<th>12.1702</th>
+<th>6.1065</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>24.1214</td>
+<td>18.1993</td>
+<td>12.2032</td>
+<td>6.1279</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>30</td>
+<td>24.1836</td>
+<td>18.3046</td>
+<td>12.3155</td>
+<td>6.2018</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>30</td>
+<td>24.3084</td>
+<td>18.5201</td>
+<td>12.5526</td>
+<td>6.3637</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>30</td>
+<td>24.5299</td>
+<td>18.915</td>
+<td>13.0109</td>
+<td>6.7005</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>30</td>
+<td>24.8964</td>
+<td>19.5989</td>
+<td>13.8756</td>
+<td>7.4272</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>30</td>
+<td>25.4568</td>
+<td>20.7087</td>
+<td>15.4655</td>
+<td>9.1328</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>30</td>
+<td>26.222</td>
+<td>22.3137</td>
+<td>18.1448</td>
+<td>13.6383</td>
+<td>9.1317</td>
+<td>7.4249</td>
+<td>6.696</td>
+<td>6.3554</td>
+<td>6.1864</td>
+<td>6.0994</td>
+<td>6.0537</td>
+<td>6.0295</td>
+<td>6.0169</td>
+<td>6.011</td>
+<td>6.0092</td>
+</tr>
+<tr>
+<td>30</td>
+<td>27.1176</td>
+<td>24.1793</td>
+<td>21.1618</td>
+<td>18.1441</td>
+<td>15.4636</td>
+<td>13.8718</td>
+<td>13.0036</td>
+<td>12.5391</td>
+<td>12.2907</td>
+<td>12.1574</td>
+<td>12.0858</td>
+<td>12.0474</td>
+<td>12.0273</td>
+<td>12.0177</td>
+<td>12.0148</td>
+</tr>
+<tr>
+<td>30</td>
+<td>28.069</td>
+<td>26.1241</td>
+<td>24.179</td>
+<td>22.3128</td>
+<td>20.7067</td>
+<td>19.5951</td>
+<td>18.9077</td>
+<td>18.5067</td>
+<td>18.2799</td>
+<td>18.1539</td>
+<td>18.0846</td>
+<td>18.047</td>
+<td>18.0272</td>
+<td>18.0176</td>
+<td>18.0148</td>
+</tr>
+<tr>
+<td>30</td>
+<td>29.0345</td>
+<td>28.069</td>
+<td>27.1173</td>
+<td>26.2214</td>
+<td>25.4555</td>
+<td>24.894</td>
+<td>24.5255</td>
+<td>24.3001</td>
+<td>24.1684</td>
+<td>24.0935</td>
+<td>24.0517</td>
+<td>24.0289</td>
+<td>24.0167</td>
+<td>24.0109</td>
+<td>24.0091</td>
+</tr>
+<tr>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pkSunmT"><img src="https://s21.ax1x.com/2024/04/19/pkSunmT.png" alt="pkSunmT.png"></a><br><img src="F:/MyWorld/picture/图片9.png" alt="0"><br>6.1.2 导热量：</p>
+<p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">qw=<span class="number">0</span>; <span class="comment">%外壁面导热量</span></span><br><span class="line">qn=<span class="number">0</span>; <span class="comment">%内壁面导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">2</span>:<span class="number">15</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>*(t(<span class="built_in">i</span>,<span class="number">1</span>)-t(<span class="built_in">i</span>,<span class="number">2</span>)); <span class="comment">%AF 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:<span class="number">11</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>*(t(<span class="number">1</span>,<span class="built_in">j</span>)-t(<span class="number">2</span>,<span class="built_in">j</span>)); <span class="comment">%AE 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">1</span>)-t(<span class="number">16</span>,<span class="number">2</span>))+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">1</span>,<span class="number">12</span>)-t(<span class="number">2</span>,<span class="number">12</span>)); <span class="comment">%A、 E、 F 点导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">15</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="built_in">i</span>,<span class="number">5</span>)-t(<span class="built_in">i</span>,<span class="number">6</span>)); <span class="comment">%BC 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">11</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="number">5</span>,<span class="built_in">j</span>)+t(<span class="number">6</span>,<span class="built_in">j</span>)); <span class="comment">%CD 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="number">6</span>,<span class="number">5</span>)+t(<span class="number">5</span>,<span class="number">6</span>)<span class="number">-2</span>*t(<span class="number">6</span>,<span class="number">6</span>))+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">5</span>)+t(<span class="number">5</span>,<span class="number">12</span>)-t(<span class="number">16</span>,<span class="number">6</span>)-t(<span class="number">6</span>,<span class="number">12</span>));</span><br><span class="line"><span class="comment">%B、 C、 D 边导热量</span></span><br><span class="line">qw=qw*<span class="number">4</span>; <span class="comment">%外壁面总导热量</span></span><br><span class="line">qn=qn*<span class="number">4</span>; <span class="comment">%内壁面总导热量</span></span><br><span class="line">qz=(qw+qn)/<span class="number">2</span> <span class="comment">%垂直于纸面方向每米长度上通过砖墙的导热量</span></span><br><span class="line">delta=<span class="built_in">abs</span>(qw-qn)/((qn+qw)/<span class="number">2</span>) <span class="comment">%热平衡偏差</span></span><br></pre></td></tr></table></figure><br>&emsp;&emsp;结果：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qz =<span class="number">241.7152</span></span><br><span class="line">delta =<span class="number">6.1122e-06</span></span><br></pre></td></tr></table></figure><br>即：</p>
+<p>外壁导热量 Φ=241.7159 W， </p>
+<p>内壁导热量 Φ= 241.7145 W</p>
+<p>垂直于纸面方向的每米长度上通过砖墙的导热量 Φ=241.7152W</p>
+<p>热平衡偏差=0.00061% 。</p>
+<h2 id="6-2-对流边界"><a href="#6-2-对流边界" class="headerlink" title="6.2 对流边界"></a>6.2 对流边界</h2><p>6.2.1 温度分布：</p>
+<p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">clc,clear</span><br><span class="line"><span class="comment">%温度差初始化</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">21</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">n=<span class="number">0</span>; <span class="comment">%迭代次数</span></span><br><span class="line">e=<span class="built_in">inf</span>; <span class="comment">%初始化相对偏差</span></span><br><span class="line"><span class="comment">%高斯迭代</span></span><br><span class="line"><span class="keyword">while</span> e&gt;<span class="number">1e-6</span> <span class="comment">%收敛判断</span></span><br><span class="line">tq=t; <span class="comment">%记录迭代前的温度</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">12</span></span><br><span class="line"><span class="keyword">if</span> ((<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">5</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">12</span>)||(<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp;<span class="built_in">j</span>&lt;<span class="number">6</span>)) <span class="comment">%内部结点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;<span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%DE 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">6</span> &amp;&amp; <span class="built_in">i</span>==<span class="number">16</span>) <span class="comment">%AB 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>))/<span class="number">4</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">1</span>) <span class="comment">%AF 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">6</span> &amp;&amp; <span class="built_in">i</span>&lt;<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">6</span>) <span class="comment">%BC 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">12</span>) <span class="comment">%CD 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>&lt;<span class="number">12</span>) <span class="comment">%EF 边</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">4</span>+<span class="number">2</span>*<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">1</span>) <span class="comment">%A 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">2</span>+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">16</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">6</span>) <span class="comment">%B 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">2</span>+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">6</span>) <span class="comment">%C 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(<span class="number">2</span>*t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+<span class="number">2</span>*t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+<span class="number">3.975</span>*<span class="number">0.2</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">6</span>+<span class="number">3.975</span>*<span class="number">0.2</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">6</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%D 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">10</span>)/(<span class="number">2</span>+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">12</span>) <span class="comment">%E 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span><span class="number">-1</span>)+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">2</span>+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">i</span>==<span class="number">1</span> &amp;&amp; <span class="built_in">j</span>==<span class="number">1</span>) <span class="comment">%F 点</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=(t(<span class="built_in">i</span>+<span class="number">1</span>,<span class="built_in">j</span>)+t(<span class="built_in">i</span>,<span class="built_in">j</span>+<span class="number">1</span>)+<span class="number">10.6</span>*<span class="number">0.2</span>/<span class="number">0.53</span>*<span class="number">30</span>)/(<span class="number">2</span>+<span class="number">10.6</span>*<span class="number">0.2</span>/<span class="number">0.53</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">e=<span class="built_in">max</span>(<span class="built_in">max</span>(<span class="built_in">abs</span>(t-tq)./(tq+<span class="built_in">eps</span>))); <span class="comment">%最大相对偏差</span></span><br><span class="line">n=n+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">&#x27;迭代次数:&#x27;</span>)</span><br><span class="line"><span class="built_in">disp</span>(n)</span><br><span class="line"><span class="comment">%非墙区域温度清零</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">12</span></span><br><span class="line">t(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(t&#x27;) <span class="comment">%温度分布</span></span><br><span class="line">pcolor(t&#x27;);shading interp</span><br><span class="line"><span class="built_in">figure</span>, contour(t&#x27;,<span class="number">10</span>);</span><br></pre></td></tr></table></figure><br>&emsp;&emsp; 结果：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>28.6132</th>
+<th>25.8319</th>
+<th>23.005</th>
+<th>20.1097</th>
+<th>17.1357</th>
+<th>14.0903</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28.621</td>
+<td>25.8546</td>
+<td>23.0392</td>
+<td>20.149</td>
+<td>17.1714</td>
+<td>14.1126</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>28.6455</td>
+<td>25.9265</td>
+<td>23.148</td>
+<td>20.2759</td>
+<td>17.2882</td>
+<td>14.1863</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>28.6902</td>
+<td>26.0579</td>
+<td>23.3504</td>
+<td>20.5183</td>
+<td>17.5191</td>
+<td>14.3356</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>28.7599</td>
+<td>26.2647</td>
+<td>23.6773</td>
+<td>20.9277</td>
+<td>17.9346</td>
+<td>14.621</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>28.8599</td>
+<td>26.5635</td>
+<td>24.1666</td>
+<td>21.5805</td>
+<td>18.6705</td>
+<td>15.2108</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>28.9924</td>
+<td>26.9629</td>
+<td>24.845</td>
+<td>22.5571</td>
+<td>19.9561</td>
+<td>16.6973</td>
+<td>15.2041</td>
+<td>14.608</td>
+<td>14.3138</td>
+<td>14.151</td>
+<td>14.0558</td>
+<td>13.9988</td>
+<td>13.9646</td>
+<td>13.9447</td>
+<td>13.9344</td>
+<td>13.9312</td>
+</tr>
+<tr>
+<td>29.1534</td>
+<td>27.4509</td>
+<td>25.6932</td>
+<td>23.8468</td>
+<td>21.8996</td>
+<td>19.9513</td>
+<td>18.6586</td>
+<td>17.9131</td>
+<td>17.4835</td>
+<td>17.2304</td>
+<td>17.0785</td>
+<td>16.9864</td>
+<td>16.9309</td>
+<td>16.8985</td>
+<td>16.8816</td>
+<td>16.8764</td>
+</tr>
+<tr>
+<td>29.3328</td>
+<td>27.9939</td>
+<td>26.6301</td>
+<td>25.2375</td>
+<td>23.8441</td>
+<td>22.5496</td>
+<td>21.5658</td>
+<td>20.9024</td>
+<td>20.4766</td>
+<td>20.2086</td>
+<td>20.0413</td>
+<td>19.9375</td>
+<td>19.874</td>
+<td>19.8367</td>
+<td>19.8171</td>
+<td>19.8111</td>
+</tr>
+<tr>
+<td>29.5211</td>
+<td>28.562</td>
+<td>27.5956</td>
+<td>26.6289</td>
+<td>25.6896</td>
+<td>24.8373</td>
+<td>24.1527</td>
+<td>23.6538</td>
+<td>23.312</td>
+<td>23.0862</td>
+<td>22.9405</td>
+<td>22.8482</td>
+<td>22.791</td>
+<td>22.757</td>
+<td>22.7392</td>
+<td>22.7336</td>
+</tr>
+<tr>
+<td>29.7124</td>
+<td>29.1371</td>
+<td>28.5616</td>
+<td>27.9927</td>
+<td>27.448</td>
+<td>26.9574</td>
+<td>26.5537</td>
+<td>26.2483</td>
+<td>26.0312</td>
+<td>25.8836</td>
+<td>25.7863</td>
+<td>25.7238</td>
+<td>25.6846</td>
+<td>25.6612</td>
+<td>25.6489</td>
+<td>25.6451</td>
+</tr>
+<tr>
+<td>29.9041</td>
+<td>29.7124</td>
+<td>29.521</td>
+<td>29.3324</td>
+<td>29.1524</td>
+<td>28.9905</td>
+<td>28.8565</td>
+<td>28.7542</td>
+<td>28.6809</td>
+<td>28.6307</td>
+<td>28.5974</td>
+<td>28.5759</td>
+<td>28.5624</td>
+<td>28.5544</td>
+<td>28.5501</td>
+<td>28.5488</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="F:/MyWorld/picture/图片10.png" alt="0"><br><img src="F:/MyWorld/picture/图片11.png" alt="0"></p>
+<p>6.2.2 导热量：</p>
+<p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">qw=<span class="number">0</span>; <span class="comment">%外壁面导热量</span></span><br><span class="line">qn=<span class="number">0</span>; <span class="comment">%内壁面导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">2</span>:<span class="number">15</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="built_in">i</span>,<span class="number">1</span>)); <span class="comment">%AF 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:<span class="number">11</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="number">1</span>,<span class="built_in">j</span>)); <span class="comment">%AE 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">2</span>*(<span class="number">2</span>*<span class="number">30</span>-t(<span class="number">16</span>,<span class="number">1</span>)-t(<span class="number">1</span>,<span class="number">12</span>))+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="number">1</span>,<span class="number">1</span>)); <span class="comment">%A、 E、 F 点导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">15</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="built_in">i</span>,<span class="number">6</span>)<span class="number">-10</span>); <span class="comment">%BC 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">11</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="number">6</span>,<span class="built_in">j</span>)<span class="number">-10</span>); <span class="comment">%CD 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">6</span>)+t(<span class="number">6</span>,<span class="number">12</span>)<span class="number">-2</span>*<span class="number">10</span>)+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="number">6</span>,<span class="number">6</span>)<span class="number">-10</span>); <span class="comment">%B、 C、 D 边导热量</span></span><br><span class="line">qw=qw*<span class="number">4</span>; <span class="comment">%外壁面总导热量</span></span><br><span class="line">qn=qn*<span class="number">4</span>; <span class="comment">%内壁面总导热量</span></span><br><span class="line">qz=(qw+qn)/<span class="number">2</span> <span class="comment">%垂直于纸面方向每米长度上通过砖墙的导热量</span></span><br><span class="line">delta=<span class="built_in">abs</span>(qw-qn)/((qn+qw)/<span class="number">2</span>) <span class="comment">%热平衡偏差</span></span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;结果：</p>
+<p>外壁导热量Φ=113.4404 W</p>
+<p>内壁导热量Φ=113.4454 W</p>
+<p>垂直于纸面方向的每米长度上通过砖墙的导热量Φ=113.4429W</p>
+<p>热平衡偏差=0.0044%。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ma Yiying
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A%E2%80%9C/" title="两种情况下通道壁面的温度分布与冷量损失">http://example.com/2024/04/19/传热学数值计算报告“/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E4%BC%A0%E7%83%AD%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 传热学</a>
+              <a href="/tags/%E6%95%B0%E5%80%BC%E6%A8%A1%E6%8B%9F/" rel="tag"><i class="fa fa-tag"></i> 数值模拟</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" rel="prev" title="塞曼效应实验报告">
+      <i class="fa fa-chevron-left"></i> 塞曼效应实验报告
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%89%A9%E7%90%86%E9%97%AE%E9%A2%98"><span class="nav-text">1. 物理问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E5%BB%BA%E7%AB%8B"><span class="nav-text">2. 模型建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0"><span class="nav-text">3. 数学描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%AD%89%E6%B8%A9%E2%80%94%E2%80%94%E5%86%85%E3%80%81%E5%A4%96%E5%A3%81%E6%81%92%E6%B8%A9"><span class="nav-text">3.1 等温——内、外壁恒温</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%AF%B9%E6%B5%81%E2%80%94%E2%80%94%E5%86%85%E5%A4%96%E5%A3%81%E4%B8%8E%E6%B5%81%E4%BD%93%E5%8F%91%E7%94%9F%E5%AF%B9%E6%B5%81%E4%BC%A0%E7%83%AD"><span class="nav-text">3.2 对流——内外壁与流体发生对流传热</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%BB%BA%E7%AB%8B%E7%A6%BB%E6%95%A3%E6%A8%A1%E5%9E%8B%E6%96%B9%E7%A8%8B"><span class="nav-text">4. 建立离散模型方程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E7%AD%89%E6%B8%A9%E6%9D%A1%E4%BB%B6"><span class="nav-text">4.1 等温条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E5%AF%B9%E6%B5%81%E4%BC%A0%E7%83%AD%E6%9D%A1%E4%BB%B6"><span class="nav-text">4.2 对流传热条件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%B7%B2%E7%9F%A5%E5%8F%82%E6%95%B0"><span class="nav-text">5. 已知参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%B1%82%E8%A7%A3%E4%BB%BF%E7%9C%9F"><span class="nav-text">6.求解仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E7%AD%89%E6%B8%A9%E8%BE%B9%E7%95%8C"><span class="nav-text">6.1 等温边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E5%AF%B9%E6%B5%81%E8%BE%B9%E7%95%8C"><span class="nav-text">6.2 对流边界</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ma Yiying"
+      src="/uploads/1.jpg">
+  <p class="site-author-name" itemprop="name">Ma Yiying</p>
+  <div class="site-description" itemprop="description">鸷鹗啄孤凤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Yiying-Ma" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Yiying-Ma" rel="noopener" target="_blank">GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ma_yiying@163.com" title="E-Mail → mailto:ma_yiying@163.com" rel="noopener" target="_blank">E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">鸷鹗啄孤凤</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">40k</span>
+</div>
+
+<script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'PX4NxhEi6APJug1YVsMTODpl-gzGzoHsz',
+      appKey     : 'pdZlDBlvSpFJj9xX9a1ilCXg',
+      placeholder: "幸有微吟可相狎，不须檀板共金樽。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

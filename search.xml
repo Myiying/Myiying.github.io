@@ -64,12 +64,13 @@
   </entry>
   <entry>
     <title>两种情况下通道壁面的温度分布与冷量损失</title>
-    <url>/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A%E2%80%9C/</url>
+    <url>/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<h1 id="1-物理问题"><a href="#1-物理问题" class="headerlink" title="1. 物理问题"></a>1. 物理问题</h1><p>&emsp;&emsp;一个长方体截面的冷空气通道的尺寸如图所示。假设再垂直于纸面的方向上冷空气及通道墙壁的温度变化很小，可以忽略。试用数值方法计算下列两种情况下通道壁面中的温度分布及每米长度上通过壁面的冷量损失：（已知$\lambda_{wall}=0.53 W/(m·K)$）</p>
+<p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片1.png" alt="图1-1 物理问题"></p>
 <p>（1）内、外壁分别维持在10℃及30℃；</p>
 <p>（2）内、外壁与流体发生对流传热，且有$t_{f_1}=10 ℃, h_1=20 W/(m^2·K), t_{f_2}=30 ℃, h_2=4 W/(m^2·K)$</p>
 <h1 id="2-模型建立"><a href="#2-模型建立" class="headerlink" title="2. 模型建立"></a>2. 模型建立</h1><p>&emsp;&emsp;由对称性，选取1/4通道作为研究对象并建立笛卡尔坐标系：</p>
-<p><a href="https://imgse.com/i/pkSZvlV"><img src="https://s21.ax1x.com/2024/04/19/pkSZvlV.png" alt="pkSZvlV.png"></a></p>
+<p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片2.png" alt="图2-1 模型建立"></p>
 <h1 id="3-数学描述"><a href="#3-数学描述" class="headerlink" title="3. 数学描述"></a>3. 数学描述</h1><p>&emsp;&emsp;针对两种情况，可得到两组对应的微分控制方程及边界条件：</p>
 <h2 id="3-1-等温——内、外壁恒温"><a href="#3-1-等温——内、外壁恒温" class="headerlink" title="3.1 等温——内、外壁恒温"></a>3.1 等温——内、外壁恒温</h2><script type="math/tex; mode=display">
 \frac{\partial^2 t}{\partial x^2}+\frac{\partial^2 t}{\partial y^2}=0</script><script type="math/tex; mode=display">
@@ -85,19 +86,20 @@ t|_{y=0.5,0.5\le x\le 1.5}=30</script><script type="math/tex; mode=display">
 -\lambda\frac{\partial t}{\partial x}|_{x=0.5,0.5\le y\le1.1}=h_1(t_{f_1}-t|_{x=0.5,0.5\le y\le 1.1})</script><script type="math/tex; mode=display">
 -\lambda\frac{\partial t}{\partial y}|_{y=0.5,0.5\le x\le1.5}=h_1(t_{f_1}-t|_{y=0.5,0.5\le x\le 1.5})</script><script type="math/tex; mode=display">
 \frac{\partial t}{\partial x}|_{x=1.5,0\le y\le 0.5}=0</script><script type="math/tex; mode=display">
-\frac{\partial t}{\partial y}|_{y=1.1,0\le x\le 0.5}=0</script><h1 id="4-建立离散模型方程"><a href="#4-建立离散模型方程" class="headerlink" title="4. 建立离散模型方程"></a>4. 建立离散模型方程</h1><p>&emsp;&emsp;将所建模型进行离散处理，并作出如图所示网格，模型中任意一节点表示为$(i,j)$，任意节点温度表示为$t_{i,j}$（横向节点用i表示，纵向节点用j表示），两个方向上步长均为0.1m，即$\Delta x=\Delta y=0.1 m$<br><a href="https://imgse.com/i/pkSmQDU"><img src="https://s21.ax1x.com/2024/04/19/pkSmQDU.png" alt="pkSmQDU.png"></a></p>
-<h2 id="4-1-等温条件"><a href="#4-1-等温条件" class="headerlink" title="4.1 等温条件"></a>4.1 等温条件</h2><p>4.1.1 若$(i,j)$为内节点：<br><a href="https://imgse.com/i/pkSmlbF"><img src="https://s21.ax1x.com/2024/04/19/pkSmlbF.png" alt="pkSmlbF.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+\frac{\partial t}{\partial y}|_{y=1.1,0\le x\le 0.5}=0</script><h1 id="4-建立离散模型方程"><a href="#4-建立离散模型方程" class="headerlink" title="4. 建立离散模型方程"></a>4. 建立离散模型方程</h1><p>&emsp;&emsp;将所建模型进行离散处理，并作出如图所示网格，模型中任意一节点表示为$(i,j)$，任意节点温度表示为$t_{i,j}$（横向节点用i表示，纵向节点用j表示），两个方向上步长均为0.1m，即$\Delta x=\Delta y=0.1 m$<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片3.png" alt="图4-1 网格划分"></p>
+<h2 id="4-1-等温条件"><a href="#4-1-等温条件" class="headerlink" title="4.1 等温条件"></a>4.1 等温条件</h2><p>4.1.1 若$(i,j)$为内节点：</p>
+<p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片4.png" alt="图4-2 等温条件内节点"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
-\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y=0</script><p>4.1.2 若$(i,j)$为等温边界点及拐角点：<br><a href="https://imgse.com/i/pkSm5Vg"><img src="https://s21.ax1x.com/2024/04/19/pkSm5Vg.png" alt="pkSm5Vg.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+\lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\Delta x+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y=0</script><p>4.1.2 若$(i,j)$为等温边界点及拐角点：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片5.png" alt="图4-3 等温条件边界点及拐角点"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
-t_{i,j}=t_{w}</script><p>4.1.3 若$(i,j)$为绝热边界点：<br><a href="https://imgse.com/i/pkSmHGn"><img src="https://s21.ax1x.com/2024/04/19/pkSmHGn.png" alt="pkSmHGn.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+t_{i,j}=t_{w}</script><p>4.1.3 若$(i,j)$为绝热边界点：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片5.png" alt="图4-4 绝热条件内节点"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
 \frac{t_{i,j-1}-t{i,j}}{\Delta y}=0\ \ \ \ \ 1\le i\le 4, j=11</script><script type="math/tex; mode=display">
 \frac{t_{i-1,j}-t{i,j}}{\Delta X}=0\ \ \ \ \ \ 1\le i=j\le 4, i=15</script><h2 id="4-2-对流传热条件"><a href="#4-2-对流传热条件" class="headerlink" title="4.2 对流传热条件"></a>4.2 对流传热条件</h2><p>4.2.1 内节点离散方程与等温条件相同；</p>
-<p>4.2.2 外部对流传热边界点（不包括拐角点）：<br><a href="https://imgse.com/i/pkSnCGR"><img src="https://s21.ax1x.com/2024/04/19/pkSnCGR.png" alt="pkSnCGR.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+<p>4.2.2 外部对流传热边界点（不包括拐角点）：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片7.png" alt="图4-5 外部对流条件边界点（不包括拐角点）"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
 \lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\Delta y+h_2\cdot\Delta y\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ i=0,1\le j\le 10</script><script type="math/tex; mode=display">
-\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot{\Delta x}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\Delta x\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ j=0,1\le i\le 14</script><p>4.2.3 内部对流传热边界点（不包括拐角点）：<br><a href="https://imgse.com/i/pkSn7wD"><img src="https://s21.ax1x.com/2024/04/19/pkSn7wD.png" alt="pkSn7wD.png"></a><br>&emsp;&emsp;对应离散方程：</p>
+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot{\Delta x}+\lambda\cdot\frac{t_{i+1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\Delta x\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ j=0,1\le i\le 14</script><p>4.2.3 内部对流传热边界点（不包括拐角点）：<br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片8.png" alt="图4-6 内部对流条件边界点（不包括拐角点）"><br>&emsp;&emsp;对应离散方程：</p>
 <script type="math/tex; mode=display">
 \lambda\cdot\frac{t_{i,j-1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2}+\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot{\Delta y}+h_1\cdot\Delta y\cdot(t_{f_1}-t_{i,j})=0\ \ \ \ \ i=5,6\le j\le 10</script><script type="math/tex; mode=display">
 \lambda\cdot\frac{t_{i,j+1}-t_{i,j}}{\Delta y}\cdot\frac{\Delta x}{2} +\lambda\cdot\frac{t_{i-1,j}-t_{i,j}}{\Delta x}\cdot\frac{\Delta y}{2}+h_2\cdot\frac{\Delta x}{2}\cdot(t_{f_2}-t_{i,j})=0\ \ \ \ \ i=15,j=0</script><script type="math/tex; mode=display">
@@ -338,7 +340,7 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
 </tbody>
 </table>
 </div>
-<p><a href="https://imgse.com/i/pkSunmT"><img src="https://s21.ax1x.com/2024/04/19/pkSunmT.png" alt="pkSunmT.png"></a><br><img src="F:/MyWorld/picture/图片9.png" alt="0"><br>6.1.2 导热量：</p>
+<p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片9.png" alt="图6-1 等温边界结果图1"><br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片10.png" alt="图6-2 等温边界结果图2"><br>6.1.2 导热量：</p>
 <p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">qw=<span class="number">0</span>; <span class="comment">%外壁面导热量</span></span><br><span class="line">qn=<span class="number">0</span>; <span class="comment">%内壁面导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">2</span>:<span class="number">15</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>*(t(<span class="built_in">i</span>,<span class="number">1</span>)-t(<span class="built_in">i</span>,<span class="number">2</span>)); <span class="comment">%AF 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:<span class="number">11</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>*(t(<span class="number">1</span>,<span class="built_in">j</span>)-t(<span class="number">2</span>,<span class="built_in">j</span>)); <span class="comment">%AE 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qw=qw+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">1</span>)-t(<span class="number">16</span>,<span class="number">2</span>))+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">1</span>,<span class="number">12</span>)-t(<span class="number">2</span>,<span class="number">12</span>)); <span class="comment">%A、 E、 F 点导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">15</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="built_in">i</span>,<span class="number">5</span>)-t(<span class="built_in">i</span>,<span class="number">6</span>)); <span class="comment">%BC 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">11</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="number">5</span>,<span class="built_in">j</span>)+t(<span class="number">6</span>,<span class="built_in">j</span>)); <span class="comment">%CD 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qn=qn+<span class="number">0.53</span>*(t(<span class="number">6</span>,<span class="number">5</span>)+t(<span class="number">5</span>,<span class="number">6</span>)<span class="number">-2</span>*t(<span class="number">6</span>,<span class="number">6</span>))+<span class="number">0.53</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">5</span>)+t(<span class="number">5</span>,<span class="number">12</span>)-t(<span class="number">16</span>,<span class="number">6</span>)-t(<span class="number">6</span>,<span class="number">12</span>));</span><br><span class="line"><span class="comment">%B、 C、 D 边导热量</span></span><br><span class="line">qw=qw*<span class="number">4</span>; <span class="comment">%外壁面总导热量</span></span><br><span class="line">qn=qn*<span class="number">4</span>; <span class="comment">%内壁面总导热量</span></span><br><span class="line">qz=(qw+qn)/<span class="number">2</span> <span class="comment">%垂直于纸面方向每米长度上通过砖墙的导热量</span></span><br><span class="line">delta=<span class="built_in">abs</span>(qw-qn)/((qn+qw)/<span class="number">2</span>) <span class="comment">%热平衡偏差</span></span><br></pre></td></tr></table></figure><br>&emsp;&emsp;结果：<br><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">qz =<span class="number">241.7152</span></span><br><span class="line">delta =<span class="number">6.1122e-06</span></span><br></pre></td></tr></table></figure><br>即：</p>
 <p>外壁导热量 Φ=241.7159 W， </p>
 <p>内壁导热量 Φ= 241.7145 W</p>
@@ -570,7 +572,7 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
 </tbody>
 </table>
 </div>
-<p><img src="F:/MyWorld/picture/图片10.png" alt="0"><br><img src="F:/MyWorld/picture/图片11.png" alt="0"></p>
+<p><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片11.png" alt="图6-3 对流边界结果图1"><br><img src="/2024/04/19/%E4%BC%A0%E7%83%AD%E5%AD%A6%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%8A%A5%E5%91%8A/图片12.png" alt="图6-4 对流边界结果图2"></p>
 <p>6.2.2 导热量：</p>
 <p>&emsp;&emsp;代码：<br><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">qw=<span class="number">0</span>; <span class="comment">%外壁面导热量</span></span><br><span class="line">qn=<span class="number">0</span>; <span class="comment">%内壁面导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">2</span>:<span class="number">15</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="built_in">i</span>,<span class="number">1</span>)); <span class="comment">%AF 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:<span class="number">11</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="number">1</span>,<span class="built_in">j</span>)); <span class="comment">%AE 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qw=qw+<span class="number">10.6</span>*<span class="number">0.1</span>/<span class="number">2</span>*(<span class="number">2</span>*<span class="number">30</span>-t(<span class="number">16</span>,<span class="number">1</span>)-t(<span class="number">1</span>,<span class="number">12</span>))+<span class="number">10.6</span>*<span class="number">0.1</span>*(<span class="number">30</span>-t(<span class="number">1</span>,<span class="number">1</span>)); <span class="comment">%A、 E、 F 点导热量</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">7</span>:<span class="number">15</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="built_in">i</span>,<span class="number">6</span>)<span class="number">-10</span>); <span class="comment">%BC 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">7</span>:<span class="number">11</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="number">6</span>,<span class="built_in">j</span>)<span class="number">-10</span>); <span class="comment">%CD 边导热量</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">qn=qn+<span class="number">3.975</span>*<span class="number">0.1</span>/<span class="number">2</span>*(t(<span class="number">16</span>,<span class="number">6</span>)+t(<span class="number">6</span>,<span class="number">12</span>)<span class="number">-2</span>*<span class="number">10</span>)+<span class="number">3.975</span>*<span class="number">0.1</span>*(t(<span class="number">6</span>,<span class="number">6</span>)<span class="number">-10</span>); <span class="comment">%B、 C、 D 边导热量</span></span><br><span class="line">qw=qw*<span class="number">4</span>; <span class="comment">%外壁面总导热量</span></span><br><span class="line">qn=qn*<span class="number">4</span>; <span class="comment">%内壁面总导热量</span></span><br><span class="line">qz=(qw+qn)/<span class="number">2</span> <span class="comment">%垂直于纸面方向每米长度上通过砖墙的导热量</span></span><br><span class="line">delta=<span class="built_in">abs</span>(qw-qn)/((qn+qw)/<span class="number">2</span>) <span class="comment">%热平衡偏差</span></span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;结果：</p>
@@ -608,7 +610,7 @@ h_2=4W/(m^2·K)</script><script type="math/tex; mode=display">
 \delta=2ndcos\theta</script><p>&emsp;&emsp;这一系列平行光在无穷远处或透镜的焦平面上发生干涉，干涉的极大值为：</p>
 <script type="math/tex; mode=display">
 2dcos\theta=K\lambda</script><p>&emsp;&emsp;K为整数，称为干涉级次。</p>
-<p><a href="https://imgse.com/i/pFzo2PP"><img src="https://s21.ax1x.com/2024/04/18/pFzo2PP.jpg" alt="pFzo2PP.jpg"></a></p>
+<p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片1.jpg" alt="图3-1 塞曼效应示意图"></p>
 <p>&emsp;&emsp;标准具有两个特征参量自由光谱范围和分辨本领,分别说明如下：</p>
 <p>&emsp;&emsp;对于F—P标准具：</p>
 <script type="math/tex; mode=display">
@@ -656,8 +658,8 @@ cos\theta=1-2sin^2\frac{\theta^2}{2}=1-\frac{\theta^2}{2}=1-\frac{D^2}{8f^2}</sc
 <li><p>验证塞曼分裂与磁感应强度的关系</p>
 </li>
 </ol>
-<h2 id="2-原始数据"><a href="#2-原始数据" class="headerlink" title="2. 原始数据"></a>2. 原始数据</h2><h3 id="2-1-实验截图"><a href="#2-1-实验截图" class="headerlink" title="2.1 实验截图"></a>2.1 实验截图</h3><p><a href="https://imgse.com/i/pFzT1Rf"><img src="https://s21.ax1x.com/2024/04/18/pFzT1Rf.png" alt="pFzT1Rf.png"></a></p>
-<p><a href="https://imgse.com/i/pFzTsQU"><img src="https://s21.ax1x.com/2024/04/18/pFzTsQU.png" alt="pFzTsQU.png"></a></p>
+<h2 id="2-原始数据"><a href="#2-原始数据" class="headerlink" title="2. 原始数据"></a>2. 原始数据</h2><h3 id="2-1-实验截图"><a href="#2-1-实验截图" class="headerlink" title="2.1 实验截图"></a>2.1 实验截图</h3><p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片2.png" alt="图片5-1 实验台示意"></p>
+<p><img src="/2024/04/18/%E5%A1%9E%E6%9B%BC%E6%95%88%E5%BA%94%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/图片3.png" alt="图片5-2 实验结果图"></p>
 <h3 id="2-2-实验数据"><a href="#2-2-实验数据" class="headerlink" title="2.2 实验数据"></a>2.2 实验数据</h3><p>&emsp;&emsp;用1/4和偏振片区分σ+成分和σ-成分：</p>
 <div class="table-container">
 <table>
@@ -748,11 +750,11 @@ cos\theta=1-2sin^2\frac{\theta^2}{2}=1-\frac{\theta^2}{2}=1-\frac{D^2}{8f^2}</sc
       </tags>
   </entry>
   <entry>
-    <title>斜面滑块摆锤问题的求解——大物实验报告</title>
-    <url>/2024/04/18/%E6%96%9C%E9%9D%A2%E6%BB%91%E5%9D%97%E6%91%86%E9%94%A4%E9%97%AE%E9%A2%98%E7%9A%84%E6%B1%82%E8%A7%A3%E2%80%94%E2%80%94%E5%A4%A7%E7%89%A9%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/</url>
-    <content><![CDATA[<h1 id="一、实验分析"><a href="#一、实验分析" class="headerlink" title="一、实验分析"></a>一、实验分析</h1><p>&emsp;&emsp;研究对象为一个在摩擦系数为$\mu$的斜面上运动的滑动摆；滑块A的质量为$m_1$，一个单摆悬挂在滑块上，单摆长度为$l$,摆锤质量为$m_2$，整个系统可以在同一竖直平面内运动。研究整个系统的运动（滑块运动和摆锤的运动轨迹）。</p>
+    <title>斜面滑块摆锤问题的求解</title>
+    <url>/2024/04/18/%E6%96%9C%E9%9D%A2%E6%BB%91%E5%9D%97%E6%91%86%E9%94%A4%E9%97%AE%E9%A2%98%E7%9A%84%E6%B1%82%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="1-实验分析"><a href="#1-实验分析" class="headerlink" title="1. 实验分析"></a>1. 实验分析</h1><p>&emsp;&emsp;研究对象为一个在摩擦系数为$\mu$的斜面上运动的滑动摆；滑块A的质量为$m_1$，一个单摆悬挂在滑块上，单摆长度为$l$,摆锤质量为$m_2$，整个系统可以在同一竖直平面内运动。研究整个系统的运动（滑块运动和摆锤的运动轨迹）。</p>
 <p>&emsp;&emsp;解决此多自由度刚体系统，最直接的途径就是把系统拆成滑块和摆锤单个系统，针对每个刚体的运动类型列出相应的动力学方程，并补充相应的能约束条件的运动学方程（滑块只能沿斜面运动，摆锤和滑块的位置关系）。</p>
-<h1 id="二、求解思路"><a href="#二、求解思路" class="headerlink" title="二、求解思路"></a>二、求解思路</h1><p>&emsp;&emsp;以滑块为研究对象，滑块沿斜面平移，可列方程：</p>
+<h1 id="2-求解思路"><a href="#2-求解思路" class="headerlink" title="2. 求解思路"></a>2. 求解思路</h1><p>&emsp;&emsp;以滑块为研究对象，滑块沿斜面平移，可列方程：</p>
 <script type="math/tex; mode=display">
 F_Nsin\alpha-\sigma\mu F_Ncos\alpha-F_{12x}=m_1\ddot{x}_1</script><script type="math/tex; mode=display">
 F_Ncos\alpha-m_1g+\sigma\mu F_Nsin\alpha-F_{12y}=m_1\ddot{y}_1</script><p>&emsp;&emsp;以摆锤为研究对象，摆锤作平面运动，可列方程：</p>
@@ -765,14 +767,14 @@ F_{12y}-m_2g=m_2\ddot{y}_2</script><script type="math/tex; mode=display">
 <script type="math/tex; mode=display">
 \ddot{y}_1-\ddot{y}_2+l(cos\beta)\ddot{\beta}=l\dot{\beta}^2sin\beta</script><script type="math/tex; mode=display">
 \ddot{x}_1-\ddot{x}_2+l(sin\beta)\ddot{\beta}=l\dot{\beta}^2cos\beta</script><p>&emsp;&emsp;整理动力学方程和补充的运动学方程，可以得到由八个方程所组成的线性方程组。给定初始条件和参数，利用matlab中的simulink，带入求解。</p>
-<h1 id="三、Simulink建模框图、程序及运行结果"><a href="#三、Simulink建模框图、程序及运行结果" class="headerlink" title="三、Simulink建模框图、程序及运行结果"></a>三、Simulink建模框图、程序及运行结果</h1><p>&emsp;&emsp;建模框图：</p>
-<p><a href="https://imgse.com/i/pFzI07n"><img src="https://s21.ax1x.com/2024/04/18/pFzI07n.png" alt="pFzI07n.png"></a></p>
-<p>程序：</p>
+<h1 id="3-Simulink建模框图、程序及运行结果"><a href="#3-Simulink建模框图、程序及运行结果" class="headerlink" title="3. Simulink建模框图、程序及运行结果"></a>3. Simulink建模框图、程序及运行结果</h1><p>&emsp;&emsp;建模框图：</p>
+<p><img src="/2024/04/18/%E6%96%9C%E9%9D%A2%E6%BB%91%E5%9D%97%E6%91%86%E9%94%A4%E9%97%AE%E9%A2%98%E7%9A%84%E6%B1%82%E8%A7%A3/图片1.png" alt="图3-1 Simulink建模框图"></p>
+<p>&emsp;&emsp;程序：</p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">out</span> = <span class="title">fcn</span><span class="params">(u)</span></span></span><br><span class="line">m1=<span class="number">5</span>;m2=<span class="number">0.5</span>;alpha=<span class="built_in">pi</span>/<span class="number">6</span>;l=<span class="number">0.5</span>;</span><br><span class="line"><span class="built_in">j</span>=<span class="number">0.01</span>;</span><br><span class="line">g=<span class="number">9.8687</span>;</span><br><span class="line">mu=<span class="number">0.5</span>;</span><br><span class="line">sdot=u(<span class="number">1</span>)*<span class="built_in">cos</span>(alpha)-u(<span class="number">2</span>)*<span class="built_in">sin</span>(alpha);</span><br><span class="line"><span class="keyword">if</span> sdot&gt;<span class="number">0</span></span><br><span class="line">sigma=<span class="number">1.0</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">sigma=<span class="number">-1.0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">a=<span class="built_in">zeros</span>(<span class="number">8</span>,<span class="number">8</span>);</span><br><span class="line">a=[m1 <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> sigma*mu*<span class="built_in">cos</span>(alpha)-<span class="built_in">sin</span>(alpha) l <span class="number">0</span>;</span><br><span class="line"><span class="number">0</span> m2 <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> -sigma*mu*<span class="built_in">sin</span>(alpha)-<span class="built_in">cos</span>(alpha) <span class="number">0</span> l;</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> m2 <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> -l <span class="number">0</span>;</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> m2 <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> -l;</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="built_in">j</span> <span class="number">0</span> -l*<span class="built_in">sin</span>(u(<span class="number">4</span>)) l*<span class="built_in">cos</span>(u(<span class="number">4</span>));</span><br><span class="line">l <span class="number">0</span> -l <span class="number">0</span> -l*<span class="built_in">sin</span>(u(<span class="number">4</span>)) <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">0</span> l <span class="number">0</span> -l l*<span class="built_in">cos</span>(u(<span class="number">4</span>)) <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line"><span class="built_in">sin</span>(alpha) <span class="built_in">cos</span>(alpha) <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">b=[<span class="number">0</span>;-m1*g;<span class="number">0</span>;-m2*g;<span class="number">0</span>;l*u(<span class="number">3</span>)*u(<span class="number">3</span>)*<span class="built_in">cos</span>(u(<span class="number">4</span>));l*u(<span class="number">3</span>)*u(<span class="number">3</span>)*<span class="built_in">sin</span>(u(<span class="number">4</span>));<span class="number">0</span>]</span><br><span class="line">out=inv(a)*b;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;运行结果：</p>
-<p><a href="https://imgse.com/i/pFzIh7R"><img src="https://s21.ax1x.com/2024/04/18/pFzIh7R.png" alt="pFzIh7R.png"></a></p>
-<h1 id="四、实验结果的分析和讨论"><a href="#四、实验结果的分析和讨论" class="headerlink" title="四、实验结果的分析和讨论"></a>四、实验结果的分析和讨论</h1><p>&emsp;&emsp;滑块的位移符合实际情况，轨迹为一条沿斜面的直线。摆锤的运动为平面运动，轨迹为复杂的曲线。斜面对滑块的作用力发生正弦变化，这正是由于摆锤对滑块的作用力变化导致的结果。</p>
-<h1 id="五、实验心得体会"><a href="#五、实验心得体会" class="headerlink" title="五、实验心得体会"></a>五、实验心得体会</h1><ol>
+<p><img src="/2024/04/18/%E6%96%9C%E9%9D%A2%E6%BB%91%E5%9D%97%E6%91%86%E9%94%A4%E9%97%AE%E9%A2%98%E7%9A%84%E6%B1%82%E8%A7%A3/图片2.png" alt="图3-2 运行结果图"></p>
+<h1 id="4-实验结果的分析和讨论"><a href="#4-实验结果的分析和讨论" class="headerlink" title="4. 实验结果的分析和讨论"></a>4. 实验结果的分析和讨论</h1><p>&emsp;&emsp;滑块的位移符合实际情况，轨迹为一条沿斜面的直线。摆锤的运动为平面运动，轨迹为复杂的曲线。斜面对滑块的作用力发生正弦变化，这正是由于摆锤对滑块的作用力变化导致的结果。</p>
+<h1 id="5-实验心得体会"><a href="#5-实验心得体会" class="headerlink" title="5. 实验心得体会"></a>5. 实验心得体会</h1><ol>
 <li><p>simulink的仿真功能对于工科的学习有很大帮助，之后可以应用到关于机械设计的许多领域。比方说在用solidworks画图之后，我们可以先用仿真系统测试它的性能，如果有问题及时调整，而不是只能在制作出实体以后才发现问题，这大大减少了对于材料和时间的消耗。</p>
 </li>
 <li><p>采用MATLAB附带的图形仿真工具Simulink实现了对于滑块和摆锤运动轨迹分析，对matlab有了进一步的了解。</p>
@@ -837,7 +839,7 @@ F_{12y}-m_2g=m_2\ddot{y}_2</script><script type="math/tex; mode=display">
   <entry>
     <title>牛奶酸度和钙含量的测定</title>
     <url>/2024/04/17/%E7%89%9B%E5%A5%B6%E9%85%B8%E5%BA%A6%E5%92%8C%E9%92%99%E5%90%AB%E9%87%8F%E7%9A%84%E6%B5%8B%E5%AE%9A/</url>
-    <content><![CDATA[<h1 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h1><ol>
+    <content><![CDATA[<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h1><ol>
 <li><p>了解牛奶酸度的测定，掌握乳浊液滴定终点的观察方法</p>
 </li>
 <li><p>了解实际样品分析方法</p>
@@ -849,27 +851,27 @@ F_{12y}-m_2g=m_2\ddot{y}_2</script><script type="math/tex; mode=display">
 <li><p>学会小组合作，共同完成实验</p>
 </li>
 </ol>
-<h1 id="二、实验原理"><a href="#二、实验原理" class="headerlink" title="二、实验原理"></a>二、实验原理</h1><ol>
+<h1 id="2-实验原理"><a href="#2-实验原理" class="headerlink" title="2. 实验原理"></a>2. 实验原理</h1><ol>
 <li><p>牛乳的酸度以中和100 mL乳液0.1 mol/L NaOH表示，以酚酞作为指示剂，对中和反应进行滴定。通过换算得到牛乳的酸度。</p>
 </li>
 <li><p>配位滴定法，以钙试剂为指示剂，计量点前钙与钙试剂形成粉红配合物，当用EDTA溶液滴定至计量点时，游离出指示剂，溶液呈现蓝色。</p>
 </li>
 </ol>
-<h1 id="三、仪器与试剂"><a href="#三、仪器与试剂" class="headerlink" title="三、仪器与试剂"></a>三、仪器与试剂</h1><h2 id="1-仪器"><a href="#1-仪器" class="headerlink" title="1. 仪器"></a>1. 仪器</h2><p>&emsp;&emsp;量筒（25 mL）、锥形瓶（250 mL）、滴定管（酸式，碱式）、烧杯、吸量管、天平、细口试剂瓶、移液管（25 mL）、玻璃棒、容量瓶（250 mL）、酸度计。</p>
-<h2 id="2-试剂"><a href="#2-试剂" class="headerlink" title="2. 试剂"></a>2. 试剂</h2><p>&emsp;&emsp;乙二胺四乙酸二钠、碳酸钙、镁溶液、6 mol/L HCI溶液、去离子水、牛奶、0.1%酚酞指示剂，0.1801 mol/L NaOH溶液、钙指示剂。</p>
-<h1 id="四、实验步骤"><a href="#四、实验步骤" class="headerlink" title="四、实验步骤"></a>四、实验步骤</h1><h2 id="1-EDTA溶液的配制与标定"><a href="#1-EDTA溶液的配制与标定" class="headerlink" title="1. EDTA溶液的配制与标定"></a>1. EDTA溶液的配制与标定</h2><h3 id="1-1-0-03mol-L-EDTA溶液的配制"><a href="#1-1-0-03mol-L-EDTA溶液的配制" class="headerlink" title="1.1 0.03mol/L EDTA溶液的配制"></a>1.1 0.03mol/L EDTA溶液的配制</h3><p>&emsp;&emsp;在电子天平上称取乙二胺四乙酸二钠2.52g，加入250mL去离子水溶解至试剂瓶。</p>
-<h3 id="1-2-以-CaCO-3-为基准物标定EDTA溶液"><a href="#1-2-以-CaCO-3-为基准物标定EDTA溶液" class="headerlink" title="1.2 以$CaCO_3$为基准物标定EDTA溶液"></a>1.2 以$CaCO_3$为基准物标定EDTA溶液</h3><ol>
+<h1 id="3-仪器与试剂"><a href="#3-仪器与试剂" class="headerlink" title="3. 仪器与试剂"></a>3. 仪器与试剂</h1><h2 id="3-1-仪器"><a href="#3-1-仪器" class="headerlink" title="3.1 仪器"></a>3.1 仪器</h2><p>&emsp;&emsp;量筒（25 mL）、锥形瓶（250 mL）、滴定管（酸式，碱式）、烧杯、吸量管、天平、细口试剂瓶、移液管（25 mL）、玻璃棒、容量瓶（250 mL）、酸度计。</p>
+<h2 id="3-2-试剂"><a href="#3-2-试剂" class="headerlink" title="3.2 试剂"></a>3.2 试剂</h2><p>&emsp;&emsp;乙二胺四乙酸二钠、碳酸钙、镁溶液、6 mol/L HCI溶液、去离子水、牛奶、0.1%酚酞指示剂，0.1801 mol/L NaOH溶液、钙指示剂。</p>
+<h1 id="4-实验步骤"><a href="#4-实验步骤" class="headerlink" title="4. 实验步骤"></a>4. 实验步骤</h1><h2 id="4-1-EDTA溶液的配制与标定"><a href="#4-1-EDTA溶液的配制与标定" class="headerlink" title="4.1 EDTA溶液的配制与标定"></a>4.1 EDTA溶液的配制与标定</h2><h3 id="4-1-1-0-03mol-L-EDTA溶液的配制"><a href="#4-1-1-0-03mol-L-EDTA溶液的配制" class="headerlink" title="4.1.1 0.03mol/L EDTA溶液的配制"></a>4.1.1 0.03mol/L EDTA溶液的配制</h3><p>&emsp;&emsp;在电子天平上称取乙二胺四乙酸二钠2.52g，加入250mL去离子水溶解至试剂瓶。</p>
+<h3 id="4-1-2-以-CaCO-3-为基准物标定EDTA溶液"><a href="#4-1-2-以-CaCO-3-为基准物标定EDTA溶液" class="headerlink" title="4.1.2 以$CaCO_3$为基准物标定EDTA溶液"></a>4.1.2 以$CaCO_3$为基准物标定EDTA溶液</h3><ol>
 <li><p>钙标准溶液的配制：准确称取0.7 ~ 0.75g $CaCO_3$（差减法称量）于100mL烧杯中，加水润湿，逐滴加入数毫升6 mol/L HCI溶液，使之全部溶解，微沸几分钟以除去$CO_2$，待冷却后转移至250 mL容量瓶中，稀释至刻度。</p>
 </li>
 <li><p>用钙标准溶液标定EDTA溶液：用移液管移取25.00mL标准钙溶液于250mL锥形瓶中，加入25 mL去离子水、10滴镁溶液、15mL 0.1801 mol/L NaOH 溶液及适量（绿豆大小）钙指示剂，摇匀后，用EDTA溶液滴定至溶液从红色变为蓝色，即为终点。</p>
 </li>
 </ol>
-<h2 id="2-酸度的测定"><a href="#2-酸度的测定" class="headerlink" title="2. 酸度的测定"></a>2. 酸度的测定</h2><h3 id="2-1-滴定法"><a href="#2-1-滴定法" class="headerlink" title="2.1 滴定法"></a>2.1 滴定法</h3><p>&emsp;&emsp;0.01801mol/L NaOH标准溶液：稀释0.1801mol/L NaOH溶液于250mL容量瓶中。</p>
+<h2 id="4-2-酸度的测定"><a href="#4-2-酸度的测定" class="headerlink" title="4.2 酸度的测定"></a>4.2 酸度的测定</h2><h3 id="4-2-1-滴定法"><a href="#4-2-1-滴定法" class="headerlink" title="4.2.1 滴定法"></a>4.2.1 滴定法</h3><p>&emsp;&emsp;0.01801mol/L NaOH标准溶液：稀释0.1801mol/L NaOH溶液于250mL容量瓶中。</p>
 <p>&emsp;&emsp;移取25.00 mL鲜乳，注入250 mL锥形瓶中，加入25 mL去离子水，0.1 % 酚酞指示剂10滴，混匀。用0.01801 mol/L NaOH标准溶液滴定，不断摇动，直至微红色在1min内不消失为止。</p>
-<h3 id="2-2-酸度计法"><a href="#2-2-酸度计法" class="headerlink" title="2.2 酸度计法"></a>2.2 酸度计法</h3><p>&emsp;&emsp;取适量鲜乳放入100 mL烧杯中，在酸度计上测定pH值。</p>
-<h2 id="3-钙含量的测定"><a href="#3-钙含量的测定" class="headerlink" title="3. 钙含量的测定"></a>3. 钙含量的测定</h2><p>&emsp;&emsp;准确移取鲜乳试样25.00 mL三份分别加入250 mL锥形瓶中，加入约25 mL 去离子水、10滴镁溶液、15 mL 0.1801 mol/L NaOH 溶液及适量（绿豆大小）钙指示剂，摇匀，用标准EDTA滴定至溶液由粉红色至灰蓝色，即为终点，平行测定三次，计算鲜乳中的含钙量，以每100 mL牛奶含钙的毫克数表示。</p>
+<h3 id="4-2-2-酸度计法"><a href="#4-2-2-酸度计法" class="headerlink" title="4.2.2 酸度计法"></a>4.2.2 酸度计法</h3><p>&emsp;&emsp;取适量鲜乳放入100 mL烧杯中，在酸度计上测定pH值。</p>
+<h2 id="4-3-钙含量的测定"><a href="#4-3-钙含量的测定" class="headerlink" title="4.3 钙含量的测定"></a>4.3 钙含量的测定</h2><p>&emsp;&emsp;准确移取鲜乳试样25.00 mL三份分别加入250 mL锥形瓶中，加入约25 mL 去离子水、10滴镁溶液、15 mL 0.1801 mol/L NaOH 溶液及适量（绿豆大小）钙指示剂，摇匀，用标准EDTA滴定至溶液由粉红色至灰蓝色，即为终点，平行测定三次，计算鲜乳中的含钙量，以每100 mL牛奶含钙的毫克数表示。</p>
 <script type="math/tex; mode=display">
-Ca_{mg/100mL}=\frac{c_{EDTA}V_{EDTA}\times40}{25}\times100</script><h1 id="五、实验记录、数据处理及实验结果"><a href="#五、实验记录、数据处理及实验结果" class="headerlink" title="五、实验记录、数据处理及实验结果"></a>五、实验记录、数据处理及实验结果</h1><h2 id="1-EDTA溶液的配制与标定-1"><a href="#1-EDTA溶液的配制与标定-1" class="headerlink" title="1. EDTA溶液的配制与标定"></a>1. EDTA溶液的配制与标定</h2><script type="math/tex; mode=display">
+Ca_{mg/100mL}=\frac{c_{EDTA}V_{EDTA}\times40}{25}\times100</script><h1 id="5-实验记录、数据处理及实验结果"><a href="#5-实验记录、数据处理及实验结果" class="headerlink" title="5. 实验记录、数据处理及实验结果"></a>5. 实验记录、数据处理及实验结果</h1><h2 id="5-1-EDTA溶液的配制与标定"><a href="#5-1-EDTA溶液的配制与标定" class="headerlink" title="5.1 EDTA溶液的配制与标定"></a>5.1 EDTA溶液的配制与标定</h2><script type="math/tex; mode=display">
 m_{CaCO_3}=0.7136 g</script><div class="table-container">
 <table>
 <thead>
@@ -905,7 +907,7 @@ m_{CaCO_3}=0.7136 g</script><div class="table-container">
 <script type="math/tex; mode=display">
 \overline{V}_{EDTA}=30.05mL</script><p>&emsp;&emsp;计算得到EDTA标准溶液的浓度为：</p>
 <script type="math/tex; mode=display">
-c_{EDTA}=0.024 mpl/L</script><h2 id="2-酸度的测定-1"><a href="#2-酸度的测定-1" class="headerlink" title="2. 酸度的测定"></a>2. 酸度的测定</h2><div class="table-container">
+c_{EDTA}=0.024 mpl/L</script><h2 id="5-2-酸度的测定"><a href="#5-2-酸度的测定" class="headerlink" title="5.2 酸度的测定"></a>5.2 酸度的测定</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -947,7 +949,7 @@ c_{EDTA}=0.024 mpl/L</script><h2 id="2-酸度的测定-1"><a href="#2-酸度的�
 \overline{V}_{NaOH}=25.97mL</script><p> &emsp;&emsp;计算得到酸度 </p>
 <script type="math/tex; mode=display">
 °T=18.71mL</script><p>&emsp;&emsp; 在酸度计上测得牛奶PH值为：6.23</p>
-<h2 id="3-钙含量的测定-1"><a href="#3-钙含量的测定-1" class="headerlink" title="3. 钙含量的测定"></a>3. 钙含量的测定</h2><div class="table-container">
+<h2 id="5-3-钙含量的测定"><a href="#5-3-钙含量的测定" class="headerlink" title="5.3 钙含量的测定"></a>5.3 钙含量的测定</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -981,11 +983,11 @@ c_{EDTA}=0.024 mpl/L</script><h2 id="2-酸度的测定-1"><a href="#2-酸度的�
 </div>
 <script type="math/tex; mode=display">
 \overline{V}_{EDTA}=31.30mL</script><p>&emsp;&emsp;计算得钙含量：120.19 mg/100 mL</p>
-<h1 id="六、实验讨论及思考题"><a href="#六、实验讨论及思考题" class="headerlink" title="六、实验讨论及思考题"></a>六、实验讨论及思考题</h1><h2 id="1-讨论"><a href="#1-讨论" class="headerlink" title="1. 讨论"></a>1. 讨论</h2><p>&emsp;&emsp;本实验属于自主设计实验，在预习过程中遇到了很多问题，最后都一一解决。在设计实验的过程中，充分锻炼了自己的实验设计能力，以及大局的规划能力。在做实验过程中锻炼了自己的小组合作能力和动手实践操作能力。</p>
-<h2 id="2-思考题"><a href="#2-思考题" class="headerlink" title="2. 思考题"></a>2. 思考题</h2><h3 id="2-1-牛奶酸度和钙含量是如何表示的？"><a href="#2-1-牛奶酸度和钙含量是如何表示的？" class="headerlink" title="2.1 牛奶酸度和钙含量是如何表示的？"></a>2.1 牛奶酸度和钙含量是如何表示的？</h3><p>答：牛乳的酸度以中和100 mL乳液0.1 mol/L NaOH表示；钙含量以每100 mL牛奶含钙的毫克数表示。</p>
-<h3 id="2-2-锌标准溶液怎样配制？"><a href="#2-2-锌标准溶液怎样配制？" class="headerlink" title="2.2 锌标准溶液怎样配制？"></a>2.2 锌标准溶液怎样配制？</h3><p>答：本实验未配置锌标准溶液，本实验采用的是配制钙标准溶液的方法：准确称取0.7 ~ 0.75g $CaCO_3$(差减法称量)于100mL烧杯中，加水润湿，逐滴加入数毫升6 mol/L HCI溶液，使之全部溶解，微沸几分钟以除去$CO_2$，待冷却后转移至250 mL容量瓶中，稀释至刻度。</p>
-<h3 id="2-3-EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？"><a href="#2-3-EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？" class="headerlink" title="2.3 EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？"></a>2.3 EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？</h3><p>答：配位滴定法，以钙试剂为指示剂，计量点前钙与钙试剂形成粉红配合物，当用EDTA溶液滴定至计量点时，游离出指示剂，溶液呈现蓝色。可以采用三乙醇胺掩蔽的方法。</p>
-<h3 id="2-4-怎样确定酸奶的称量范围？"><a href="#2-4-怎样确定酸奶的称量范围？" class="headerlink" title="2.4 怎样确定酸奶的称量范围？"></a>2.4 怎样确定酸奶的称量范围？</h3><p>答：酸奶的称量范围以适量为准，不要太多也不要太少。可以先进行一次预测量，以确定大致的称量范围。</p>
+<h1 id="6-实验讨论及思考题"><a href="#6-实验讨论及思考题" class="headerlink" title="6. 实验讨论及思考题"></a>6. 实验讨论及思考题</h1><h2 id="6-1-讨论"><a href="#6-1-讨论" class="headerlink" title="6.1 讨论"></a>6.1 讨论</h2><p>&emsp;&emsp;本实验属于自主设计实验，在预习过程中遇到了很多问题，最后都一一解决。在设计实验的过程中，充分锻炼了自己的实验设计能力，以及大局的规划能力。在做实验过程中锻炼了自己的小组合作能力和动手实践操作能力。</p>
+<h2 id="6-2-思考题"><a href="#6-2-思考题" class="headerlink" title="6.2 思考题"></a>6.2 思考题</h2><h3 id="6-2-1-牛奶酸度和钙含量是如何表示的？"><a href="#6-2-1-牛奶酸度和钙含量是如何表示的？" class="headerlink" title="6.2.1 牛奶酸度和钙含量是如何表示的？"></a>6.2.1 牛奶酸度和钙含量是如何表示的？</h3><p>答：牛乳的酸度以中和100 mL乳液0.1 mol/L NaOH表示；钙含量以每100 mL牛奶含钙的毫克数表示。</p>
+<h3 id="6-2-2-锌标准溶液怎样配制？"><a href="#6-2-2-锌标准溶液怎样配制？" class="headerlink" title="6.2.2 锌标准溶液怎样配制？"></a>6.2.2 锌标准溶液怎样配制？</h3><p>答：本实验未配置锌标准溶液，本实验采用的是配制钙标准溶液的方法：准确称取0.7 ~ 0.75g $CaCO_3$(差减法称量)于100mL烧杯中，加水润湿，逐滴加入数毫升6 mol/L HCI溶液，使之全部溶解，微沸几分钟以除去$CO_2$，待冷却后转移至250 mL容量瓶中，稀释至刻度。</p>
+<h3 id="6-2-3-EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？"><a href="#6-2-3-EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？" class="headerlink" title="6.2.3 EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？"></a>6.2.3 EDTA滴定牛奶中钙的原理？怎样消除Fe，Al干扰？</h3><p>答：配位滴定法，以钙试剂为指示剂，计量点前钙与钙试剂形成粉红配合物，当用EDTA溶液滴定至计量点时，游离出指示剂，溶液呈现蓝色。可以采用三乙醇胺掩蔽的方法。</p>
+<h3 id="6-2-4-怎样确定酸奶的称量范围？"><a href="#6-2-4-怎样确定酸奶的称量范围？" class="headerlink" title="6.2.4 怎样确定酸奶的称量范围？"></a>6.2.4 怎样确定酸奶的称量范围？</h3><p>答：酸奶的称量范围以适量为准，不要太多也不要太少。可以先进行一次预测量，以确定大致的称量范围。</p>
 ]]></content>
       <categories>
         <category>文章报告</category>
@@ -1075,16 +1077,16 @@ c_{EDTA}=0.024 mpl/L</script><h2 id="2-酸度的测定-1"><a href="#2-酸度的�
     <url>/2024/04/17/%E5%8F%96%E5%A4%A9%E4%B8%8B%E4%B9%8B%E8%83%BD%E6%BA%90%EF%BC%8C%E9%9B%86%E8%87%AA%E8%BA%AB%E4%B9%8B%E5%8A%A8%E5%8A%9B/</url>
     <content><![CDATA[<p>&emsp;&emsp;要是问到本学期最令人印象深刻的课程，那一定是这门能源动力科学技术导论了，涉猎范围之广，学科跨度之大，授课教师的数量等，都是其他科目无法比拟的。因此本学期的导论课我十分重视，这是我第一次全方位的接触相关专业研究方向的相关基础知识和理论。我不但领略了不同教授的不同风格，我还深入了解了我所进入的专业究竟是一个研究什么的专业。经过一学期的学习，我终于对我的人生有了更加明确的目标。</p>
 <p>&emsp;&emsp;本学期的能源动力工程技术导论课程主要涉及一下四个方面：能源与动力科学技术的相关理论知识与学科背景、能源动力工程的各种研究方向、与其他学科的交叉和学科前景。这些内容互相相关，成为一个有机的整体。每一部分内容环环相扣，使得本学期的导论课紧张充实，回味无穷。</p>
-<h1 id="一、理论知识与学科背景"><a href="#一、理论知识与学科背景" class="headerlink" title="一、理论知识与学科背景"></a>一、理论知识与学科背景</h1><p>&emsp;&emsp;学习任何一门知识，都要从理论开始按部就班，脚踏实地。空中楼阁肯定是不可行的。因此，我们首先就了解了能源动力工程这个专业的相关理论知识。首先，到底什么是能源动力工程。之前我对能源与动力学科的了解仅仅是停留在“这门学科是从事与能源相关的研究”这种层面上，在十一个周的学习后，我对其有了更加深刻、细致的认识。我知道了，能源与动力工程致力于传统能源的利用及新能源的开发，和如何更高效的利用能源。能源既包括水、煤、石油等传统能源，也包括核能、风能、生物能等新能源，以及未来将广泛应用的氢能。动力方面包括内燃机、锅炉、航空发动机、制冷及相关测试技术。专业通过理论力学、材料力学、工程制图、机械设计、电工与电子技术、工程热力学、流体力学、传热学、控制理论、热工测试技术以及专业方向课程的学习，使我们具备工程热力学、流体力学、传热学和热工测试技术等能源与动力工程领域的基础理论、实验技能和基本专业知识，掌握制冷空调设备、制冷装置、动力机械与动力工程、流体机械等设计、制造和实验研究的基本技术。在此基础上，它是一个宽口径的专业，拓展空间很大，就业方向很广，目前我国有120多所院校开设有该专业，它由旧本科的九个相关专业合并而成，包括了原来的热力发动机、能源工程、流体机械及流体工程、能源工程与动力机械、制冷与低温技术、能源工程、工程热物理、水利水电动力工程、冷冻冷藏工程专业。同时，能动还是现代动力工程师的基本训练，可见能动是现代动力工程的基础。</p>
+<h1 id="1-理论知识与学科背景"><a href="#1-理论知识与学科背景" class="headerlink" title="1. 理论知识与学科背景"></a>1. 理论知识与学科背景</h1><p>&emsp;&emsp;学习任何一门知识，都要从理论开始按部就班，脚踏实地。空中楼阁肯定是不可行的。因此，我们首先就了解了能源动力工程这个专业的相关理论知识。首先，到底什么是能源动力工程。之前我对能源与动力学科的了解仅仅是停留在“这门学科是从事与能源相关的研究”这种层面上，在十一个周的学习后，我对其有了更加深刻、细致的认识。我知道了，能源与动力工程致力于传统能源的利用及新能源的开发，和如何更高效的利用能源。能源既包括水、煤、石油等传统能源，也包括核能、风能、生物能等新能源，以及未来将广泛应用的氢能。动力方面包括内燃机、锅炉、航空发动机、制冷及相关测试技术。专业通过理论力学、材料力学、工程制图、机械设计、电工与电子技术、工程热力学、流体力学、传热学、控制理论、热工测试技术以及专业方向课程的学习，使我们具备工程热力学、流体力学、传热学和热工测试技术等能源与动力工程领域的基础理论、实验技能和基本专业知识，掌握制冷空调设备、制冷装置、动力机械与动力工程、流体机械等设计、制造和实验研究的基本技术。在此基础上，它是一个宽口径的专业，拓展空间很大，就业方向很广，目前我国有120多所院校开设有该专业，它由旧本科的九个相关专业合并而成，包括了原来的热力发动机、能源工程、流体机械及流体工程、能源工程与动力机械、制冷与低温技术、能源工程、工程热物理、水利水电动力工程、冷冻冷藏工程专业。同时，能动还是现代动力工程师的基本训练，可见能动是现代动力工程的基础。</p>
 <p>&emsp;&emsp;在本学期的学习中，我更加深刻地知道了能源动力是一个国家的支撑，而我国的能源形势正处在转型期，因此存在各种亟待解决的关键突破问题。因此我更加明白了这门课程的重要性，以及这门学科的重要性。能源问题在当今社会举足轻重，能源与动力工程专业在国民经济中的地位可想而知。改革开放以来，国民经济呈现出增长较快、结构优化、效益提高、民生改善的良好运行态势，同时，随着国民经济的发展，对能源的需求也日益增大。高耗能产品产量大幅增长，从而造成能源消费量增长过快。在能源日益紧迫的当代社会中，能源与动力工程专业应运而生，半个世纪以来，能源与动力工程专业教育为社会输送了大量的高级技术人才和其他各类人才，是我国国家建设尤其是能源动力建设领域的中坚力量，为我国小康社会的建设和自立于世界民族之林作出了重大的贡献。</p>
 <p>&emsp;&emsp;能源动力工程的理论知识是以热力学为主体的。通过对热力系统、热力平衡、热力状态、热力过程、热力循环和工质的分析研究，改进和完善热力发动机、制冷机和热泵的工作循环，提高热能利用率和热功转换效率。为此，必须以热力学基本定律为依据，探讨各种热力过程的特性；研究气体和液体的热物理性质，以及蒸发和凝结等相变规律；研究工质特性也是分析某些类型制冷机所必需的。现代工程热力学还包括诸如燃烧等化学反应过程，溶解吸收或解吸等物理化学过程，这就又涉及化学热力学方面的基本知识。这些就是热力学的基本要求，而这些正是作为一名能动学子必须掌握的知识和技能。</p>
-<h1 id="二、主要研究方向"><a href="#二、主要研究方向" class="headerlink" title="二、主要研究方向"></a>二、主要研究方向</h1><p>&emsp;&emsp;本学期除了学习了学科相关理论知识外，我还在教授的介绍下，深入了解了能源动力工程的各种专业方向。根据专业宽厚的基础，可以将能源与动力工程专业分成以下四个专业方向：</p>
+<h1 id="2-主要研究方向"><a href="#2-主要研究方向" class="headerlink" title="2. 主要研究方向"></a>2. 主要研究方向</h1><p>&emsp;&emsp;本学期除了学习了学科相关理论知识外，我还在教授的介绍下，深入了解了能源动力工程的各种专业方向。根据专业宽厚的基础，可以将能源与动力工程专业分成以下四个专业方向：</p>
 <p>​    (1)  以能源转换与利用系统为主的能源动力工程及控制方向；</p>
 <p>​    (2)  以内燃机及其驱动系统为主的热力发动机及汽车工程方向；</p>
 <p>​    (3)  以电能转换为机械功为主的流体机械与制冷低温工程方向；</p>
 <p>​    (4)  以机械功转换为电能为主的水利水电动力工程方向。</p>
 <p>&emsp;&emsp;这些丰富多彩的研究方向就是我将来要为之奋斗的目标，也是我继续学习的动力。</p>
-<h1 id="三、与其他学科的交叉"><a href="#三、与其他学科的交叉" class="headerlink" title="三、与其他学科的交叉"></a>三、与其他学科的交叉</h1><p>&emsp;&emsp;经过一学期的导论课学习，我知道了能源与动力工程这门专业的学科跨度非常之大。化学，物理，机械，材料，等均所涉及。</p>
+<h1 id="3-与其他学科的交叉"><a href="#3-与其他学科的交叉" class="headerlink" title="3. 与其他学科的交叉"></a>3. 与其他学科的交叉</h1><p>&emsp;&emsp;经过一学期的导论课学习，我知道了能源与动力工程这门专业的学科跨度非常之大。化学，物理，机械，材料，等均所涉及。</p>
 <p>&emsp;&emsp;这学期通过入浅出的讲解，我了解到能源化学与化工的原理、技术及发展趋势，这其中包括了热化学、电化学、光化学、生物化学原理与工程化技术；以及能源材料与加工工艺的科学理论与技术及发展趋势，这其中包括支撑材料、结构材料、储能材料、催化及功能材料，材料加工工艺理论及技术等诸多方面。还有王秋旺教授所讲的动力机械工程的内涵与工业技术和装备及其发展，让我知道了像泵、风机、压缩机、制冷机等机械方面的能源动力工程技术。</p>
 <p>&emsp;&emsp;在这其中，最让我印象深刻的便是能源化学与化工的原理，最让我感兴趣的便是电化学方面的知识。我深刻地了解到，我国的电化学工业正在向新领域发展，资源、能量转换和电化学储能已经成为战略性新兴产业发展不可或缺的基础。而我国的工业领域一直关注着电化学工业的发展，“节能、降耗、减排、增效”是重大需求。经过我多方面查阅资料，我了解到我国的电化学工业还面临着许多问题，比如：</p>
 <p>&emsp;&emsp;电化学工业布局不合理，与我国新能源产业的发展不相适应。新能源产业和新能源汽车产业的发展改变了世界能源结构，大大降低了电能成本，这对电化学工业的发展无疑是非常有益的；同时发展电化学工业有助于提高新能源的消纳水平，符合我国的新能源发展战略。</p>
@@ -1093,9 +1095,9 @@ c_{EDTA}=0.024 mpl/L</script><h2 id="2-酸度的测定-1"><a href="#2-酸度的�
 <p>&emsp;&emsp;基础研究与应用研究衔接不紧密，研究成果产业化机制尚未形成，原创性的工艺、过程、产品和技术不多。电化学是应用面十分广泛的科学，并且应用领域仍有扩大、深化的趋势，应重视电化学工业的研究和应用。</p>
 <p>&emsp;&emsp;电化学清洁生产技术的开发，对传统工艺技术进行绿色化升级改造迫在眉睫。清洁、绿色和高效是电化学过程的突出特点，探索节能、减排、降耗的新工艺体系是解决与电化学生产有关的实际问题重要途径。</p>
 <p>&emsp;&emsp;而这些都是我们将要攻克的方向，在现在的能源形势下，小型风能和太阳能非并网发电系统普遍采用蓄电池组作为储能装置，要求容量高、循环寿命长、适用温度范围宽。目前风力发电机组已由干瓦级发展到兆瓦级，这就要求储能系统必需大型化一大电池系统或储能电池站。而由于发电系统地理位置的限制，储能系统必需安全可靠，使用方便，价格便宜，充电效率高，使用寿命长并且有充分的抗恶劣天气和使用条件的能力。</p>
-<h1 id="四、学科前景"><a href="#四、学科前景" class="headerlink" title="四、学科前景"></a>四、学科前景</h1><p>&emsp;&emsp;进入21世纪气候变化对于全球社会进步及人类生活的影响引起有识之士前所未有的关注。温室气体的大量排放导致地表温度不断升高海平面不断上升沙尘暴、飓风等灾害不断升级这使人们意识到了当前环境保护的严峻形势以及发展新能源的紧迫性。人们之所以把新能源视为未来人类获得能源的首选方式是因为在可以预见的未来可控核聚变技术并不会投入到实际生产，而地球上现存的化石燃料储量在本世纪末就会消耗殆尽，而且会带来一系列严重的环境影响。而新能源清洁干净、污染物排放很少，在地球上可利用的总量又十分巨大，其不仅环境友好，更是世界不发达国家的20多亿无电人口和特殊用途解决供电问题的现实能源，有助于缓解世界范围内的能源矛盾。</p>
+<h1 id="4-学科前景"><a href="#4-学科前景" class="headerlink" title="4. 学科前景"></a>4. 学科前景</h1><p>&emsp;&emsp;进入21世纪气候变化对于全球社会进步及人类生活的影响引起有识之士前所未有的关注。温室气体的大量排放导致地表温度不断升高海平面不断上升沙尘暴、飓风等灾害不断升级这使人们意识到了当前环境保护的严峻形势以及发展新能源的紧迫性。人们之所以把新能源视为未来人类获得能源的首选方式是因为在可以预见的未来可控核聚变技术并不会投入到实际生产，而地球上现存的化石燃料储量在本世纪末就会消耗殆尽，而且会带来一系列严重的环境影响。而新能源清洁干净、污染物排放很少，在地球上可利用的总量又十分巨大，其不仅环境友好，更是世界不发达国家的20多亿无电人口和特殊用途解决供电问题的现实能源，有助于缓解世界范围内的能源矛盾。</p>
 <p>&emsp;&emsp;因此在吕友军和王秋旺教授的生动讲解下，我了解了可再生能源转化利用的原理、技术、及其发展趋势。知道了可再生新能源是大势所趋，未来的能源必将是新能源的世界。</p>
-<h1 id="五、结语"><a href="#五、结语" class="headerlink" title="五、结语"></a>五、结语</h1><p>&emsp;&emsp;下面就是我为这门课程的一点小建议，希望这门课程能够配以教材或者讲义，这样学生就能对整学期的课程结构有更清晰的认识。本学期的各个授课教师认真负责，上课生动，PPT及其用心，课堂学习氛围浓厚，希望以后还能和这些教授面对面进行交流，提升我自身的专业素质。</p>
+<h1 id="5-结语"><a href="#5-结语" class="headerlink" title="5. 结语"></a>5. 结语</h1><p>&emsp;&emsp;下面就是我为这门课程的一点小建议，希望这门课程能够配以教材或者讲义，这样学生就能对整学期的课程结构有更清晰的认识。本学期的各个授课教师认真负责，上课生动，PPT及其用心，课堂学习氛围浓厚，希望以后还能和这些教授面对面进行交流，提升我自身的专业素质。</p>
 <p>&emsp;&emsp;问渠哪得清如许，为有源头活水来。自当取天下之能源，集自身之动力。</p>
 <p>&emsp;&emsp;为你执剑，千山越尽不知倦，万水覆河山，纵惊涛拍岸，天地血染。</p>
 <p>&emsp;&emsp;暮去朝来留不住，遂令东海变桑田。</p>

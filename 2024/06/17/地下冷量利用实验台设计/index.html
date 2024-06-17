@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/m.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/m%20.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/m.png">
+  <link rel="mask-icon" href="/images/m.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="地表浅层存在着大量的热（冷）能，如能将其利用起来，将是非常有意义的。本文通过搭建实验台的方式说明了对于地下冷量利用的可行性。本文给出了一种搭建小型制冷循环的实验方案，对循环搭建过程、循环设备选型等都给出了较为明确的选择。本文拟通过模拟搭建小型制冷循环实验台以达到教学、演示等目的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="地下冷量利用系统实验台设计与优化">
+<meta property="og:url" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="鸷鹗啄孤凤">
+<meta property="og:description" content="地表浅层存在着大量的热（冷）能，如能将其利用起来，将是非常有意义的。本文通过搭建实验台的方式说明了对于地下冷量利用的可行性。本文给出了一种搭建小型制冷循环的实验方案，对循环搭建过程、循环设备选型等都给出了较为明确的选择。本文拟通过模拟搭建小型制冷循环实验台以达到教学、演示等目的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%874.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%875.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%876.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%878.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%879.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%8710.jpg">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%8711.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%8712.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%8713.jpg">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%8714.png">
+<meta property="og:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%8715.png">
+<meta property="article:published_time" content="2024-06-17T08:02:16.000Z">
+<meta property="article:modified_time" content="2024-06-17T08:07:38.931Z">
+<meta property="article:author" content="Ma Yiying">
+<meta property="article:tag" content="能动学科">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/%E5%9B%BE%E7%89%871.png">
+
+<link rel="canonical" href="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>地下冷量利用系统实验台设计与优化 | 鸷鹗啄孤凤</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">鸷鹗啄孤凤</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到新世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook" rel="section"><i class="fa fa-book fa-fw"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/1.jpg">
+      <meta itemprop="name" content="Ma Yiying">
+      <meta itemprop="description" content="鸷鹗啄孤凤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鸷鹗啄孤凤">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          地下冷量利用系统实验台设计与优化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-06-17 16:02:16 / 修改时间：16:07:38" itemprop="dateCreated datePublished" datetime="2024-06-17T16:02:16+08:00">2024-06-17</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text"></span>
+              <span>6.8k</span>
+            </span>
+            <div class="post-description">地表浅层存在着大量的热（冷）能，如能将其利用起来，将是非常有意义的。本文通过搭建实验台的方式说明了对于地下冷量利用的可行性。本文给出了一种搭建小型制冷循环的实验方案，对循环搭建过程、循环设备选型等都给出了较为明确的选择。本文拟通过模拟搭建小型制冷循环实验台以达到教学、演示等目的。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-研究背景"><a href="#1-研究背景" class="headerlink" title="1. 研究背景"></a>1. 研究背景</h1><p>土壤是一个庞大的蓄冷体，其内部蓄存着巨大的地下热能，在对地热能的开发研究过程中，人们开始意识到蕴藏在地表浅层地热能。地表浅层是一个巨大的太阳能集热器，收集了47%的太阳能量，比人类每年利用能量的500倍还多。因此，浅层地热能是真正意义上的可再生能源。</p>
+<p>以土壤为冷热源的地源热泵技术（Ground-Source Heat Pump，简称GSHP）是一种高效节能、清洁无污染的能源利用技术。GSHP利用土壤的蓄热（冷）性质，通过中间介质，在封闭的地下换埋管换热器中循环流动，从而实现于土壤的热交换。在夏季通过热泵将建筑物的热量转移到地下，对建筑物进行降温，同时可以贮存热量，以备冬天采暖。</p>
+<p>本文针对地下冷量利用方面提出了一种以搭建实验台的方式模拟地下冷量利用的设计方案。通过本实验台的搭建，真实模拟了对于地下冷量的利用循环装置。本实验台可用于教学，可以更加直观的认识热泵循环的相关设备，对制冷循环有更加深刻的理解。</p>
+<h1 id="2-循环建立"><a href="#2-循环建立" class="headerlink" title="2. 循环建立"></a>2. 循环建立</h1><p>对于地下冷量的利用，本实验台所选择的循环为制冷循环。消耗外部机械功，以实现热能由低温物体向高温物体的转移。根据热力学第二定律，进行这样的过程必须外界向系统提供机械能，以确保包括低温冷源、高温热源、功源在内的孤立系统的熵不减少。</p>
+<p>理论上可以实现压缩蒸气的逆向卡诺制冷循环，如图2中循环7-3-4-6-7。但在状态7时工质干度相当小，两相物质的压缩是不利的。为了避免这种不利状况，也为增加制冷量，使工质气化到干度更大的状态1。此外为了简化设备，提高装置运行的可靠性，实际应用的压缩蒸气制冷循环常采用节流阀（或称膨胀阀）代替膨胀机，主要设备流程图如图1所示。从冷库定压气化吸热后，状态为1（通常为干饱和蒸气或接近干饱和蒸气）的制冷工质进人压缩机在绝热状态下压缩，升温升压到状态2（<em>T2&gt;T0</em>）再进人冷凝器向环境介质等压散热，在冷凝器内过热的制冷剂蒸气先等压降温到对应于压力的饱和温度<em>T3</em>，然后继续等压（同时也是等温）冷凝成饱和液状态4进入节流阀，绝热节流降温、降压至对应于的湿饱和蒸气状态5，再进人冷库定压气化吸热完成循环。其循环<em>T-s</em>图如图2中1-2-3-4-5-1所示。</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片1.png" alt="图1 装置流程图"></p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片2.png" alt="图2 T-s图"></p>
+<h1 id="3-模拟模型建立"><a href="#3-模拟模型建立" class="headerlink" title="3. 模拟模型建立"></a>3. 模拟模型建立</h1><h2 id="3-1-地上部分模拟"><a href="#3-1-地上部分模拟" class="headerlink" title="3.1 地上部分模拟"></a>3.1 地上部分模拟</h2><p>实际的热泵制冷循环都是对建筑进行制冷，本实验台为了模拟利用地源热泵制冷的空间，利用保温绝热材料搭建一1m×1m×1m中空正方体作为研究对象。地上部分的换热器在正方体内部，在绝热材料（采用泡沫保温板）表面预留孔洞，用于测温。</p>
+<h2 id="3-2-地下部分模拟"><a href="#3-2-地下部分模拟" class="headerlink" title="3.2 地下部分模拟"></a>3.2 地下部分模拟</h2><p>地源热泵的地下部分实际采用深埋管的方式，为了更加真实的模拟实际情况，本实验采用将换热管埋于沙土中的方式来模拟地下埋管的情况。为了更加贴近实际情况，在沙土中通入恒温水浴来模拟地下的潮湿与温度环境。最终的实验台模拟如图所示：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片3.png" alt="图3 实验台搭建图"></p>
+<h1 id="4-参数确定及设备选择"><a href="#4-参数确定及设备选择" class="headerlink" title="4. 参数确定及设备选择"></a>4. 参数确定及设备选择</h1><h2 id="4-1-压缩机"><a href="#4-1-压缩机" class="headerlink" title="4.1 压缩机"></a>4.1 压缩机</h2><p>压缩机是制冷循环中最重要的设备之一，压缩机的作用是把压力较低的蒸汽压缩成压力较高的蒸汽，使蒸汽的体积减小，压力升高。压缩机吸入从蒸发器出来的较低压力的工质蒸汽，使之压力升高后送入冷凝器，在冷凝器中冷凝成压力较高的液体，经节流阀节流后，成为压力较低的液体后，送入蒸发器，在蒸发器中吸热蒸发而成为压力较低的蒸汽，再送入压缩机的入口，从而完成制冷循环。</p>
+<p>对于在制冷循环中压缩机的型号选择，采取依据负荷选择设备的方法，首先确定研究对象的大致负荷，再根据负荷大致数值选择压缩机的制冷量大小。而由于本实验台所研究的制冷空间过小，因此需要对研究面积进行扩大，以求得较为准确的单位面积冷负荷数据。</p>
+<p>  现采用建筑能耗模拟软件DeST对西安交通大学创新港三号巨构进行了全年负荷模拟，DeST是建筑环境及<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HVAC/10683140">HVAC</a>系统模拟的软件平台，该平台以清华大学建筑技术科学系环境与设备研究所十余年的科研成果为理论基础，将现代模拟技术和独特的模拟思想运用到建筑环境的模拟和HVAC系统的模拟中去，为建筑环境的相关研究和建筑环境的模拟预测、性能评估提供了方便实用可靠的软件工具，为建筑设计及HVAC系统的相关研究和系统的模拟预测、性能优化提供了一流的软件工具。在处理数据时，采用理想化处理，即：</p>
+<p>1)     设定空调供冷季为每年的6月1日到9月31日，且不考虑该时间段内的热负荷;</p>
+<p>2)     设定空调供热季为每年的12月1日到3月31日，且不考虑该时间段内的冷负荷;</p>
+<p>3)     忽略过渡季节内的冷负荷和热负荷；</p>
+<p>4)     供冷季和供热季的运行时间为上午8:00到下午5:30；</p>
+<p>下图为软件建模界面：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片4.png" alt></p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片5.png" alt="图4 建模截界面"></p>
+<p>得到建筑夏季单位面积逐时冷负荷：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片6.png" alt="图5 三号楼全年逐时单位面积负荷"></p>
+<p>可以看到，对于教学、办公楼夏季的最大冷负荷在$100W/m^2$左右，本着根据负荷选择设备的原则，得到备选设备如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">型号</th>
+<th style="text-align:center">制冷量/W</th>
+<th style="text-align:center">价格/元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">BX18-DC24E</td>
+<td style="text-align:center">150~400</td>
+<td style="text-align:center">640</td>
+</tr>
+<tr>
+<td style="text-align:center">ZH2012A</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">370</td>
+</tr>
+<tr>
+<td style="text-align:center">QX36H</td>
+<td style="text-align:center">365</td>
+<td style="text-align:center">370</td>
+</tr>
+<tr>
+<td style="text-align:center">HAC27RDC12</td>
+<td style="text-align:center">405</td>
+<td style="text-align:center">580</td>
+</tr>
+<tr>
+<td style="text-align:center">6MS020ZB441</td>
+<td style="text-align:center">330</td>
+<td style="text-align:center">538</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>最终选择QX36H型号作为本实验压缩机型号。下表为此型号压缩机相关参数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">压缩机系列</td>
+<td style="text-align:center">H系列</td>
+</tr>
+<tr>
+<td style="text-align:center">压缩机型号</td>
+<td style="text-align:center">QX36H</td>
+</tr>
+<tr>
+<td style="text-align:center">冷媒</td>
+<td style="text-align:center">R-134a</td>
+</tr>
+<tr>
+<td style="text-align:center">功率/W</td>
+<td style="text-align:center">170</td>
+</tr>
+<tr>
+<td style="text-align:center">电流/A</td>
+<td style="text-align:center">0.8</td>
+</tr>
+<tr>
+<td style="text-align:center">电源规范</td>
+<td style="text-align:center">220-240V/50Hz</td>
+</tr>
+<tr>
+<td style="text-align:center">排气量/$cm^3$</td>
+<td style="text-align:center">3.6</td>
+</tr>
+<tr>
+<td style="text-align:center">性能系数COP</td>
+<td style="text-align:center">2.14</td>
+</tr>
+<tr>
+<td style="text-align:center">压缩机高度/mm</td>
+<td style="text-align:center">147</td>
+</tr>
+<tr>
+<td style="text-align:center">压缩机外径/mm</td>
+<td style="text-align:center">95</td>
+</tr>
+<tr>
+<td style="text-align:center">制冷能力/W</td>
+<td style="text-align:center">365</td>
+</tr>
+<tr>
+<td style="text-align:center">制冷能力/$Btu·h^-1$</td>
+<td style="text-align:center">1244</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片8.png" alt="图6 压缩机尺寸图"></p>
+<p>压缩机相关技术参数如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">冷凝温度/℃</td>
+<td style="text-align:center">54.4</td>
+</tr>
+<tr>
+<td style="text-align:center">蒸发温度/℃</td>
+<td style="text-align:center">7.2</td>
+</tr>
+<tr>
+<td style="text-align:center">环境温度/℃</td>
+<td style="text-align:center">30</td>
+</tr>
+<tr>
+<td style="text-align:center">吸气温度/℃</td>
+<td style="text-align:center">35</td>
+</tr>
+<tr>
+<td style="text-align:center">过冷温度/℃</td>
+<td style="text-align:center">46.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-2-地下土壤导热系数"><a href="#4-2-地下土壤导热系数" class="headerlink" title="4.2 地下土壤导热系数"></a>4.2 地下土壤导热系数</h2><p>现对于地下环境模拟作如下假设：</p>
+<p>1)     假设各个方向的土壤同性；</p>
+<p>2)     不考虑土壤中因水分迁移而引起的热交换，即地埋管与土壤间为纯导热传热；</p>
+<p>3)     认为地埋管与土壤接触良好，不考虑接触热阻；</p>
+<p>4)     认为周围边界与流体的传热是在无限大的均匀介质中进行；</p>
+<p>5)     整个传热过程视为稳态导热过程；</p>
+<p>故将土壤导热系数视为常数，将取值为：λ=1.5W/(m·K)。下表为沙子不同含湿率下的导热系数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>含湿率/%</strong></th>
+<th style="text-align:center">$ <strong>λ / W·(m·K)^-1</strong> $</th>
+<th style="text-align:center"><strong>含湿率/%</strong></th>
+<th style="text-align:center">$ <strong>λ / W·(m·K)^-1</strong> $</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0.2281</td>
+<td style="text-align:center">35</td>
+<td style="text-align:center">1.0577</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0.2964</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">1.1499</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">0.5942</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">1.1616</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">0.5181</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">1.2205</td>
+</tr>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.7456</td>
+<td style="text-align:center">55</td>
+<td style="text-align:center">1.3083</td>
+</tr>
+<tr>
+<td style="text-align:center">25</td>
+<td style="text-align:center">0.8995</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">1.3112</td>
+</tr>
+<tr>
+<td style="text-align:center">30</td>
+<td style="text-align:center">1.0022</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">1.6241</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>由数据可知，在含湿率为75%左右时导热系数最接近土壤导热系数，因此在模拟地下环境时采取利用向干燥的沙子中按一定流量通入恒温水的方法。利用绝热材料（采用泡沫保温板）制作一个0.5m×0.5m×0.5m的开盖正方体，其中填满沙子，外接恒温水浴，向沙子中通入恒温水，实现潮湿沙土环境。</p>
+<h2 id="4-3-地下埋管"><a href="#4-3-地下埋管" class="headerlink" title="4.3 地下埋管"></a>4.3 地下埋管</h2><p> 目前地源热泵地下埋管换热器主要有两种形式，即水平埋管和垂直埋管。为了简化实验，本文采用水平埋管的方式进行相关计算。</p>
+<p>  根据《GB 50366-2005地源热泵系统工程技术规范（2009版）》（以下简称《规范》），水平地埋管换热器可不设坡度。最上层埋管顶部应在冻土层以下0.4m，且距离地面不宜小于0.8m。故取为1.5m。在实验台的搭建过程中，显然将管道埋至1.5m地下不太现实，故需要将模型的尺寸进行缩小，因此需要确定几何相似常数。几何相似上述需要考虑多方面的因素综合确定，若过大则实验成本较高，过小又给模型搭建和实验精度增加困难，因此需要慎重选择。</p>
+<p>  在火灾相似模型实验中，NFPA（美国消防协会）给出了几何相似常数的选取经验，其认为当几何相似常数Cl&lt;1/8时，模型实验的相似性和精度会显著降低。目前地源热泵地埋管相似模型的几何相似常数还没有相关的标准和规范给出建议，因此本实验中模型与原型的几何相似常数取为1/8。相似准则数为雷诺数和努塞尔数：</p>
+<script type="math/tex; mode=display">
+Re=\frac{ul}{\nu},Nu=\frac{hl}{\lambda}</script><p>得到模型与原型中个参数的相似常数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>参数名称</strong></th>
+<th style="text-align:center"><strong>相似常数</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">几何尺寸</td>
+<td style="text-align:center">Cl=1/8</td>
+</tr>
+<tr>
+<td style="text-align:center">温度</td>
+<td style="text-align:center">Ct=1/1</td>
+</tr>
+<tr>
+<td style="text-align:center">换热量</td>
+<td style="text-align:center">Cq=1/8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>因此，在实验台搭建中，水平埋管深度为0.2m.</p>
+<p>对于换热量Ф，采用如下方式计算，由蒸发温度7.2℃与冷凝温度54.4℃查R134a饱和性质表得：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">p1</td>
+<td style="text-align:center">378.52 kPa</td>
+</tr>
+<tr>
+<td style="text-align:center">h1</td>
+<td style="text-align:center">402.1584 kJ/kg</td>
+</tr>
+<tr>
+<td style="text-align:center">s1</td>
+<td style="text-align:center">1.7213 kJ/(kg·K)</td>
+</tr>
+<tr>
+<td style="text-align:center">p4=p3=p2</td>
+<td style="text-align:center">1469.72 kPa</td>
+</tr>
+<tr>
+<td style="text-align:center">h4</td>
+<td style="text-align:center">278.425 kJ/kg</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>计算得：</p>
+<script type="math/tex; mode=display">
+q_c=h_1-h_4=123.7334\quad{kJ/kg}</script><script type="math/tex; mode=display">
+w_c=\frac{q_c}{\epsilon}=55.9880\quad kJ/kg</script><script type="math/tex; mode=display">
+h_2=w_c+h_1=458.1464\quad kJ/kg</script><script type="math/tex; mode=display">
+q_m=\frac{q_Q}{q_c}=2.95\times10^{-3}\quad kg/s</script><p>查R134a压焓图得到：</p>
+<script type="math/tex; mode=display">
+t_2=76.85℃</script><script type="math/tex; mode=display">
+\Delta t'=22.45℃</script><script type="math/tex; mode=display">
+\Phi=q_m\times c_{R134a}\times\Delta t'=0.056\quad kW</script><p>根据得到的换热量Ф数值，将换热器类型确定为螺旋管式换热器如图：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片9.png" alt="图7 螺旋管式换热器"></p>
+<p>相关参数如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>参数</strong></th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">材质</td>
+<td style="text-align:center">铜</td>
+</tr>
+<tr>
+<td style="text-align:center">内径（mm）</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:center">外径（mm）</td>
+<td style="text-align:center">7</td>
+</tr>
+<tr>
+<td style="text-align:center">长度（mm）</td>
+<td style="text-align:center">200</td>
+</tr>
+<tr>
+<td style="text-align:center">螺旋直径（mm）</td>
+<td style="text-align:center">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-4-底下温度"><a href="#4-4-底下温度" class="headerlink" title="4.4 底下温度"></a>4.4 底下温度</h2><p>根据地温分带及其相互关系图：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片10.jpg" alt="图8 地温分带及其相互关系图"></p>
+<p>可知：埋深1.5m时地下温度约为18℃，则根据相似准则，并且忽略水在流动过程中的热量损失，本实验中恒温水浴的温度范围确定为15~20℃。</p>
+<h2 id="4-5-节流阀"><a href="#4-5-节流阀" class="headerlink" title="4.5 节流阀"></a>4.5 节流阀</h2><p>节流阀是循环中重要的一环，因为整个系统是均压的，而制冷系统冷凝部分是高压的，节流阀是控制制冷剂合理分配给蒸发器，让蒸发器处于正常的制冷工作状态。节流机构为制冷循环的四大部件之一，节流的工作原理是制冷工质流过阀门时流动截面突然收缩，流体流速加快，压力下降，压力下降的大小取决于流动截面收缩的比例。当常温高压的制冷剂饱和液体流过节流阀，变成低温低压的制冷剂液体，进而实现向外界吸热的目的。</p>
+<p>在针对节流阀的选择上，我们将目光放在了既便宜又安全的AS1001FG系列型号节流阀上，下面为该型号节流阀尺寸图及不同尺寸的相关数据表：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片11.png" alt="图9 节流阀尺寸"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>型号</strong></th>
+<th style="text-align:center"><strong>d</strong></th>
+<th style="text-align:center"><strong>D1</strong></th>
+<th style="text-align:center"><strong>D2</strong></th>
+<th style="text-align:center"><strong>L1</strong></th>
+<th style="text-align:center"><strong>L2</strong></th>
+<th style="text-align:center"><strong>L3</strong></th>
+<th style="text-align:center"><strong>M1</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">AS1001FG-23</td>
+<td style="text-align:center">3.2</td>
+<td style="text-align:center">8.4</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">38</td>
+<td style="text-align:center">4.5</td>
+<td style="text-align:center">20.7~23.5</td>
+<td style="text-align:center">12.7</td>
+</tr>
+<tr>
+<td style="text-align:center">AS1001FG-04</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">9.3</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">39.2</td>
+<td style="text-align:center">5.2</td>
+<td style="text-align:center">24.2~21.4</td>
+<td style="text-align:center">12.7</td>
+</tr>
+<tr>
+<td style="text-align:center">AS1001FG-06</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">11.6</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">40.7</td>
+<td style="text-align:center">6.2</td>
+<td style="text-align:center">22.4~25.2</td>
+<td style="text-align:center">13.5</td>
+</tr>
+<tr>
+<td style="text-align:center">AS2001FG-04</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">9.3</td>
+<td style="text-align:center">11.8</td>
+<td style="text-align:center">40.7</td>
+<td style="text-align:center">5.2</td>
+<td style="text-align:center">27.6~32.6</td>
+<td style="text-align:center">12.7</td>
+</tr>
+<tr>
+<td style="text-align:center">AS2001FG-06</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">11.6</td>
+<td style="text-align:center">11.8</td>
+<td style="text-align:center">44.8</td>
+<td style="text-align:center">6.3</td>
+<td style="text-align:center">28.7~33.7</td>
+<td style="text-align:center">13.5</td>
+</tr>
+<tr>
+<td style="text-align:center">AS2051FG-06</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">12.8</td>
+<td style="text-align:center">14.8</td>
+<td style="text-align:center">53.2</td>
+<td style="text-align:center">6.7</td>
+<td style="text-align:center">30.2~35.2</td>
+<td style="text-align:center">17</td>
+</tr>
+<tr>
+<td style="text-align:center">AS2051FG-08</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">15.2</td>
+<td style="text-align:center">14.8</td>
+<td style="text-align:center">59.8</td>
+<td style="text-align:center">8.1</td>
+<td style="text-align:center">27.6~32.6</td>
+<td style="text-align:center">18</td>
+</tr>
+<tr>
+<td style="text-align:center">AS3001FG-06</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">12.8</td>
+<td style="text-align:center">19.8</td>
+<td style="text-align:center">59</td>
+<td style="text-align:center">7.4</td>
+<td style="text-align:center">33.3~38.3</td>
+<td style="text-align:center">17</td>
+</tr>
+<tr>
+<td style="text-align:center">AS3001FG-08</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">15.2</td>
+<td style="text-align:center">19.8</td>
+<td style="text-align:center">64.4</td>
+<td style="text-align:center">8.2</td>
+<td style="text-align:center">34.1~39.1</td>
+<td style="text-align:center">18</td>
+</tr>
+<tr>
+<td style="text-align:center">AS3001FG-10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">18.5</td>
+<td style="text-align:center">19.8</td>
+<td style="text-align:center">71.6</td>
+<td style="text-align:center">9.8</td>
+<td style="text-align:center">35.6~40.6</td>
+<td style="text-align:center">21</td>
+</tr>
+<tr>
+<td style="text-align:center">AS3001FG-12</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">20.9</td>
+<td style="text-align:center">19.8</td>
+<td style="text-align:center">76</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">36.8~41.8</td>
+<td style="text-align:center">22</td>
+</tr>
+<tr>
+<td style="text-align:center">AS4001FG-10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">18.5</td>
+<td style="text-align:center">26.5</td>
+<td style="text-align:center">82</td>
+<td style="text-align:center">11.3</td>
+<td style="text-align:center">43.6~51.1</td>
+<td style="text-align:center">21</td>
+</tr>
+<tr>
+<td style="text-align:center">AS4001FG-12</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">20.9</td>
+<td style="text-align:center">26.5</td>
+<td style="text-align:center">82</td>
+<td style="text-align:center">11.3</td>
+<td style="text-align:center">44.6~52.1</td>
+<td style="text-align:center">22</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 最终选择的具体型号为AS2051FG-08型号节流阀。</p>
+<h2 id="4-6-蒸发器"><a href="#4-6-蒸发器" class="headerlink" title="4.6 蒸发器"></a>4.6 蒸发器</h2><p>查阅文献得知，对于冷库等制冷环境，广泛使用的就是铝制排管换热器。对于本实验模拟地上部分的蒸发器，拟采用导热性能更好的铜管。如图所示：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片12.png" alt="图10 排管式换热器"></p>
+<p>相关参数如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>蒸发器相关参数</strong></th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">材质</td>
+<td style="text-align:center">铜</td>
+</tr>
+<tr>
+<td style="text-align:center">内径/mm</td>
+<td style="text-align:center">6~8</td>
+</tr>
+<tr>
+<td style="text-align:center">长×宽/m2</td>
+<td style="text-align:center">0.5×0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">排数</td>
+<td style="text-align:center">10~15</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-7-管道"><a href="#4-7-管道" class="headerlink" title="4.7 管道"></a>4.7 管道</h2><p>根据压缩机型号，可以确定相连管道尺寸：内径6mm，外径7~9mm。根据压缩机排气量，计算得到管道内流体出口流速为0.127 m/s。忽略从压缩机到冷凝器之间的热量损失和动量损失，故冷凝器中流体流速也视为0.127m/s。在《规范》中所规定的管道均为PE材质，由于地埋管管径过小，实际中很难找到内径只有6mm的PE管，同时考虑到铜管的传热性能较好，能在实验时做到更好的换热，故采用铜管代替PE管。</p>
+<h2 id="4-8-测温设备"><a href="#4-8-测温设备" class="headerlink" title="4.8 测温设备"></a>4.8 测温设备</h2><p>本实验台中采用的是铜-康铜热电偶（也称T型热电偶），其在廉价金属热电偶中准确度最高，测温范围为-20~350℃，而且信号便于传送和显示。经调查，热电偶需要人工制作热电偶探头。热电偶的制作方法为：</p>
+<p>1） 首先将热电偶丝材外部的绝缘橡胶去除，并用金属丝擦拭掉外层的氧化膜；</p>
+<p>2） 接着将两根丝材绞合在一起，然后用热电偶点焊机将绞合的丝材熔结在一起形成一个小圆球（焊点），即制作完成。</p>
+<p>3）  焊接后应检查焊点是否焊接牢，并且要求焊接的圆球符合表面圆滑、无裂纹等要求，否则应重焊，直至满足要求。</p>
+<p>在使用前为保证热电偶的测量精度，在制作完成后，需对每个热电偶进行标定。热电偶标定主要是和标准的水银温度计进行温度对比，即用被校热电偶和标准水银温度计同时测量某一对象的温度，然后比较两者示值，以确定被校热电偶的基本误差。标定方法如下：</p>
+<p>1）  将热电偶和标准水银温度计（测温范围 0~50℃）同时测量热水的温度，读数稳定后记录数据；</p>
+<p>2）  然后逐渐加入冷水使水温降低，读数稳定后再记录数据；</p>
+<p>3）  重复上述步骤，读取 8-10 组数据，控制水温在 0~50℃之间均匀分布。</p>
+<p>4）  根据这些数据进行数据处理和误差分析，拟合出每个热电偶的温度修正曲线，</p>
+<p>5）  实验中在读取热电偶温度后，可根据修正曲线公式，得到实际的温度。</p>
+<p>我们需要测的温度点为压缩机出口、两个换热器的出入口、地下部分冷凝器上、节流阀出入口以及环境温度。我们发现，本实验台中有多个热电偶埋设于土壤中，为进一步保护热电偶探头，需对热电偶探头采取一定的保护措施。故将土壤中的热电偶探头用透明胶管套住，以防止沙子对热电偶造成损坏。</p>
+<h2 id="4-9-测压设备"><a href="#4-9-测压设备" class="headerlink" title="4.9 测压设备"></a>4.9 测压设备</h2><p>测定管道中的流体的压力也是测量数据中重要的一环，本实验台采用联测3051差压变送器，如图所示：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片13.jpg" alt="图11 差压变送器"></p>
+<h2 id="4-10-流量计"><a href="#4-10-流量计" class="headerlink" title="4.10 流量计"></a>4.10 流量计</h2><p>实验台中的流量计分别安装在地埋管的出水管和压缩机出口处，共计两台。流量计采用涡轮流量计，公称通径为6mm，流量范围为0.04~0.4m3/s，精度等级为 1 级。如图所示：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片14.png" alt="图12 涡轮流量计"></p>
+<h2 id="4-11-小结"><a href="#4-11-小结" class="headerlink" title="4.11 小结"></a>4.11 小结</h2><p>本实验台概况如下：</p>
+<p><img src="/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/图片15.png" alt="图13 实验台流程图及测量设备安装位置"></p>
+<h1 id="5-实验台功能"><a href="#5-实验台功能" class="headerlink" title="5. 实验台功能"></a>5. 实验台功能</h1><h2 id="1-计算制冷循环中的相关参数，分析地下冷量利用可行性"><a href="#1-计算制冷循环中的相关参数，分析地下冷量利用可行性" class="headerlink" title="1. 计算制冷循环中的相关参数，分析地下冷量利用可行性"></a>1. <strong>计算制冷循环中的相关参数，分析地下冷量利用可行性</strong></h2><p>由图11，根据所测量制冷循环相关物理量，可以计算得到该制冷循环的相关参数：</p>
+<p>已知：各个点温度、体积流量、压强，由测量得到各个点温度和压强，根据R134a性质表可以查到各个点的h与s，则有：</p>
+<p>单位工质制冷量：</p>
+<script type="math/tex; mode=display">
+q_c=h_1-h_4</script><p>压缩机做功：</p>
+<script type="math/tex; mode=display">
+w_c=h_2-h_1</script><p>制冷系数：</p>
+<script type="math/tex; mode=display">
+\epsilon=\frac{q_c}{w_c}</script><p>质量流量：</p>
+<script type="math/tex; mode=display">
+q_m=q_V\times \rho</script><p>总制冷量：</p>
+<script type="math/tex; mode=display">
+q_Q=q_m\times q_c</script><h2 id="2-换热器分析"><a href="#2-换热器分析" class="headerlink" title="2. 换热器分析"></a>2. 换热器分析</h2><p>换热器换热量：</p>
+<script type="math/tex; mode=display">
+\Phi=q_m\times c_{R134a}\times \Delta T'</script><p>根据在换热器沿途所测的温度数据，可以作出换热器沿途的温度变化，以定性得到换热器的中流体的温度变化特点</p>
+<h1 id="6-实验台优化"><a href="#6-实验台优化" class="headerlink" title="6. 实验台优化"></a>6. 实验台优化</h1><h2 id="6-1-丰富研究内容"><a href="#6-1-丰富研究内容" class="headerlink" title="6.1 丰富研究内容"></a>6.1 丰富研究内容</h2><p>将地下部分扩大，在不同的土壤中埋入不同材质的换热器，并在入口处安装换向阀，这样可以利用本实验台研究不同地下埋管情况对制冷循环的影响。</p>
+<h2 id="6-2-与传统方式对比"><a href="#6-2-与传统方式对比" class="headerlink" title="6.2 与传统方式对比"></a>6.2 与传统方式对比</h2><p>通过上一小节所计算得到的制冷量及制冷系数，可以与当前传统空调的制冷效果进行对比，在相同制冷量的情况下，通过比较本实验台与传统空调的制冷系数，可以知道我们所建立的循环与当前传统制冷方式之间的区别与差距。</p>
+<h1 id="7-结语"><a href="#7-结语" class="headerlink" title="7. 结语"></a>7. 结语</h1><p>本文提出了一种地下冷量利用系统的实验台搭建方案，即采用搭建制冷循环的方式对地下冷量加以利用，同时对实验台中的设备都给出了较为明确的选择，最后对实验台进行了优化。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] 陶文铨.传热学.5版.北京：高等教育出版社,2019. </p>
+<p>[2] 沈维道,童钧耕.工程热力学.5版.北京：高等教育出版社,2016.</p>
+<p>[3] 吕晨腾. 济南市某企业办公楼地源热泵系统设计[J]. 制冷,2021,40(01):15-21.</p>
+<p>[4] 韩斯东. 地埋管地源热泵浅层土壤分层热物性测试实验及计算研究[D].内蒙古科技大学,2015.</p>
+<p>[5] 鲁念. 安徽地区地源热泵地下土壤温度预测[D].华中科技大学,2014.</p>
+<p>[6] 邵莉,孙宗保,赵斌. 热泵/制冷循环模拟实验台的设计[J]. 实验技术与管理,2007,(05):57-60+96.</p>
+<p>[7] 范蕊. 土壤蓄冷与热泵集成系统地埋管热渗耦合理论与实验研究[D].哈尔滨工业大学,2006.</p>
+<p>[8] 余传辉. 地下土壤导热系数计算方法及结果分析[D].吉林大学,2006.</p>
+<p>[9] 刘冬生. 地源热泵实验台及同轴套管换热器传热模型研究[D].吉林大学,2005.</p>
+<p>[10] 韦科娟. 基于相似理论的地源热泵地埋管实验台研究[D].重庆大学,2018.</p>
+<p>[11] 马海峰. 全热回收型地源热泵机组在别墅中的设计应用[J]. 上海煤气,2021,(04):30-34.</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ma Yiying
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/06/17/%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%8F%B0%E8%AE%BE%E8%AE%A1/" title="地下冷量利用系统实验台设计与优化">http://example.com/2024/06/17/地下冷量利用实验台设计/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E8%83%BD%E5%8A%A8%E5%AD%A6%E7%A7%91/" rel="tag"><i class="fa fa-tag"></i> 能动学科</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/19/%E5%8D%95%E7%AE%A1%E4%BD%8E%E9%A2%91%E7%94%B5%E5%8E%8B%E6%94%BE%E5%A4%A7%E5%99%A8%E4%BB%BF%E7%9C%9F%E5%AE%9E%E9%AA%8C/" rel="prev" title="单管低频电压放大器仿真实验">
+      <i class="fa fa-chevron-left"></i> 单管低频电压放大器仿真实验
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="nav-text">1. 研究背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%BE%AA%E7%8E%AF%E5%BB%BA%E7%AB%8B"><span class="nav-text">2. 循环建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%A8%A1%E6%8B%9F%E6%A8%A1%E5%9E%8B%E5%BB%BA%E7%AB%8B"><span class="nav-text">3. 模拟模型建立</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%9C%B0%E4%B8%8A%E9%83%A8%E5%88%86%E6%A8%A1%E6%8B%9F"><span class="nav-text">3.1 地上部分模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%9C%B0%E4%B8%8B%E9%83%A8%E5%88%86%E6%A8%A1%E6%8B%9F"><span class="nav-text">3.2 地下部分模拟</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%8F%82%E6%95%B0%E7%A1%AE%E5%AE%9A%E5%8F%8A%E8%AE%BE%E5%A4%87%E9%80%89%E6%8B%A9"><span class="nav-text">4. 参数确定及设备选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%8E%8B%E7%BC%A9%E6%9C%BA"><span class="nav-text">4.1 压缩机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E5%9C%B0%E4%B8%8B%E5%9C%9F%E5%A3%A4%E5%AF%BC%E7%83%AD%E7%B3%BB%E6%95%B0"><span class="nav-text">4.2 地下土壤导热系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E5%9C%B0%E4%B8%8B%E5%9F%8B%E7%AE%A1"><span class="nav-text">4.3 地下埋管</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E5%BA%95%E4%B8%8B%E6%B8%A9%E5%BA%A6"><span class="nav-text">4.4 底下温度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E8%8A%82%E6%B5%81%E9%98%80"><span class="nav-text">4.5 节流阀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E8%92%B8%E5%8F%91%E5%99%A8"><span class="nav-text">4.6 蒸发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-%E7%AE%A1%E9%81%93"><span class="nav-text">4.7 管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-%E6%B5%8B%E6%B8%A9%E8%AE%BE%E5%A4%87"><span class="nav-text">4.8 测温设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9-%E6%B5%8B%E5%8E%8B%E8%AE%BE%E5%A4%87"><span class="nav-text">4.9 测压设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-10-%E6%B5%81%E9%87%8F%E8%AE%A1"><span class="nav-text">4.10 流量计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-11-%E5%B0%8F%E7%BB%93"><span class="nav-text">4.11 小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E5%8F%B0%E5%8A%9F%E8%83%BD"><span class="nav-text">5. 实验台功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AE%A1%E7%AE%97%E5%88%B6%E5%86%B7%E5%BE%AA%E7%8E%AF%E4%B8%AD%E7%9A%84%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%EF%BC%8C%E5%88%86%E6%9E%90%E5%9C%B0%E4%B8%8B%E5%86%B7%E9%87%8F%E5%88%A9%E7%94%A8%E5%8F%AF%E8%A1%8C%E6%80%A7"><span class="nav-text">1. 计算制冷循环中的相关参数，分析地下冷量利用可行性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8D%A2%E7%83%AD%E5%99%A8%E5%88%86%E6%9E%90"><span class="nav-text">2. 换热器分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E5%8F%B0%E4%BC%98%E5%8C%96"><span class="nav-text">6. 实验台优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E4%B8%B0%E5%AF%8C%E7%A0%94%E7%A9%B6%E5%86%85%E5%AE%B9"><span class="nav-text">6.1 丰富研究内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E4%B8%8E%E4%BC%A0%E7%BB%9F%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="nav-text">6.2 与传统方式对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E7%BB%93%E8%AF%AD"><span class="nav-text">7. 结语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ma Yiying"
+      src="/uploads/1.jpg">
+  <p class="site-author-name" itemprop="name">Ma Yiying</p>
+  <div class="site-description" itemprop="description">鸷鹗啄孤凤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Yiying-Ma" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Yiying-Ma" rel="noopener" target="_blank">GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ma_yiying@163.com" title="E-Mail → mailto:ma_yiying@163.com" rel="noopener" target="_blank">E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">鸷鹗啄孤凤</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">50k</span>
+</div>
+
+<script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'PX4NxhEi6APJug1YVsMTODpl-gzGzoHsz',
+      appKey     : 'pdZlDBlvSpFJj9xX9a1ilCXg',
+      placeholder: "幸有微吟可相狎，不须檀板共金樽。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

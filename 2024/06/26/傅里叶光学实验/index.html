@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2024/06/26/%E5%82%85%E9%87%8C%E5%8F%B6%E5%85%89%E5%AD%A6%E5%AE%9E%E9%AA%8C/4.png">
 <meta property="og:image" content="http://example.com/2024/06/26/%E5%82%85%E9%87%8C%E5%8F%B6%E5%85%89%E5%AD%A6%E5%AE%9E%E9%AA%8C/5.png">
 <meta property="article:published_time" content="2024-06-26T06:41:21.000Z">
-<meta property="article:modified_time" content="2024-06-26T07:44:12.012Z">
+<meta property="article:modified_time" content="2024-06-26T07:57:10.449Z">
 <meta property="article:author" content="Ma Yiying">
 <meta property="article:tag" content="物理">
 <meta name="twitter:card" content="summary">
@@ -129,7 +129,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a>
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -231,7 +231,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-06-26 14:41:21 / 修改时间：15:44:12" itemprop="dateCreated datePublished" datetime="2024-06-26T14:41:21+08:00">2024-06-26</time>
+              <time title="创建时间：2024-06-26 14:41:21 / 修改时间：15:57:10" itemprop="dateCreated datePublished" datetime="2024-06-26T14:41:21+08:00">2024-06-26</time>
             </span>
 
           
@@ -254,7 +254,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text"></span>
-              <span>2.1k</span>
+              <span>2.4k</span>
             </span>
             <div class="post-description">忘了是啥课的实验报告了</div>
 
@@ -267,15 +267,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="1-原理简述"><a href="#1-原理简述" class="headerlink" title="1. 原理简述"></a>1. 原理简述</h1><p>我们知道一个复变函数$f(x,y)$的傅立叶变换为：</p>
+        <h1 id="1-原理简述"><a href="#1-原理简述" class="headerlink" title="1. 原理简述"></a>1. 原理简述</h1><p>&emsp;&emsp;我们知道一个复变函数$f(x,y)$的傅立叶变换为：</p>
 <script type="math/tex; mode=display">
-F(u,v)=\iint f(x,y)exp[-i2\pi(ux+vy)]dxdy</script><p>$F(u,v)$叫做$f(x,y)$的傅立叶变换函数或频谱函数。它一般也为复变函数，$f(x,y)$叫做原函数，也可以通过求$F(u,v)$逆傅立叶变换得到原函数$f(x,y)$：</p>
+F(u,v)=\iint f(x,y)exp[-i2\pi(ux+vy)]dxdy</script><p>&emsp;&emsp;$F(u,v)$叫做$f(x,y)$的傅立叶变换函数或频谱函数。它一般也为复变函数，$f(x,y)$叫做原函数，也可以通过求$F(u,v)$逆傅立叶变换得到原函数$f(x,y)$：</p>
 <script type="math/tex; mode=display">
-f(x,y)=\iint F(u,v)exp[i2\pi(ux+vy)]dudv</script><p>在光学系统中处理的是平面图形，当光波照明图形时从图形反射或透射出来的光波可用空间两维复变函数（简称空间函数）来表示。在这些情况下一般都可以进行傅里叶变换或广义的傅里叶变换。逆傅里叶变换公式说明一个空间函数$f(x,y)$可以表示成无穷多个基函数$exp[i2(ux+vy)]$的线性加，$F(u,v)dudv$是相应于空间频率u，v的权重，$F(u,v)$称为$f(x,y)$的空间频谱。</p>
-<p>在光学成像的过程中如果将一个平面图形放在一个理想的透镜（傅立叶变换透镜）的前焦平面上，在透镜的后焦平面就可以得到它的准确的傅立叶变换，即得到它的频谱函数。反之如果将一个平面图形的频谱放在一个理想的透镜的前焦平面上，在透镜的后焦平面就可以得到此平面图形（不过图形的坐标要反转）。从电子学的通讯理论我们知道，如果对信号的频谱进行处理（如滤波处理）再将信号还原就可以改变信号的性质，如去除信号的噪声等等。因此等效地可以在透镜的后焦平面上放置各种形状和大小的光阑改变图形的频谱，再对此图形用第二个透镜成像就可以对图形进行处理，得到经过处理的图形。这个过程叫作光学信息处理，在透镜的后焦平面上放置的光阑叫做空间滤波器。</p>
-<p>最典型的空间滤波系统—两个透镜（光学信息处理系统或傅立叶光学变换系统）叫作4f系统，激光经过扩束准直形成平行光照明物平面(其坐标为$x_1$，$y_1$)，透过物平面的光的复振幅为物函数$f(x_1,y_1)$，这一光波透镜1到达后焦平面（频谱面）就得到物函数的频谱，其坐标为$(u，v)$，再经透镜2 在透镜2的象平面上可以得到与物相等大小完全相似但坐标完全反转的象，设其坐标为$(x_2,y_2)$。此时我们将坐标完全反转后可以认为得到原物的完全相同的象。</p>
-<p>关于物平面和频谱面的尺寸大小的问题是实验中很重要的。为了便于问题的讨论，假定物平面和频谱面的坐标单位相同，物函数$f(x_1,y_1)$的坐标$x_1$，$y_1$和频谱函数$F(u,v)$的坐标$u$、$v$的关系为$u=x_1/f\lambda,v=y_1/f\lambda$， 其中$\lambda$为光的波长，$f$为透镜的焦距。以矩孔为例，如果矩孔的长为$a$，宽为$b$，则频谱面得到的衍射图形即矩孔的频谱为，根据前面的傅里叶变换的缩放性质可以推得相关公式。</p>
-<p>由此可以计算出频谱面上中央主极大的宽度、高度。可以知道频谱面尺寸的大小与物平面图形尺寸成反比，与透镜焦距f成正比，所以为了得到较大尺寸的频谱图用于完成实验的透镜的焦距要求较长。</p>
+f(x,y)=\iint F(u,v)exp[i2\pi(ux+vy)]dudv</script><p>&emsp;&emsp;在光学系统中处理的是平面图形，当光波照明图形时从图形反射或透射出来的光波可用空间两维复变函数（简称空间函数）来表示。在这些情况下一般都可以进行傅里叶变换或广义的傅里叶变换。逆傅里叶变换公式说明一个空间函数$f(x,y)$可以表示成无穷多个基函数$exp[i2(ux+vy)]$的线性加，$F(u,v)dudv$是相应于空间频率u，v的权重，$F(u,v)$称为$f(x,y)$的空间频谱。</p>
+<p>&emsp;&emsp;在光学成像的过程中如果将一个平面图形放在一个理想的透镜（傅立叶变换透镜）的前焦平面上，在透镜的后焦平面就可以得到它的准确的傅立叶变换，即得到它的频谱函数。反之如果将一个平面图形的频谱放在一个理想的透镜的前焦平面上，在透镜的后焦平面就可以得到此平面图形（不过图形的坐标要反转）。从电子学的通讯理论我们知道，如果对信号的频谱进行处理（如滤波处理）再将信号还原就可以改变信号的性质，如去除信号的噪声等等。因此等效地可以在透镜的后焦平面上放置各种形状和大小的光阑改变图形的频谱，再对此图形用第二个透镜成像就可以对图形进行处理，得到经过处理的图形。这个过程叫作光学信息处理，在透镜的后焦平面上放置的光阑叫做空间滤波器。</p>
+<p>&emsp;&emsp;最典型的空间滤波系统—两个透镜（光学信息处理系统或傅立叶光学变换系统）叫作4f系统，激光经过扩束准直形成平行光照明物平面(其坐标为$x_1$，$y_1$)，透过物平面的光的复振幅为物函数$f(x_1,y_1)$，这一光波透镜1到达后焦平面（频谱面）就得到物函数的频谱，其坐标为$(u，v)$，再经透镜2 在透镜2的象平面上可以得到与物相等大小完全相似但坐标完全反转的象，设其坐标为$(x_2,y_2)$。此时我们将坐标完全反转后可以认为得到原物的完全相同的象。</p>
+<p>&emsp;&emsp;关于物平面和频谱面的尺寸大小的问题是实验中很重要的。为了便于问题的讨论，假定物平面和频谱面的坐标单位相同，物函数$f(x_1,y_1)$的坐标$x_1$，$y_1$和频谱函数$F(u,v)$的坐标$u$、$v$的关系为$u=x_1/f\lambda,v=y_1/f\lambda$， 其中$\lambda$为光的波长，$f$为透镜的焦距。以矩孔为例，如果矩孔的长为$a$，宽为$b$，则频谱面得到的衍射图形即矩孔的频谱为，根据前面的傅里叶变换的缩放性质可以推得相关公式。</p>
+<p>&emsp;&emsp;由此可以计算出频谱面上中央主极大的宽度、高度。可以知道频谱面尺寸的大小与物平面图形尺寸成反比，与透镜焦距f成正比，所以为了得到较大尺寸的频谱图用于完成实验的透镜的焦距要求较长。</p>
 <h1 id="2-实验相关问题列举"><a href="#2-实验相关问题列举" class="headerlink" title="2. 实验相关问题列举"></a>2. 实验相关问题列举</h1><ol>
 <li><p>傅里叶变换相关知识</p>
 </li>
@@ -287,13 +287,13 @@ f(x,y)=\iint F(u,v)exp[i2\pi(ux+vy)]dudv</script><p>在光学系统中处理的�
 <h1 id="3-原始数据及操作"><a href="#3-原始数据及操作" class="headerlink" title="3. 原始数据及操作"></a>3. 原始数据及操作</h1><h2 id="3-1-实验操作"><a href="#3-1-实验操作" class="headerlink" title="3.1 实验操作"></a>3.1 实验操作</h2><ol>
 <li>熟悉各个仪器的工作原理和使用方法。</li>
 <li>调节平行光，测傅里叶透镜的焦距$f$。</li>
-<li>利用夫琅和费衍射测一维光栅常数：<br>1) 利用夫琅和费衍射测一维光栅常数；光栅方程：$dsinθ=k\lambda$    其中，$k=0，±1， ±2， ±3，…$请自己选择待测量的量和求光栅常数的方法。记录一维光栅的衍射图样、可看到哪些级？记录 0级、±1级、±2级光斑的位置<br>2) 记录二维光栅的衍射图样<br>A.观察并记录下述傅立叶频谱面上不同滤波条件的图样或特征。<br>  a) 一维光栅<br>波范本只让0级通过；<br>滤波范本只让0、±1级通过；<br>滤波范本只让0、±2级通过。<br>  b) 二维光栅：<br>滤波范本只让含0级的水平方向一排点阵通过；<br>滤波范本只让含0级的竖直方向一排点阵通过；<br>滤波范本只让含0级的与水平方向成45°一排点阵通过；<br>滤波范本只让含0级的与水平方向成135°一排点阵通过。<br>B.“光”字屏滤波，物面上是规则的光栅和一个汉字组成迭加，观察实验结果。<br>  a) 在象面上仅看到一个汉字“光” ；<br>  b) 如何操作可看到像面上是“光”字中仅有横条纹，或“光”字中仅有竖条纹.</li>
+<li>利用夫琅和费衍射测一维光栅常数：<br>&emsp;&emsp;1) 利用夫琅和费衍射测一维光栅常数；光栅方程：$dsinθ=k\lambda$    其中，$k=0，±1， ±2， ±3，…$请自己选择待测量的量和求光栅常数的方法。记录一维光栅的衍射图样、可看到哪些级？记录 0级、±1级、±2级光斑的位置<br>&emsp;&emsp;2) 记录二维光栅的衍射图样<br>A.观察并记录下述傅立叶频谱面上不同滤波条件的图样或特征。<br>  a) 一维光栅<br>&emsp;&emsp;波范本只让0级通过；<br>&emsp;&emsp;滤波范本只让0、±1级通过；<br>&emsp;&emsp;滤波范本只让0、±2级通过。<br>  b) 二维光栅：<br>&emsp;&emsp;滤波范本只让含0级的水平方向一排点阵通过；<br>&emsp;&emsp;滤波范本只让含0级的竖直方向一排点阵通过；<br>&emsp;&emsp;滤波范本只让含0级的与水平方向成45°一排点阵通过；<br>&emsp;&emsp;滤波范本只让含0级的与水平方向成135°一排点阵通过。<br>B.“光”字屏滤波，物面上是规则的光栅和一个汉字组成迭加，观察实验结果。<br>  a) 在象面上仅看到一个汉字“光” ；<br>  b) 如何操作可看到像面上是“光”字中仅有横条纹，或“光”字中仅有竖条纹.</li>
 </ol>
 <h2 id="3-2-原始数据"><a href="#3-2-原始数据" class="headerlink" title="3.2 原始数据"></a>3.2 原始数据</h2><h3 id="3-2-1-测傅里叶透镜的焦距"><a href="#3-2-1-测傅里叶透镜的焦距" class="headerlink" title="3.2.1 测傅里叶透镜的焦距"></a>3.2.1 测傅里叶透镜的焦距</h3><p><img src="/2024/06/26/%E5%82%85%E9%87%8C%E5%8F%B6%E5%85%89%E5%AD%A6%E5%AE%9E%E9%AA%8C/1.png" alt="图1 傅里叶透镜焦距测量"></p>
-<p>测量得到傅里叶透镜焦距为：$f=306mm$.</p>
+<p>&emsp;&emsp;测量得到傅里叶透镜焦距为：$f=306mm$.</p>
 <h3 id="3-2-2-计算一维光栅常数"><a href="#3-2-2-计算一维光栅常数" class="headerlink" title="3.2.2 计算一维光栅常数"></a>3.2.2 计算一维光栅常数</h3><p><img src="/2024/06/26/%E5%82%85%E9%87%8C%E5%8F%B6%E5%85%89%E5%AD%A6%E5%AE%9E%E9%AA%8C/2.png" alt="图2 计算一维光栅常数"></p>
-<p>记录光屏上出现衍射光斑时，傅里叶透镜与光屏之间的距离$L=306mm$.</p>
-<p>利用夫稂和费衍射测一维光栅常数记录±1级，±2级光斑之间的距离的数据表格：</p>
+<p>&emsp;&emsp;记录光屏上出现衍射光斑时，傅里叶透镜与光屏之间的距离$L=306mm$.</p>
+<p>&emsp;&emsp;利用夫稂和费衍射测一维光栅常数记录±1级，±2级光斑之间的距离的数据表格：</p>
 <div class="table-container">
 <table>
 <thead>
@@ -315,7 +315,7 @@ f(x,y)=\iint F(u,v)exp[i2\pi(ux+vy)]dudv</script><p>在光学系统中处理的�
 <h3 id="3-2-3-傅里叶频谱面上不同滤波条件的图样或特征"><a href="#3-2-3-傅里叶频谱面上不同滤波条件的图样或特征" class="headerlink" title="3.2.3 傅里叶频谱面上不同滤波条件的图样或特征"></a>3.2.3 傅里叶频谱面上不同滤波条件的图样或特征</h3><p><img src="/2024/06/26/%E5%82%85%E9%87%8C%E5%8F%B6%E5%85%89%E5%AD%A6%E5%AE%9E%E9%AA%8C/3.png" alt="图3 一维光栅"></p>
 <p><img src="/2024/06/26/%E5%82%85%E9%87%8C%E5%8F%B6%E5%85%89%E5%AD%A6%E5%AE%9E%E9%AA%8C/4.png" alt="图4 二维光栅"></p>
 <p><img src="/2024/06/26/%E5%82%85%E9%87%8C%E5%8F%B6%E5%85%89%E5%AD%A6%E5%AE%9E%E9%AA%8C/5.png" alt="图5 “光”字"></p>
-<p>竖条纹：安装好光路图，将光栅调为“光”字光栅，滤波器选择为水平光栅，适当调节光栅宽度则可得到图样。</p>
+<p>&emsp;&emsp;竖条纹：安装好光路图，将光栅调为“光”字光栅，滤波器选择为水平光栅，适当调节光栅宽度则可得到图样。</p>
 <h1 id="4-测量内容与数据处理"><a href="#4-测量内容与数据处理" class="headerlink" title="4. 测量内容与数据处理"></a>4. 测量内容与数据处理</h1><div class="table-container">
 <table>
 <thead>
@@ -339,7 +339,7 @@ f(x,y)=\iint F(u,v)exp[i2\pi(ux+vy)]dudv</script><p>在光学系统中处理的�
 </tbody>
 </table>
 </div>
-<p>计算得到一维光栅常数为：</p>
+<p>&emsp;&emsp;计算得到一维光栅常数为：</p>
 <script type="math/tex; mode=display">
 d=3.66\times10^{-5} \text m</script><h1 id="5-误差分析"><a href="#5-误差分析" class="headerlink" title="5. 误差分析"></a>5. 误差分析</h1><ol>
 <li><p>光斑间距的测量会产生误差</p>
@@ -474,7 +474,7 @@ d=3.66\times10^{-5} \text m</script><h1 id="5-误差分析"><a href="#5-误差�
       <div class="site-state-item site-state-tags">
             <a href="/tags">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -519,7 +519,7 @@ d=3.66\times10^{-5} \text m</script><h1 id="5-误差分析"><a href="#5-误差�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">71k</span>
 </div>
 
 <script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
